@@ -1,0 +1,117 @@
+import React, { useState } from "react";
+import { FaEdit } from "react-icons/fa";
+import PersonalCard from "./PersonalCard";
+
+const CompanyCard = ({ id, roomNum, address, city, state, zip, addresses }) => {
+    const [storedAdress, setStoredAddress] = useState({
+        address: address,
+        roomNum: roomNum,
+        city: city,
+        state: state,
+        zip: zip,
+    });
+    const [edit, setEdit] = useState(false);
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setStoredAddress((prevAddress) => ({
+            ...prevAddress,
+            [name]: value,
+        }));
+    };
+
+    const onEdit = () => {
+        setEdit(!edit);
+    };
+
+    return (
+        <>
+            <PersonalCard
+                key={addresses.id}
+                firstName={addresses.first_name}
+                lastName={addresses.last_name}
+                phone={addresses.phone}
+                company={addresses.company}
+                edit={edit}
+            />
+            <div className="flex flex-col w-full items-start justify-between p-1 bg-blue-50 border-l border-r border-b border-neutral-200 mb-4">
+                <div className="flex flex-col w-full">
+                    <h1 className="bg-blue-100 text-slate-500 px-2 font-medium rounded-xs">
+                        Address
+                    </h1>
+
+                    <div
+                        className="flex flex-row w-full items-center justify-between pr-2"
+                        key={id}
+                    >
+                        <h1 className="text-slate-500 font-medium p-3 rounded-xs">
+                            {!address ? "NULL" : address}{" "}
+                            {!roomNum ? "" : roomNum} {!city ? "NULL" : city}{" "}
+                            {!state ? "NULL" : state} {!zip ? "NULL" : zip}
+                        </h1>
+                        <button
+                            onClick={onEdit}
+                            className="border bg-slate-200 border-slate-300 rounded-md p-2 text-slate-500"
+                        >
+                            <FaEdit />
+                        </button>
+                    </div>
+
+                    {edit && (
+                        <div className="flex flex-col p-1">
+                            <div className="flex flex-row w-full mt-1 gap-2">
+                                <input
+                                    className="border bg-white border-slate-300 rounded-md text-slate-500 w-2/4"
+                                    type="text"
+                                    name="address"
+                                    onChange={handleChange}
+                                    value={storedAdress.address}
+                                    placeholder="Address"
+                                />
+                                <input
+                                    className="border bg-white border-slate-300 rounded-md p-1 text-slate-500 w-2/4"
+                                    type="text"
+                                    name="roomNum"
+                                    onChange={handleChange}
+                                    value={storedAdress.roomNum}
+                                    placeholder="room number"
+                                />
+                            </div>
+                            <div className="flex flex-row w-full my-2 gap-2">
+                                <input
+                                    className="border bg-white border-slate-300 rounded-md p-1 text-slate-500 w-1/3"
+                                    type="text"
+                                    name="city"
+                                    placeholder="city"
+                                    onChange={handleChange}
+                                    value={storedAdress.city}
+                                />
+                                <input
+                                    className="border bg-white border-slate-300 rounded-md p-1 text-slate-500 w-1/3"
+                                    type="text"
+                                    name="roomNum"
+                                    placeholder="Room number"
+                                    onChange={handleChange}
+                                    value={storedAdress.state}
+                                />
+                                <input
+                                    className="border bg-white border-slate-300 rounded-md p-1 text-slate-500 w-1/3"
+                                    type="text"
+                                    name="roomNum"
+                                    placeholder="Room number"
+                                    onChange={handleChange}
+                                    value={storedAdress.zip}
+                                />
+                            </div>
+                            <button className="bg-slate-300 text-slate-600 p-2 mt-1 mb-2 font-medium rounded">
+                                save
+                            </button>
+                        </div>
+                    )}
+                </div>
+            </div>
+        </>
+    );
+};
+
+export default CompanyCard;
