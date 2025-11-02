@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import Addresses from "./address/Addresses";
-import Receipts from "./receipt/Receipts";
-import AddressForm from "./address/AddressForm";
+import Addresses from "./organisms/Addresses";
+import AddressForm from "./organisms/AddressForm";
 
 const App = () => {
     return (

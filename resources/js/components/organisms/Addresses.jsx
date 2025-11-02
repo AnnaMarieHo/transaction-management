@@ -1,9 +1,6 @@
 import React from "react";
 import { useAddress } from "../../hooks/useAddress";
-import PersonalCard from "./PersonalCard";
-import CompanyCard from "./CompanyCard";
-import { FaEdit } from "react-icons/fa";
-import { useState } from "react";
+import AddressCard from "./AddressCard";
 
 const Addresses = () => {
     const { addresses } = useAddress();
@@ -13,7 +10,7 @@ const Addresses = () => {
             {addresses.map((addresses) => {
                 return (
                     <>
-                        <CompanyCard
+                        <AddressCard
                             addresses={addresses}
                             key={addresses.id}
                             roomNum={addresses.room_num}

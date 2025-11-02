@@ -2,7 +2,16 @@ import React, { useState } from "react";
 import { FaEdit } from "react-icons/fa";
 import PersonalCard from "./PersonalCard";
 
-const CompanyCard = ({ id, roomNum, address, city, state, zip, addresses }) => {
+const CompanyCard = ({
+    id,
+    roomNum,
+    address,
+    city,
+    state,
+    zip,
+    onEdit,
+    edit,
+}) => {
     const [storedAdress, setStoredAddress] = useState({
         address: address,
         roomNum: roomNum,
@@ -10,7 +19,6 @@ const CompanyCard = ({ id, roomNum, address, city, state, zip, addresses }) => {
         state: state,
         zip: zip,
     });
-    const [edit, setEdit] = useState(false);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -20,20 +28,8 @@ const CompanyCard = ({ id, roomNum, address, city, state, zip, addresses }) => {
         }));
     };
 
-    const onEdit = () => {
-        setEdit(!edit);
-    };
-
     return (
         <>
-            <PersonalCard
-                key={addresses.id}
-                firstName={addresses.first_name}
-                lastName={addresses.last_name}
-                phone={addresses.phone}
-                company={addresses.company}
-                edit={edit}
-            />
             <div className="flex flex-col w-full items-start justify-between p-1 bg-blue-50 border-l border-r border-b border-neutral-200 mb-4">
                 <div className="flex flex-col w-full">
                     <h1 className="bg-blue-100 text-slate-500 px-2 font-medium rounded-xs">
