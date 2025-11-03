@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { FaEdit } from "react-icons/fa";
-import PersonalCard from "./PersonalCard";
 
 const CompanyCard = ({
     id,

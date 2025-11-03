@@ -13,7 +13,7 @@ export const useAddress = () => {
             }
         };
         fetchData();
-    }, []);
+    }, [addresses]);
 
     const addAddress = async (formData) => {
         try {
@@ -24,5 +24,5 @@ export const useAddress = () => {
             throw error;
         }
     };
-    return { addresses, addAddress };
+    return { addresses, addAddress, setAddress };
 };

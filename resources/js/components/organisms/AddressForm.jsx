@@ -3,7 +3,7 @@ import React from "react";
 import { useAddress } from "../../hooks/useAddress";
 
 const AddressForm = () => {
-    const { addAddress } = useAddress();
+    const { addAddress, setAddress } = useAddress();
     const [formData, setFormData] = useState({
         firstName: "",
         lastName: "",
@@ -32,6 +32,7 @@ const AddressForm = () => {
         e.preventDefault();
         addAddress(formData);
         setSubmit(!submit);
+        setAddress(formData);
     };
 
     return (
