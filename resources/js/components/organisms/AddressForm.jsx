@@ -1,13 +1,16 @@
 import { use, useState } from "react";
 import React from "react";
+import { useAddress } from "../../hooks/useAddress";
 
 const AddressForm = () => {
+    const { addAddress, setAddress } = useAddress();
     const [formData, setFormData] = useState({
         firstName: "",
         lastName: "",
         phone: "",
         company: "",
-        address: "",
+        addressLine1: "",
+        addressLine2: "",
         roomNum: "",
         city: "",
         state: "",
@@ -25,8 +28,11 @@ const AddressForm = () => {
     };
 
     const handleSubmit = (e) => {
+        console.log(formData);
         e.preventDefault();
+        addAddress(formData);
         setSubmit(!submit);
+        setAddress(formData);
     };
 
     return (
@@ -67,21 +73,39 @@ const AddressForm = () => {
                     onChange={handleChange}
                 ></input>
             </div>
-            <div className="flex flex-row">
+            <div className="flex pr-4 flex-col">
                 <input
                     className="w-full m-2 bg-white p-3 rounded-sm outline-none"
-                    name="address"
+                    name="addressLine1"
                     type="text"
-                    placeholder="address"
-                    value={formData.address}
+                    placeholder="address 1"
+                    value={formData.addressLine1}
                     onChange={handleChange}
                 ></input>
+                <input
+                    className="w-full m-2 bg-white p-3 rounded-sm outline-none"
+                    name="addressLine2"
+                    type="text"
+                    placeholder="address 2"
+                    value={formData.addressLine2}
+                    onChange={handleChange}
+                ></input>
+            </div>
+            <div className="flex flex-row">
                 <input
                     className="w-full m-2 bg-white p-3 rounded-sm outline-none"
                     name="roomNum"
                     type="text"
                     placeholder="room number"
                     value={formData.roomNum}
+                    onChange={handleChange}
+                ></input>
+                <input
+                    className="w-full m-2 bg-white p-3 rounded-sm outline-none"
+                    name="zip"
+                    type="text"
+                    placeholder="zip"
+                    value={formData.zip}
                     onChange={handleChange}
                 ></input>
             </div>
@@ -100,14 +124,6 @@ const AddressForm = () => {
                     type="text"
                     placeholder="state"
                     value={formData.state}
-                    onChange={handleChange}
-                ></input>
-                <input
-                    className="w-full m-2 bg-white p-3 rounded-sm outline-none"
-                    name="zip"
-                    type="text"
-                    placeholder="zip"
-                    value={formData.zip}
                     onChange={handleChange}
                 ></input>
             </div>

@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { FaEdit } from "react-icons/fa";
-import PersonalCard from "./PersonalCard";
 
 const CompanyCard = ({
     id,
     roomNum,
-    address,
+    addressLine1,
+    addressLine2,
     city,
     state,
     zip,
@@ -13,12 +13,14 @@ const CompanyCard = ({
     edit,
 }) => {
     const [storedAdress, setStoredAddress] = useState({
-        address: address,
+        addressLine1: addressLine1,
         roomNum: roomNum,
         city: city,
         state: state,
         zip: zip,
     });
+
+    console.log("ADDRESS LINE 1", addressLine1);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -41,7 +43,7 @@ const CompanyCard = ({
                         key={id}
                     >
                         <h1 className="text-slate-500 font-medium p-3 rounded-xs">
-                            {!address ? "NULL" : address}{" "}
+                            {!addressLine1 ? "NULL" : addressLine1}{" "}
                             {!roomNum ? "" : roomNum} {!city ? "NULL" : city}{" "}
                             {!state ? "NULL" : state} {!zip ? "NULL" : zip}
                         </h1>
@@ -61,7 +63,7 @@ const CompanyCard = ({
                                     type="text"
                                     name="address"
                                     onChange={handleChange}
-                                    value={storedAdress.address}
+                                    value={storedAdress.addressLine1}
                                     placeholder="Address"
                                 />
                                 <input

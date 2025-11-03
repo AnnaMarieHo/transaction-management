@@ -2,13 +2,13 @@ import "./bootstrap";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./components/App";
-import { ReceiptProvider } from "./contexts/ReceiptContext";
+import { DataContext } from "./contexts/DataContext";
 
 const root = ReactDOM.createRoot(document.getElementById("app"));
 root.render(
     // <React.StrictMode>
-    <ReceiptProvider>
+    <DataContext>
         <App />
-    </ReceiptProvider>
+    </DataContext>
     // </React.StrictMode>
 );

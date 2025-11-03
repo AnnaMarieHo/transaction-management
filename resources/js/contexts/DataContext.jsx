@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { fetchReceipts } from "../services/receiptService";
 import React from "react";
 
-export const ReceiptContext = createContext({ receipts: [] });
+export const DataContext = createContext({ receipts: [] });
 
 export const ReceiptProvider = ({ children }) => {
     const [receipts, setReceipt] = useState([]);
@@ -28,12 +28,12 @@ export const ReceiptProvider = ({ children }) => {
         console.log("IN CONTEXT", receipts);
     });
     return (
-        <ReceiptContext.Provider value={{ receipts, loading }}>
+        <DataContext.Provider value={{ receipts, loading }}>
             {children}
-        </ReceiptContext.Provider>
+        </DataContext.Provider>
     );
 };
 
 export const useReceiptContext = () => {
-    return useContext(ReceiptContext);
+    return useContext(DataContext);
 };

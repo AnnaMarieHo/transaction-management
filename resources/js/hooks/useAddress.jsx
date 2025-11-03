@@ -13,6 +13,16 @@ export const useAddress = () => {
             }
         };
         fetchData();
-    }, []);
-    return { addresses };
+    }, [addresses]);
+
+    const addAddress = async (formData) => {
+        try {
+            const response = await AddressService.addAddress(formData);
+            console.log(response);
+        } catch (error) {
+            console.log(error);
+            throw error;
+        }
+    };
+    return { addresses, addAddress, setAddress };
 };
