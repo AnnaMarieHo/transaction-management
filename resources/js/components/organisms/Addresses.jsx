@@ -10,15 +10,7 @@ const Addresses = () => {
             {addresses.map((addresses) => {
                 return (
                     <>
-                        <AddressCard
-                            addresses={addresses}
-                            key={addresses.id}
-                            roomNum={addresses.room_num}
-                            address={addresses.address}
-                            state={addresses.state}
-                            city={addresses.city}
-                            zip={addresses.zip}
-                        />
+                        <AddressCard addresses={addresses} key={addresses.id} />
                     </>
                 );
             })}

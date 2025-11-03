@@ -8,5 +8,11 @@ Route::get('/', function () {
     return view('app');
 });
 
-Route::get('/test-addresses', [AddressController::class, 'index']);
+
+// Address routes
+Route::get('/addresses', [AddressController::class, 'index']);
+Route::post('/add-address', [AddressController::class, 'store']);
+
+
+// Reciept routes
 Route::get('/test-receipts', [ReceiptController::class, 'index']);

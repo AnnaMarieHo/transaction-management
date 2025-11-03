@@ -5,6 +5,7 @@ import CompanyCard from "../molecules/CompanyCard";
 const AddressCard = ({ addresses }) => {
     const [edit, setEdit] = useState(false);
 
+    console.log("ADDRESSES: ", addresses);
     const onEdit = () => {
         setEdit(!edit);
     };
@@ -22,7 +23,8 @@ const AddressCard = ({ addresses }) => {
             <CompanyCard
                 key={addresses.id}
                 roomNum={addresses.roomNum}
-                address={addresses.address}
+                addressLine1={addresses.address_line1}
+                addressLine2={addresses.address_line2}
                 city={addresses.city}
                 state={addresses.state}
                 zip={addresses.zip}
