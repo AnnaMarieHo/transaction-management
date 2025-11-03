@@ -13,16 +13,28 @@ export const useAddress = () => {
             }
         };
         fetchData();
-    }, [addresses]);
+    }, []);
 
     const addAddress = async (formData) => {
         try {
             const response = await AddressService.addAddress(formData);
+            setAddress((prev) => [response.data, ...prev]);
             console.log(response);
         } catch (error) {
             console.log(error);
             throw error;
         }
     };
-    return { addresses, addAddress, setAddress };
+
+    const editAddress = async (editData) => {
+        try {
+            const response = await AddressService.editAddress(editData);
+            setAddress((prev) => [response.data, ...prev]);
+        } catch (e) {
+            console.log(e);
+            throw e;
+        }
+    };
+
+    return { addresses, addAddress, editAddress };
 };

@@ -1,23 +1,19 @@
-import React, { useEffect } from "react";
+import React from "react";
+import AddressList from "./AddressList";
+import AddressForm from "../molecules/AddressForm";
 import { useAddress } from "../../hooks/useAddress";
-import AddressCard from "./AddressCard";
 
 const Addresses = () => {
-    const { addresses } = useAddress();
-
-    useEffect(() => {});
+    const { addAddress, addresses, editAddress } = useAddress();
 
     return (
-        <div className="flex-col flex w-full max-w-md shadow-2xl shadow-black/20 rounded-md bg-orange-100 content-center px-4 ml-4">
-            {addresses.map((addresses) => {
-                return (
-                    <>
-                        <AddressCard addresses={addresses} key={addresses.id} />
-                    </>
-                );
-            })}
+        <div className="w-screen min-h-screen h-auto flex flex-row items-start bg-orange-200 justify-center p-2 sm:p-4 overflow-x-hidden">
+            <AddressList
+                addresses={addresses}
+                editAddress={editAddress}
+            ></AddressList>
+            <AddressForm addAddress={addAddress}></AddressForm>
         </div>
     );
 };
-
 export default Addresses;

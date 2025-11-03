@@ -12,6 +12,7 @@ Route::get('/', function () {
 // Address routes
 Route::get('/addresses', [AddressController::class, 'index']);
 Route::post('/add-address', [AddressController::class, 'store']);
+Route::post('/edit-address/{id}', [AddressController::class, 'update']);
 
 
 // Reciept routes
