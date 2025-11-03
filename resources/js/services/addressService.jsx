@@ -13,7 +13,6 @@ export const AddressService = {
     },
 
     async addAddress(formData) {
-        console.log("IN THE SERVICE", formData);
         try {
             const response = await api.post(`/add-address`, {
                 first_name: formData.firstName,
@@ -32,6 +31,18 @@ export const AddressService = {
         } catch (error) {
             console.log("error saving address", error);
             throw error;
+        }
+    },
+
+    async editAddress({ id, editData }) {
+        try {
+            const response = await api.post(`/edit-address/${id}`, {
+                editData,
+            });
+            console.log(response.data);
+            return response.data;
+        } catch (e) {
+            throw e;
         }
     },
 };

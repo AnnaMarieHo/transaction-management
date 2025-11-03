@@ -1,9 +1,7 @@
 import { use, useState } from "react";
 import React from "react";
-import { useAddress } from "../../hooks/useAddress";
 
-const AddressForm = () => {
-    const { addAddress, setAddress } = useAddress();
+const AddressForm = ({ addAddress }) => {
     const [formData, setFormData] = useState({
         firstName: "",
         lastName: "",
@@ -18,6 +16,12 @@ const AddressForm = () => {
     });
 
     const [submit, setSubmit] = useState(false);
+    const handleSubmit = (e) => {
+        console.log(formData);
+        e.preventDefault();
+        addAddress(formData);
+        setSubmit(!submit);
+    };
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -25,14 +29,6 @@ const AddressForm = () => {
             ...prevFormData,
             [name]: value,
         }));
-    };
-
-    const handleSubmit = (e) => {
-        console.log(formData);
-        e.preventDefault();
-        addAddress(formData);
-        setSubmit(!submit);
-        setAddress(formData);
     };
 
     return (

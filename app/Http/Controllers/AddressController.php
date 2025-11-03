@@ -78,7 +78,7 @@ class AddressController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        Log::debug("Update Request: ", ["request", $request]);
     }
 
     /**

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import PersonalCard from "../molecules/PersonalCard";
 import CompanyCard from "../molecules/CompanyCard";
 
-const AddressCard = ({ addresses }) => {
+const AddressCard = ({ addresses, editAddress }) => {
     const [edit, setEdit] = useState(false);
 
     console.log("ADDRESSES: ", addresses);
