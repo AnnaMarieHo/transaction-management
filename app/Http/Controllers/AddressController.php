@@ -14,10 +14,13 @@ class AddressController extends Controller
      */
     public function index()
     {
-        $addresses = DB::select('select * from addresses');
+        
+        // $addresses = DB::select('select * from addresses');
 
-        Log::debug('addresses:', $addresses);
-
+        $addresses = Address::orderBy('updated_at', 'desc')->get();
+        // $addresses = Address::all();
+        
+        Log::debug('addresses', ['addresses' => $addresses->toArray()]);
         return response()->json($addresses);
     }
 
@@ -78,7 +81,33 @@ class AddressController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        Log::debug("Update Request: ", ["request", $request]);
+        // Accept either nested payload under 'editData' (from frontend) or top-level fields
+        $input = $request->input('editData', $request->all());
+
+        // Validate only fields that are present (partial update)
+        $validated = validator($input, [
+            'first_name'     => ['sometimes', 'nullable', 'max:255'],
+            'last_name'      => ['sometimes', 'nullable', 'max:255'],
+            'phone'          => ['sometimes', 'nullable', 'max:255'],
+            'company'        => ['sometimes', 'required', 'max:255'],
+            'address_line1'  => ['sometimes', 'required', 'max:255'],
+            'address_line2'  => ['sometimes', 'nullable', 'max:255'],
+            'room_num'       => ['sometimes', 'nullable', 'max:255'],
+            'city'           => ['sometimes', 'required', 'max:255'],
+            'state'          => ['sometimes', 'required', 'max:255'],
+            'zip'            => ['sometimes', 'required', 'max:255'],
+        ])->validate();
+
+        $address = Address::findOrFail($id);
+        $address->fill($validated);
+        $address->save();
+
+        Log::debug('Address updated', ['id' => $address->id, 'changes' => $validated]);
+
+        return response()->json([
+            'message' => 'success',
+            'data' => $address,
+        ]);
     }
 
     /**
@@ -86,6 +115,14 @@ class AddressController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Log::debug('delet item with id: ', ['id', $id]);
+        $address = Address::findOrFail($id);
+        Log::debug('delet address with id: ', ['id', $address]);
+    
+        $address->delete();
+
+        return response()->json([
+            'message' => 'success'
+        ], 201);
     }
 }
