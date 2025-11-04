@@ -36,7 +36,7 @@ export const AddressService = {
 
     async editAddress(editData) {
         try {
-            console.log("IN ADDRESS SERVICE: ", editData);
+            // console.log("IN ADDRESS SERVICE: ", editData);
             const response = await api.post(`/edit-address/${editData.id}`, {
                 address_line1: editData.addressLine1,
                 city: editData.city,

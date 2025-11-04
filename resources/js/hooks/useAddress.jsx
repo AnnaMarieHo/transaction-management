@@ -28,9 +28,13 @@ export const useAddress = () => {
 
     const editAddress = async (editData) => {
         try {
-            console.log("IN USEADDRESS HOOK EDIT:", editData);
             const response = await AddressService.editAddress(editData);
-            setAddress((prev) => [response.data, ...prev]);
+            const updated = response?.data ?? response;
+            if (!updated || updated.id == null) return;
+            setAddress((prev) =>
+                prev.map((a) => (a.id === updated.id ? updated : a))
+            );
+            return response;
         } catch (e) {
             console.log(e);
             throw e;

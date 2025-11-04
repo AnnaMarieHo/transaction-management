@@ -81,10 +81,8 @@ class AddressController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        // Accept either nested payload under 'editData' (from frontend) or top-level fields
         $input = $request->input('editData', $request->all());
 
-        // Validate only fields that are present (partial update)
         $validated = validator($input, [
             'first_name'     => ['sometimes', 'nullable', 'max:255'],
             'last_name'      => ['sometimes', 'nullable', 'max:255'],
