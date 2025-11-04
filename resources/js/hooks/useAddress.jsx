@@ -28,6 +28,7 @@ export const useAddress = () => {
 
     const editAddress = async (editData) => {
         try {
+            console.log("IN USEADDRESS HOOK EDIT:", editData);
             const response = await AddressService.editAddress(editData);
             setAddress((prev) => [response.data, ...prev]);
         } catch (e) {
@@ -36,5 +37,17 @@ export const useAddress = () => {
         }
     };
 
-    return { addresses, addAddress, editAddress };
+    const deleteAddress = async (id) => {
+        console.log(id);
+        setAddress((prev) => prev.filter((a) => a.id !== id));
+        try {
+            await AddressService.deleteAddress(id);
+            const response = await AddressService.fetchAddress();
+            setAddress(response);
+        } catch (e) {
+            console.log(e);
+            throw e;
+        }
+    };
+    return { addresses, addAddress, editAddress, deleteAddress };
 };

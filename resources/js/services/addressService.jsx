@@ -34,12 +34,31 @@ export const AddressService = {
         }
     },
 
-    async editAddress({ id, editData }) {
+    async editAddress(editData) {
         try {
-            const response = await api.post(`/edit-address/${id}`, {
-                editData,
+            console.log("IN ADDRESS SERVICE: ", editData);
+            const response = await api.post(`/edit-address/${editData.id}`, {
+                address_line1: editData.addressLine1,
+                city: editData.city,
+                id: editData.id,
+                room_num: editData.roomNum,
+                state: editData.state,
+                zip: editData.zip,
             });
             console.log(response.data);
+            return response.data;
+        } catch (e) {
+            throw e;
+        }
+    },
+
+    async deleteAddress(id) {
+        console.log(id);
+        try {
+            const response = await api.delete(`/delete-address/${id}`, {
+                id: id,
+            });
+            console.log(response);
             return response.data;
         } catch (e) {
             throw e;

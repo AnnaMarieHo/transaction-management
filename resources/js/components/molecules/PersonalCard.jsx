@@ -58,7 +58,7 @@ const PersonalCard = ({ id, firstName, lastName, phone, company, edit }) => {
     };
 
     return (
-        <div className="flex flex-col w-full py-1 items-start border-l border-r border-t border-neutral-200 justify-between bg-white mt-4">
+        <div className="flex flex-col w-full py-1 items-start border-l border-r border-t border-neutral-200 justify-between bg-white">
             <div className="flex flex-row my-1 w-full px-1">
                 <div className="px-1 w-24 shrink-0" key={id}>
                     <h1 className="py-1 text-slate-500 font-medium px-1 rounded-xs color">

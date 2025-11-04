@@ -4,15 +4,18 @@ import { FaEdit } from "react-icons/fa";
 const CompanyCard = ({
     id,
     roomNum,
+    key,
     addressLine1,
     addressLine2,
     city,
     state,
     zip,
+    editAddress,
     onEdit,
     edit,
 }) => {
     const [storedAdress, setStoredAddress] = useState({
+        id: id,
         addressLine1: addressLine1,
         roomNum: roomNum,
         city: city,
@@ -28,6 +31,11 @@ const CompanyCard = ({
             ...prevAddress,
             [name]: value,
         }));
+    };
+
+    const onSave = () => {
+        console.log(id);
+        editAddress(storedAdress);
     };
 
     return (
@@ -61,7 +69,7 @@ const CompanyCard = ({
                                 <input
                                     className="border bg-white border-slate-300 rounded-md text-slate-500 w-2/4"
                                     type="text"
-                                    name="address"
+                                    name="addressLine1"
                                     onChange={handleChange}
                                     value={storedAdress.addressLine1}
                                     placeholder="Address"
@@ -87,21 +95,24 @@ const CompanyCard = ({
                                 <input
                                     className="border bg-white border-slate-300 rounded-md p-1 text-slate-500 w-1/3"
                                     type="text"
-                                    name="roomNum"
-                                    placeholder="Room number"
+                                    name="state"
+                                    placeholder="state"
                                     onChange={handleChange}
                                     value={storedAdress.state}
                                 />
                                 <input
                                     className="border bg-white border-slate-300 rounded-md p-1 text-slate-500 w-1/3"
                                     type="text"
-                                    name="roomNum"
-                                    placeholder="Room number"
+                                    name="zip"
+                                    placeholder="zip"
                                     onChange={handleChange}
                                     value={storedAdress.zip}
                                 />
                             </div>
-                            <button className="bg-slate-300 text-slate-600 p-2 mt-1 mb-2 font-medium rounded">
+                            <button
+                                onClick={onSave}
+                                className="bg-slate-300 text-slate-600 p-2 mt-1 mb-2 font-medium rounded"
+                            >
                                 save
                             </button>
                         </div>

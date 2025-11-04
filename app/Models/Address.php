@@ -14,7 +14,7 @@ class Address extends Model
         'company',
         'address_line1',
         'address_line2',
-        'root_num',
+        'room_num',
         'city',
         'state',
         'zip'
