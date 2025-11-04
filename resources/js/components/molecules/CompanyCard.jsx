@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaEdit } from "react-icons/fa";
 
 const CompanyCard = ({
     id,
     roomNum,
-    key,
     addressLine1,
     addressLine2,
     city,
@@ -23,7 +22,11 @@ const CompanyCard = ({
         zip: zip,
     });
 
-    console.log("ADDRESS LINE 1", addressLine1);
+    useEffect(() => {
+        if (roomNum) {
+            console.log(roomNum);
+        }
+    }, [roomNum]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -33,9 +36,9 @@ const CompanyCard = ({
         }));
     };
 
-    const onSave = () => {
-        console.log(id);
-        editAddress(storedAdress);
+    const onSave = async () => {
+        const response = await editAddress(storedAdress);
+        onEdit(response.message);
     };
 
     return (

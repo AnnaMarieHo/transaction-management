@@ -17,7 +17,7 @@ const AddressForm = ({ addAddress }) => {
 
     const [submit, setSubmit] = useState(false);
     const handleSubmit = (e) => {
-        console.log(formData);
+        // console.log(formData);
         e.preventDefault();
         addAddress(formData);
         setSubmit(!submit);
@@ -32,7 +32,7 @@ const AddressForm = ({ addAddress }) => {
     };
 
     return (
-        <div className=" m-7 bg-orange-100 min-w-sm rounded-md flex p-10 shadow-2xl  shadow-black/20 flex-col">
+        <div className=" m-7 border-slate-300  bg-slate-100 border min-w-sm rounded-md flex p-10 shadow-2xl  shadow-black/20 flex-col">
             <div className="flex flex-row">
                 <input
                     className="w-full m-2 bg-white p-3 rounded-sm  outline-none"
@@ -126,7 +126,7 @@ const AddressForm = ({ addAddress }) => {
             <div className="flex w-full flex-row">
                 <button
                     onClick={handleSubmit}
-                    className="w-full border-orange-500 border-md m-4 bg-orange-400 rounded-md p-3"
+                    className="w-full border-slate-500 border-md m-4 bg-slate-400 rounded-md p-3"
                 >
                     submit
                 </button>
