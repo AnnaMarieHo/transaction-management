@@ -3,17 +3,27 @@ import { AddressService } from "../services/addressService";
 
 export const useAddress = () => {
     const [addresses, setAddress] = useState([]);
+    const [active, setActive] = useState(false);
+
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await AddressService.fetchAddress();
-                setAddress(response);
+                setAddress(Array.isArray(response) ? response : []);
             } catch (e) {
                 console.error("Error fetching receipts:", e);
             }
         };
         fetchData();
     }, []);
+
+    const updateAddress = (id, name, value) => {
+        setAddress((prev) =>
+            prev.map((address) =>
+                address.id === id ? { ...address, [name]: value } : address
+            )
+        );
+    };
 
     const addAddress = async (formData) => {
         try {
@@ -47,11 +57,23 @@ export const useAddress = () => {
         try {
             await AddressService.deleteAddress(id);
             const response = await AddressService.fetchAddress();
-            setAddress(response);
+            setAddress(Array.isArray(response) ? response : []);
         } catch (e) {
             console.log(e);
             throw e;
         }
     };
-    return { addresses, addAddress, editAddress, deleteAddress };
+
+    const toggleActive = () => {
+        setIsActive(!isActive);
+        console.log(isActive);
+    };
+
+    return {
+        addresses,
+        addAddress,
+        updateAddress,
+        editAddress,
+        deleteAddress,
+    };
 };
