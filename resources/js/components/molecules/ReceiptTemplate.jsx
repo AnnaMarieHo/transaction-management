@@ -1,18 +1,20 @@
 import React from "react";
 
-const ReceiptTemplate = ({
-    receiptId,
-    name,
-    saleDate,
-    address,
-    roomNum,
-    city,
-    state,
-    zip,
-    numItems,
-    highestPrice,
-    total,
-}) => {
+const ReceiptTemplate = (props) => {
+    const {
+        receiptId,
+        name,
+        saleDate,
+        address,
+        roomNum,
+        city,
+        state,
+        zip,
+        numItems,
+        highestPrice,
+        total,
+    } = props;
+
     return (
         <div className="m-4 pb-10 p-5 shadow-2xl border border-neutral-300 shadow-black/20 m-6 rounded-md ">
             <div className="flex flex-row">

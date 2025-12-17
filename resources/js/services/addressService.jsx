@@ -38,10 +38,15 @@ export const AddressService = {
         try {
             // console.log("IN ADDRESS SERVICE: ", editData);
             const response = await api.post(`/edit-address/${editData.id}`, {
-                address_line1: editData.addressLine1,
+                first_name: editData.first_name,
+                last_name: editData.last_name,
+                company: editData.company,
+                phone: editData.phone,
+                address_line1: editData.address_line1,
+                address_line2: editData.address_line2,
                 city: editData.city,
                 id: editData.id,
-                room_num: editData.roomNum,
+                room_num: editData.room_num,
                 state: editData.state,
                 zip: editData.zip,
             });
