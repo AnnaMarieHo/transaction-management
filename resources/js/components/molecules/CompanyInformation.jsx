@@ -24,7 +24,6 @@ const CompanyInformation = ({
             </h2>
 
             {!edit ? (
-                /* Read-only View: Looks like a real mailing address */
                 <div className="text-slate-600 leading-relaxed bg-slate-100 p-3 rounded-lg border border-slate-100">
                     <p className="font-medium text-slate-800">
                         {address_line1} {room_num && `• Unit ${room_num}`}
@@ -34,7 +33,6 @@ const CompanyInformation = ({
                     </p>
                 </div>
             ) : (
-                /* Edit View: Organized Grid */
                 <div className="space-y-3 animate-in fade-in duration-300">
                     <div className="flex gap-2">
                         <div className="flex-[3]">
