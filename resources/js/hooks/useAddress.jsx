@@ -3,7 +3,6 @@ import { AddressService } from "../services/addressService";
 
 export const useAddress = () => {
     const [addresses, setAddress] = useState([]);
-    const [active, setActive] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {

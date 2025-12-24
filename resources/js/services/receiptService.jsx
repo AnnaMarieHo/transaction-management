@@ -1,5 +1,4 @@
 import api from "./apiService";
-import React from "react";
 
 export const fetchReceipts = async () => {
     try {

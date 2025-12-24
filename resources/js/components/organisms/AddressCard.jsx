@@ -18,7 +18,7 @@ const AddressCard = ({
         addresses.last_name?.[0] || ""
     }`;
     const [isDeleting, setIsDeleting] = React.useState(false);
-    const [isVisible, setIsVisible] = React.useState(false); // state for entrance
+    const [isVisible, setIsVisible] = React.useState(false);
 
     React.useEffect(() => {
         // Trigger entrance animation on mount
@@ -29,7 +29,7 @@ const AddressCard = ({
         e.stopPropagation();
         setIsDeleting(true);
 
-        // Wait for the animation (300ms) before actually removing it from the data
+        // Wait for the animation (300ms) before actually removing address from the data
         setTimeout(() => {
             deleteAddress(addresses.id);
         }, 300);

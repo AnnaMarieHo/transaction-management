@@ -11,19 +11,17 @@ const ListAddresses = () => {
         useAddress();
 
     const handleSetActive = (id) => {
-        // If we are editing, don't let the card deactivate or switch
         if (editingId !== null) return;
         setActiveId((prevId) => (prevId === id ? null : id));
     };
 
     const handleEditToggle = (id) => {
-        // called when the edit icon is clicked
         setEditingId((prev) => (prev === id ? null : id));
     };
 
     const handleSave = async (addressData) => {
         await editAddress(addressData);
-        setEditingId(null); // Close the edit mode after saving
+        setEditingId(null);
     };
 
     return (
