@@ -3,12 +3,12 @@ import AddressCard from "./AddressCard";
 import { useAddress } from "../../hooks/useAddress";
 import AddressForm from "../molecules/AddressForm";
 
-const ListAddresses = () => {
+const ListAddresses = (props) => {
+    const { addresses, editAddress, deleteAddress, updateAddress, addAddress } =
+        props;
+
     const [activeId, setActiveId] = useState(null);
     const [editingId, setEditingId] = useState(null);
-
-    const { addresses, editAddress, deleteAddress, updateAddress, addAddress } =
-        useAddress();
 
     const handleSetActive = (id) => {
         if (editingId !== null) return;
@@ -56,7 +56,6 @@ const ListAddresses = () => {
                     </div>
                 </div>
             </div>
-            <AddressForm addAddress={addAddress}></AddressForm>
         </>
     );
 };

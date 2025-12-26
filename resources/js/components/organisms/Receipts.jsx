@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import ReceiptTemplate from "../molecules/ReceiptTemplate";
+import ReceiptTemplate from "../atoms/ReceiptTemplate";
 import { useReceipt } from "../../hooks/useReceipt";
 
 const Receipts = () => {
