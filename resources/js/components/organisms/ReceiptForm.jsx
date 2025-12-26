@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FaPlus, FaTimes } from "react-icons/fa";
 
-const AddressForm = ({ addAddress }) => {
+const ReceiptForm = ({ addAddress }) => {
     const [formData, setFormData] = useState({
         firstName: "",
         lastName: "",
@@ -57,12 +57,12 @@ const AddressForm = ({ addAddress }) => {
             <div className="p-6 flex justify-between items-center bg-white">
                 <div>
                     <h2 className="text-lg font-bold text-slate-800">
-                        {showAddressForm ? "New Address" : "Add Addresses"}
+                        {showAddressForm ? "New Receipt" : "Add Receipt"}
                     </h2>
                     <p className="text-slate-500 text-xs">
                         {showAddressForm
-                            ? "Fill in the delivery details"
-                            : "Add a new location to your list"}
+                            ? "Fill in the transaction details"
+                            : "Add a new transaction to your list"}
                     </p>
                 </div>
 
@@ -196,4 +196,4 @@ const AddressForm = ({ addAddress }) => {
     );
 };
 
-export default AddressForm;
+export default ReceiptForm;

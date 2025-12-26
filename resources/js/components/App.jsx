@@ -3,6 +3,7 @@ import ListAddresses from "./organisms/ListAddresses";
 import Receipts from "./organisms/Receipts";
 import { useAddress } from "../hooks/useAddress";
 import AddressForm from "./organisms/AddressForm";
+import ReceiptForm from "./organisms/ReceiptForm";
 
 const App = () => {
     const { addresses, editAddress, deleteAddress, updateAddress, addAddress } =
@@ -17,7 +18,10 @@ const App = () => {
                 updateAddress={updateAddress}
                 addAddress={addAddress}
             ></ListAddresses>
-            <AddressForm addAddress={addAddress}></AddressForm>
+            <div className="flex flex-col">
+                <AddressForm addAddress={addAddress}></AddressForm>
+                {/* <ReceiptForm addAddress={addAddress}></ReceiptForm> */}
+            </div>
 
             <Receipts></Receipts>
         </div>

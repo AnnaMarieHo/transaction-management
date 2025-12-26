@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { act, useEffect, useState } from "react";
 import AddressCard from "./AddressCard";
-import { useAddress } from "../../hooks/useAddress";
-import AddressForm from "./AddressForm";
+import ReceiptTemplate from "../atoms/ReceiptTemplate";
+import { useReceipt } from "../../hooks/useReceipt";
+import ReceiptDrawer from "../molecules/ReceiptDrawer";
 
 const ListAddresses = (props) => {
-    const { addresses, editAddress, deleteAddress, updateAddress, addAddress } =
-        props;
+    const { addresses, editAddress, deleteAddress, updateAddress } = props;
 
     const [activeId, setActiveId] = useState(null);
     const [editingId, setEditingId] = useState(null);
@@ -43,6 +43,7 @@ const ListAddresses = (props) => {
                                 key={address.id}
                                 addresses={address}
                                 isActive={address.id === activeId}
+                                activeId={activeId}
                                 isEditing={address.id === editingId}
                                 onCardClick={() => handleSetActive(address.id)}
                                 onEditToggle={() =>
