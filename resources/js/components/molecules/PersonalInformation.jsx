@@ -22,7 +22,6 @@ const PersonalInformation = ({
 
     return (
         <div className="w-full space-y-3">
-            {/* Header: Name and Company */}
             <div className="flex justify-between items-end border-b border-slate-200 pb-2">
                 <div>
                     <h2 className="text-xs uppercase tracking-widest text-slate-400 font-bold">
@@ -38,7 +37,6 @@ const PersonalInformation = ({
                 </span>
             </div>
 
-            {/* Form Fields */}
             <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-1">
                     <label className="text-[10px] uppercase font-bold text-slate-400 ml-1">

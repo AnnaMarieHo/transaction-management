@@ -9,6 +9,7 @@ export const useAddress = () => {
             try {
                 const response = await AddressService.fetchAddress();
                 setAddress(Array.isArray(response) ? response : []);
+                console.log("ADDRESSES: ", response);
             } catch (e) {
                 console.error("Error fetching receipts:", e);
             }

@@ -1,10 +1,32 @@
+import { isPending } from "@reduxjs/toolkit";
 import React from "react";
-
 const ReceiptTemplate = (props) => {
+    const isSeller = props.variant === "seller";
+    const isNeutral = props.variant !== "seller" && props.variant !== "buyer";
+
     return (
-        /* The "Receipt Paper" look */
-        <div className="bg-white p-6 shadow-md border-t-4 border-blue-500 relative">
-            {/* Corner ID Tag */}
+        <div
+            className={`relative p-5 border-l-4 my-7 ${
+                isSeller ? "border-emerald-500" : "border-blue-500"
+            } bg-white shadow-sm`}
+        >
+            {!isNeutral && (
+                <div className="flex justify-between items-start mb-2">
+                    <span
+                        className={`text-[10px] font-bold uppercase tracking-tighter px-2 py-0.5 rounded ${
+                            isSeller
+                                ? "bg-emerald-100 text-emerald-700"
+                                : "bg-blue-100 text-blue-700"
+                        }`}
+                    >
+                        {isSeller && "Outgoing Sale"}
+                        {!isSeller && "Incoming Sale"}
+                    </span>
+                    <span className="text-slate-400 text-xs">
+                        #{props.reciept_id}
+                    </span>
+                </div>
+            )}
             <div className="absolute top-2 right-2 text-[10px] font-mono text-slate-300">
                 REF: {props.reciept_id}
             </div>
@@ -49,7 +71,6 @@ const ReceiptTemplate = (props) => {
                 </div>
             </div>
 
-            {/* Bottom Decorative Edge */}
             <div className="mt-6 flex justify-center">
                 <div className="h-1 w-full bg-[radial-gradient(circle,_#e2e8f0_1px,_transparent_1px)] bg-[length:8px_8px]" />
             </div>
