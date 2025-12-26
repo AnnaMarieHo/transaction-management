@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import AddressCard from "./AddressCard";
 import { useAddress } from "../../hooks/useAddress";
-import AddressForm from "../molecules/AddressForm";
+import AddressForm from "./AddressForm";
 
 const ListAddresses = (props) => {
     const { addresses, editAddress, deleteAddress, updateAddress, addAddress } =

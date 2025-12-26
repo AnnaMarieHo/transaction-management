@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import ListAddresses from "./organisms/ListAddresses";
 import Receipts from "./organisms/Receipts";
 import { useAddress } from "../hooks/useAddress";
-import AddressForm from "./molecules/AddressForm";
+import AddressForm from "./organisms/AddressForm";
 
 const App = () => {
     const { addresses, editAddress, deleteAddress, updateAddress, addAddress } =
@@ -19,7 +19,7 @@ const App = () => {
             ></ListAddresses>
             <AddressForm addAddress={addAddress}></AddressForm>
 
-            {/* <Receipts></Receipts> */}
+            <Receipts></Receipts>
         </div>
     );
 };

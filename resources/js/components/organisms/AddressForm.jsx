@@ -53,7 +53,7 @@ const AddressForm = ({ addAddress }) => {
         "w-full bg-slate-50 border border-slate-200 p-3 rounded-lg outline-none focus:ring-2 focus:ring-blue-100 focus:border-blue-400 transition-all text-slate-700 placeholder:text-slate-400 text-sm";
 
     return (
-        <div className="max-w-lg mx-auto m-7 bg-white border border-slate-200 rounded-xl shadow-xl overflow-hidden transition-all duration-500">
+        <div className="max-w-lg m-7 bg-white border border-slate-200 rounded-xl shadow-xl overflow-hidden transition-all duration-500">
             <div className="p-6 flex justify-between items-center bg-white">
                 <div>
                     <h2 className="text-lg font-bold text-slate-800">
