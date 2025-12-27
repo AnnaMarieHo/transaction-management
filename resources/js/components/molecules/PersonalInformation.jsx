@@ -1,5 +1,7 @@
 import React from "react";
 import { formatPhone } from "../../utils/formattingUtils";
+import FormField from "./FormField";
+import Badge from "../atoms/Badge";
 
 const PersonalInformation = ({
     first_name,
@@ -14,12 +16,6 @@ const PersonalInformation = ({
         onFieldChange(name, value);
     };
 
-    const inputClasses = `w-full transition-all duration-200 px-2 py-1 rounded border ${
-        edit
-            ? "bg-white border-blue-200 text-slate-800 focus:ring-2 focus:ring-blue-100 outline-none"
-            : "bg-transparent border-transparent text-slate-600 cursor-default"
-    }`;
-
     return (
         <div className="w-full space-y-3">
             <div className="flex justify-between items-end border-b border-slate-200 pb-2">
@@ -32,66 +28,48 @@ const PersonalInformation = ({
                         <span>{last_name}</span>
                     </div>
                 </div>
-                <span className="text-sm font-medium text-blue-600 bg-blue-50 px-2 py-0.5 rounded">
-                    {company || "Personal"}
-                </span>
+                <Badge variant="blue">{company || "Personal"}</Badge>
             </div>
 
             <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-1">
-                    <label className="text-[10px] uppercase font-bold text-slate-400 ml-1">
-                        First Name
-                    </label>
-                    <input
-                        name="first_name"
-                        value={first_name || ""}
-                        onChange={handleChange}
-                        disabled={!edit}
-                        className={inputClasses}
-                        placeholder="First Name"
-                    />
-                </div>
-                <div className="space-y-1">
-                    <label className="text-[10px] uppercase font-bold text-slate-400 ml-1">
-                        Last Name
-                    </label>
-                    <input
-                        name="last_name"
-                        value={last_name || ""}
-                        onChange={handleChange}
-                        disabled={!edit}
-                        className={inputClasses}
-                        placeholder="Last Name"
-                    />
-                </div>
-                <div className="space-y-1">
-                    <label className="text-[10px] uppercase font-bold text-slate-400 ml-1">
-                        Phone
-                    </label>
-                    <input
-                        name="phone"
-                        value={phone || ""}
-                        onChange={(e) =>
-                            onFieldChange("phone", formatPhone(e.target.value))
-                        }
-                        disabled={!edit}
-                        className={inputClasses}
-                        placeholder="(000) 000-0000"
-                    />
-                </div>
-                <div className="space-y-1">
-                    <label className="text-[10px] uppercase font-bold text-slate-400 ml-1">
-                        Company
-                    </label>
-                    <input
-                        name="company"
-                        value={company || ""}
-                        onChange={handleChange}
-                        disabled={!edit}
-                        className={inputClasses}
-                        placeholder="Company Name"
-                    />
-                </div>
+                <FormField
+                    label="First Name"
+                    name="first_name"
+                    value={first_name}
+                    onChange={handleChange}
+                    disabled={!edit}
+                    variant={edit ? "minimal" : "transparent"}
+                    placeholder="First Name"
+                />
+                <FormField
+                    label="Last Name"
+                    name="last_name"
+                    value={last_name}
+                    onChange={handleChange}
+                    disabled={!edit}
+                    variant={edit ? "minimal" : "transparent"}
+                    placeholder="Last Name"
+                />
+                <FormField
+                    label="Phone"
+                    name="phone"
+                    value={phone}
+                    onChange={(e) =>
+                        onFieldChange("phone", formatPhone(e.target.value))
+                    }
+                    disabled={!edit}
+                    variant={edit ? "minimal" : "transparent"}
+                    placeholder="(000) 000-0000"
+                />
+                <FormField
+                    label="Company"
+                    name="company"
+                    value={company}
+                    onChange={handleChange}
+                    disabled={!edit}
+                    variant={edit ? "minimal" : "transparent"}
+                    placeholder="Company Name"
+                />
             </div>
         </div>
     );

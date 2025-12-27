@@ -2,66 +2,59 @@ import React from "react";
 import Receipts from "./Receipts";
 import GlobalStats from "./GlobalStats";
 import { motion, AnimatePresence } from "framer-motion";
+import StatCard from "../molecules/StatCard";
+import Label from "../atoms/Label";
+import {
+    calculateTotalVolume,
+    calculateReceiptAverage,
+    filterReceiptsByUser,
+} from "../../utils/receiptUtils";
 
 const DashboardStats = ({ receipts, addresses, activeId }) => {
-    const filteredReceipts = receipts.filter(
-        (receipt) => receipt.b_id === activeId || receipt.s_id === activeId
-    );
+    const filteredReceipts = activeId
+        ? filterReceiptsByUser(receipts, activeId)
+        : [];
 
     const activePerson = addresses?.find((a) => a.id === activeId);
     const activeName = activePerson
         ? `${activePerson.first_name ?? ""} ${activePerson.last_name}`
         : "";
 
+    const displayReceipts = activeId ? filteredReceipts : receipts;
+    const totalVolume = calculateTotalVolume(displayReceipts);
+    const avgTransaction = calculateReceiptAverage(displayReceipts);
+
     return (
         <div className="space-y-8 mx-auto p-6">
             <header>
-                <h3 className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-4 ml-2">
-                    {activeName ? activeName : ""}
-                </h3>
+                {activeName && (
+                    <Label className="mb-4 ml-2">{activeName}</Label>
+                )}
 
                 <div className="grid grid-cols-2 gap-4">
-                    <div className="p-4 bg-blue-50 rounded-2xl border border-blue-100">
-                        <p className="text-xs font-bold text-blue-600 uppercase">
-                            Total Volume
-                        </p>
-                        <p className="text-2xl font-black text-slate-800">
-                            $
-                            {(activeId ? filteredReceipts : receipts)
-                                .reduce((sum, r) => sum + r.sale_total, 0)
-                                .toLocaleString()}
-                        </p>
-                    </div>
-                    <div className="p-4 bg-green-50 rounded-2xl border border-green-100">
-                        <p className="text-xs font-bold text-green-600 uppercase">
-                            Avg. Transaction
-                        </p>
-                        <p className="text-2xl font-black text-slate-800">
-                            $
-                            {(activeId
-                                ? filteredReceipts.reduce(
-                                      (sum, r) => sum + r.sale_total,
-                                      0
-                                  ) / filteredReceipts.length || 0
-                                : receipts.reduce(
-                                      (sum, r) => sum + r.sale_total,
-                                      0
-                                  ) / receipts.length || 0
-                            ).toFixed(2)}
-                        </p>
-                    </div>
+                    <StatCard
+                        title="Total Volume"
+                        value={`$${totalVolume.toLocaleString()}`}
+                        variant="blue"
+                    />
+                    <StatCard
+                        title="Avg. Transaction"
+                        value={`$${avgTransaction.toFixed(2)}`}
+                        variant="green"
+                    />
                 </div>
             </header>
 
             <div className="flex flex-col space-y-8">
-                <AnimatePresence mode="popLayout">
+                <AnimatePresence mode="wait">
                     {activeId ? (
                         <React.Fragment key="user-view">
                             <motion.div
                                 layout
-                                initial={{ opacity: 0, y: 20 }}
+                                initial={{ opacity: 0, y: 10 }}
                                 animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -20 }}
+                                exit={{ opacity: 0, y: -10 }}
+                                transition={{ duration: 0.2, ease: "easeOut" }}
                             >
                                 <Receipts
                                     receipts={receipts}
@@ -72,7 +65,12 @@ const DashboardStats = ({ receipts, addresses, activeId }) => {
                                 />
                             </motion.div>
 
-                            <motion.div layout>
+                            <motion.div
+                                layout
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{ duration: 0.2, delay: 0.1 }}
+                            >
                                 <GlobalStats
                                     addresses={addresses}
                                     receipts={receipts}
@@ -84,12 +82,12 @@ const DashboardStats = ({ receipts, addresses, activeId }) => {
                         <motion.div
                             key="global-view"
                             layout
-                            initial={{ opacity: 0, scale: 0.95 }}
+                            initial={{ opacity: 0, scale: 0.98 }}
                             animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0, scale: 0.98 }}
                             transition={{
-                                type: "spring",
-                                damping: 20,
-                                stiffness: 100,
+                                duration: 0.2,
+                                ease: "easeOut",
                             }}
                         >
                             <GlobalStats
