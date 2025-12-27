@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { FaPlus, FaTimes } from "react-icons/fa";
+import Button from "../atoms/Button";
+import Input from "../atoms/Input";
 
 const AddressForm = ({ addAddress }) => {
     const [formData, setFormData] = useState({
@@ -49,9 +51,6 @@ const AddressForm = ({ addAddress }) => {
         setShowAddressForm(false);
     };
 
-    const inputClasses =
-        "w-full bg-slate-50 border border-slate-200 p-3 rounded-lg outline-none focus:ring-2 focus:ring-blue-100 focus:border-blue-400 transition-all text-slate-700 placeholder:text-slate-400 text-sm";
-
     return (
         <div className="max-w-lg m-5 bg-white border border-slate-200 rounded-xl shadow-xl overflow-hidden transition-all duration-500">
             <div className="p-6 flex justify-between items-center bg-white">
@@ -68,25 +67,14 @@ const AddressForm = ({ addAddress }) => {
                     </p>
                 </div>
 
-                <button
+                <Button
                     type="button"
                     onClick={handleToggle}
-                    className={`flex items-center gap-2 px-4 py-2 rounded-full font-bold text-xs uppercase tracking-wider transition-all duration-300 ${
-                        showAddressForm
-                            ? "bg-slate-100 text-slate-600 hover:bg-slate-200"
-                            : "bg-blue-600 text-white hover:bg-blue-700 shadow-md"
-                    }`}
+                    variant={showAddressForm ? "gray" : "blue"}
+                    icon={showAddressForm ? FaTimes : FaPlus}
                 >
-                    {showAddressForm ? (
-                        <>
-                            <FaTimes /> Cancel
-                        </>
-                    ) : (
-                        <>
-                            <FaPlus /> Add New
-                        </>
-                    )}
-                </button>
+                    {showAddressForm ? "Cancel" : "Add New"}
+                </Button>
             </div>
 
             <div
@@ -101,15 +89,13 @@ const AddressForm = ({ addAddress }) => {
                     className="p-6 space-y-4 bg-white"
                 >
                     <div className="grid grid-cols-2 gap-4">
-                        <input
-                            className={inputClasses}
+                        <Input
                             name="firstName"
                             placeholder="First Name"
                             value={formData.firstName}
                             onChange={handleChange}
                         />
-                        <input
-                            className={inputClasses}
+                        <Input
                             name="lastName"
                             placeholder="Last Name"
                             value={formData.lastName}
@@ -118,15 +104,13 @@ const AddressForm = ({ addAddress }) => {
                     </div>
 
                     <div className="grid grid-cols-2 gap-4">
-                        <input
-                            className={inputClasses}
+                        <Input
                             name="phone"
                             placeholder="Phone Number"
                             value={formData.phone}
                             onChange={handleChange}
                         />
-                        <input
-                            className={inputClasses}
+                        <Input
                             name="company"
                             placeholder="Company (Optional)"
                             value={formData.company}
@@ -135,40 +119,34 @@ const AddressForm = ({ addAddress }) => {
                     </div>
 
                     <div className="grid grid-cols-2 gap-4">
-                        <input
-                            className={inputClasses}
+                        <Input
                             name="addressLine1"
                             placeholder="Street Address"
                             value={formData.addressLine1}
                             onChange={handleChange}
                         />
-                        <input
-                            className={inputClasses}
+                        <Input
                             name="roomNum"
                             placeholder="Room/Floor"
                             value={formData.roomNum}
                             onChange={handleChange}
                         />
                     </div>
-                    {/* </div> */}
 
                     <div className="grid grid-cols-3 gap-4">
-                        <input
-                            className={inputClasses}
+                        <Input
                             name="city"
                             placeholder="City"
                             value={formData.city}
                             onChange={handleChange}
                         />
-                        <input
-                            className={inputClasses}
+                        <Input
                             name="state"
                             placeholder="State"
                             value={formData.state}
                             onChange={handleChange}
                         />
-                        <input
-                            className={inputClasses}
+                        <Input
                             name="zip"
                             placeholder="Zip"
                             value={formData.zip}
@@ -177,12 +155,14 @@ const AddressForm = ({ addAddress }) => {
                     </div>
 
                     <div className="pt-2">
-                        <button
+                        <Button
                             type="submit"
-                            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 rounded-lg shadow-lg active:scale-[0.98] transition-all uppercase text-xs tracking-widest mt-2"
+                            variant="blue"
+                            size="lg"
+                            fullWidth
                         >
                             Save Address
-                        </button>
+                        </Button>
                     </div>
                 </form>
             </div>

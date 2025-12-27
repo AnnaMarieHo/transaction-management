@@ -4,6 +4,7 @@ import { FaChevronDown, FaReceipt } from "react-icons/fa";
 import ReceiptTemplate from "../atoms/ReceiptTemplate";
 
 const ReceiptCard = ({ receipt, variant }) => {
+    console.log(variant);
     const [isExpanded, setIsExpanded] = useState(false);
 
     return (
@@ -24,10 +25,21 @@ const ReceiptCard = ({ receipt, variant }) => {
                     </div>
                     <div className="text-left">
                         <p className="text-sm font-bold text-slate-900">
-                            ${receipt.sale_total}
+                            {receipt.seller_name}
                         </p>
                         <p className="text-[10px] text-slate-400 font-medium">
-                            #{receipt.reciept_id} • {receipt.num_items} items
+                            #{receipt.reciept_id} • {receipt.num_items} items •{" "}
+                            <span
+                                className={
+                                    variant === "buyer"
+                                        ? "text-red-500"
+                                        : "text-green-600"
+                                }
+                            >
+                                {variant === "buyer"
+                                    ? "Bought from"
+                                    : "Sold to " + receipt.buyer_name}
+                            </span>
                         </p>
                     </div>
                 </div>

@@ -1,8 +1,9 @@
 import React from "react";
 import { createPortal } from "react-dom";
-import { FaTimes } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
-import ReceiptDrawerButtons from "../atoms/ReceiptDrawerButtons";
+import IconButton from "../atoms/IconButton";
+import Button from "../atoms/Button";
+import { FaTimes } from "react-icons/fa";
 
 const ReceiptDrawer = ({ isOpen, onClose, children, title }) => {
     return createPortal(
@@ -32,12 +33,11 @@ const ReceiptDrawer = ({ isOpen, onClose, children, title }) => {
                             <h2 className="text-xl font-bold text-slate-800">
                                 {title}
                             </h2>
-                            <button
+                            <IconButton
+                                icon={FaTimes}
                                 onClick={onClose}
-                                className="p-2 rounded-full hover:bg-slate-100 text-slate-400"
-                            >
-                                <FaTimes className="w-5 h-5" />
-                            </button>
+                                ariaLabel="Close drawer"
+                            />
                         </div>
 
                         <div className="flex-1 overflow-y-auto p-6 bg-slate-50/50">
@@ -45,12 +45,14 @@ const ReceiptDrawer = ({ isOpen, onClose, children, title }) => {
                         </div>
 
                         <div className="p-6 border-t border-slate-100 bg-white">
-                            <button
+                            <Button
                                 onClick={onClose}
-                                className="w-full py-3 bg-slate-800 text-white rounded-lg font-bold uppercase text-sm tracking-widest"
+                                variant="dark"
+                                size="lg"
+                                fullWidth
                             >
                                 Close Details
-                            </button>
+                            </Button>
                         </div>
                     </motion.div>
                 </div>

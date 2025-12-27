@@ -1,7 +1,8 @@
 import React from "react";
-
 import CompanyInformation from "../molecules/CompanyInformation";
 import PersonalInformation from "../molecules/PersonalInformation";
+import Divider from "./Divider";
+import Button from "./Button";
 
 const AddressExpanded = ({ isEditing, addresses, updateAddress, onSave }) => {
     return (
@@ -12,7 +13,7 @@ const AddressExpanded = ({ isEditing, addresses, updateAddress, onSave }) => {
                 edit={isEditing}
             />
 
-            <div className="h-[1px] w-full bg-slate-100" />
+            <Divider />
 
             <CompanyInformation
                 {...addresses}
@@ -22,15 +23,17 @@ const AddressExpanded = ({ isEditing, addresses, updateAddress, onSave }) => {
 
             {isEditing && (
                 <div className="pt-2 animate-in zoom-in-95 duration-200">
-                    <button
+                    <Button
                         onClick={(e) => {
                             e.stopPropagation();
                             onSave(addresses);
                         }}
-                        className="w-full bg-blue-600 text-white py-2.5 rounded-lg font-bold shadow-md hover:bg-blue-700 active:scale-[0.98] transition-all uppercase text-sm tracking-widest"
+                        variant="blue"
+                        size="lg"
+                        fullWidth
                     >
                         Save Changes
-                    </button>
+                    </Button>
                 </div>
             )}
         </div>

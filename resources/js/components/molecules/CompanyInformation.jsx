@@ -1,4 +1,6 @@
 import React from "react";
+import Label from "../atoms/Label";
+import Input from "../atoms/Input";
 
 const CompanyInformation = ({
     room_num,
@@ -14,14 +16,9 @@ const CompanyInformation = ({
         onFieldChange(name, value);
     };
 
-    const inputClasses =
-        "w-full bg-white border border-slate-200 rounded-md p-2 text-sm text-slate-700 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all";
-
     return (
         <div className="w-full">
-            <h2 className="text-[10px] uppercase tracking-widest text-slate-400 font-bold mb-2">
-                Location
-            </h2>
+            <Label className="mb-2">Location</Label>
 
             {!edit ? (
                 <div className="text-slate-600 leading-relaxed bg-slate-100 p-3 rounded-lg border border-slate-100">
@@ -36,46 +33,46 @@ const CompanyInformation = ({
                 <div className="space-y-3 animate-in fade-in duration-300">
                     <div className="flex gap-2">
                         <div className="flex-[3]">
-                            <input
+                            <Input
                                 name="address_line1"
-                                value={address_line1 || ""}
+                                value={address_line1}
                                 onChange={handleChange}
                                 placeholder="Street Address"
-                                className={inputClasses}
+                                variant="minimal"
                             />
                         </div>
                         <div className="flex-[1]">
-                            <input
+                            <Input
                                 name="room_num"
-                                value={room_num || ""}
+                                value={room_num}
                                 onChange={handleChange}
                                 placeholder="Unit"
-                                className={inputClasses}
+                                variant="minimal"
                             />
                         </div>
                     </div>
 
                     <div className="grid grid-cols-3 gap-2">
-                        <input
+                        <Input
                             name="city"
-                            value={city || ""}
+                            value={city}
                             onChange={handleChange}
                             placeholder="City"
-                            className={inputClasses}
+                            variant="minimal"
                         />
-                        <input
+                        <Input
                             name="state"
-                            value={state || ""}
+                            value={state}
                             onChange={handleChange}
                             placeholder="State"
-                            className={inputClasses}
+                            variant="minimal"
                         />
-                        <input
+                        <Input
                             name="zip"
-                            value={zip || ""}
+                            value={zip}
                             onChange={handleChange}
                             placeholder="Zip"
-                            className={inputClasses}
+                            variant="minimal"
                         />
                     </div>
                 </div>
