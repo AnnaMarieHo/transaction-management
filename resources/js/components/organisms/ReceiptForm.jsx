@@ -1,24 +1,24 @@
 import React, { useState } from "react";
 import { FaPlus, FaTimes } from "react-icons/fa";
 
-const ReceiptForm = ({ addAddress }) => {
+const ReceiptForm = ({ addReceipt }) => {
     const [formData, setFormData] = useState({
         firstName: "",
         lastName: "",
         phone: "",
         company: "",
-        addressLine1: "",
-        addressLine2: "",
+        ReceiptLine1: "",
+        ReceiptLine2: "",
         roomNum: "",
         city: "",
         state: "",
         zip: "",
     });
 
-    const [showAddressForm, setShowAddressForm] = useState(false);
+    const [showReceiptForm, setShowReceiptForm] = useState(false);
 
-    const handleToggle = () => {
-        setShowAddressForm(!showAddressForm);
+    const handleReceiptToggle = () => {
+        setShowReceiptForm(!showReceiptForm);
     };
 
     const handleChange = (e) => {
@@ -29,9 +29,9 @@ const ReceiptForm = ({ addAddress }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         // Pre-submit check
-        if (!formData.firstName || !formData.addressLine1) return;
+        if (!formData.firstName || !formData.ReceiptLine1) return;
 
-        addAddress(formData);
+        addReceipt(formData);
 
         // Reset and close
         setFormData({
@@ -39,14 +39,14 @@ const ReceiptForm = ({ addAddress }) => {
             lastName: "",
             phone: "",
             company: "",
-            addressLine1: "",
-            addressLine2: "",
+            ReceiptLine1: "",
+            ReceiptLine2: "",
             roomNum: "",
             city: "",
             state: "",
             zip: "",
         });
-        setShowAddressForm(false);
+        setShowReceiptForm(false);
     };
 
     const inputClasses =
@@ -57,10 +57,10 @@ const ReceiptForm = ({ addAddress }) => {
             <div className="p-6 flex justify-between items-center bg-white">
                 <div>
                     <h2 className="text-lg font-bold text-slate-800">
-                        {showAddressForm ? "New Receipt" : "Add Receipt"}
+                        {showReceiptForm ? "New Receipt" : "Add Receipt"}
                     </h2>
                     <p className="text-slate-500 text-xs">
-                        {showAddressForm
+                        {showReceiptForm
                             ? "Fill in the transaction details"
                             : "Add a new transaction to your list"}
                     </p>
@@ -68,14 +68,14 @@ const ReceiptForm = ({ addAddress }) => {
 
                 <button
                     type="button"
-                    onClick={handleToggle}
+                    onClick={handleReceiptToggle}
                     className={`flex items-center gap-2 px-4 py-2 rounded-full font-bold text-xs uppercase tracking-wider transition-all duration-300 ${
-                        showAddressForm
+                        showReceiptForm
                             ? "bg-slate-100 text-slate-600 hover:bg-slate-200"
                             : "bg-blue-600 text-white hover:bg-blue-700 shadow-md"
                     }`}
                 >
-                    {showAddressForm ? (
+                    {showReceiptForm ? (
                         <>
                             <FaTimes /> Cancel
                         </>
@@ -89,7 +89,7 @@ const ReceiptForm = ({ addAddress }) => {
 
             <div
                 className={`transition-all duration-500 ease-in-out overflow-hidden ${
-                    showAddressForm
+                    showReceiptForm
                         ? "max-h-[1000px] opacity-100 border-t border-slate-100"
                         : "max-h-0 opacity-0"
                 }`}
@@ -132,20 +132,12 @@ const ReceiptForm = ({ addAddress }) => {
                         />
                     </div>
 
-                    {/* <div className="space-y-3">
-                        <input
-                            className={inputClasses}
-                            name="addressLine1"
-                            placeholder="Street Address"
-                            value={formData.addressLine1}
-                            onChange={handleChange}
-                        /> */}
                     <div className="grid grid-cols-2 gap-4">
                         <input
                             className={inputClasses}
-                            name="addressLine1"
-                            placeholder="Street Address"
-                            value={formData.addressLine1}
+                            name="ReceiptLine1"
+                            placeholder="Street Receipt"
+                            value={formData.ReceiptLine1}
                             onChange={handleChange}
                         />
                         <input
@@ -156,7 +148,6 @@ const ReceiptForm = ({ addAddress }) => {
                             onChange={handleChange}
                         />
                     </div>
-                    {/* </div> */}
 
                     <div className="grid grid-cols-3 gap-4">
                         <input
@@ -187,7 +178,7 @@ const ReceiptForm = ({ addAddress }) => {
                             type="submit"
                             className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 rounded-lg shadow-lg active:scale-[0.98] transition-all uppercase text-xs tracking-widest mt-2"
                         >
-                            Save Address
+                            Save Receipt
                         </button>
                     </div>
                 </form>

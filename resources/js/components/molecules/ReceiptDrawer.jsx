@@ -8,7 +8,7 @@ const ReceiptDrawer = ({ isOpen, onClose, children, title }) => {
     return createPortal(
         <AnimatePresence>
             {isOpen && (
-                <div className="fixed inset-0 z-50 flex justify-end overflow-hidden">
+                <div className="fixed inset-0 z-50 flex justify-start overflow-hidden">
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
@@ -18,9 +18,9 @@ const ReceiptDrawer = ({ isOpen, onClose, children, title }) => {
                     />
 
                     <motion.div
-                        initial={{ x: "100%" }}
+                        initial={{ x: "-100%" }}
                         animate={{ x: 0 }}
-                        exit={{ x: "100%" }}
+                        exit={{ x: "-100%" }}
                         transition={{
                             type: "spring",
                             damping: 25,
