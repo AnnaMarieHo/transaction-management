@@ -1,7 +1,7 @@
 import React from "react";
 import Receipts from "./Receipts";
 
-const DashboardStats = ({ receipts, addresses }) => {
+const DashboardStats = ({ receipts, addresses, activeId }) => {
     const topSpenders = addresses
         .map((addr) => ({
             name: addr.first_name,
@@ -49,7 +49,6 @@ const DashboardStats = ({ receipts, addresses }) => {
                     </p>
                 </div>
             </div>
-
             <div className="grid grid-cols-2 gap-4">
                 <div className="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm">
                     <h3 className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-4">
@@ -94,10 +93,9 @@ const DashboardStats = ({ receipts, addresses }) => {
                 </div>
             </div>
 
+            <Receipts receipts={receipts} activeId={activeId}></Receipts>
+
             <div className="">
-                <h3 className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-4 ml-2">
-                    Global Feed...
-                </h3>
                 <div className="space-y-2">
                     {receipts.slice(0, 5).map((r) => (
                         <div
@@ -114,7 +112,6 @@ const DashboardStats = ({ receipts, addresses }) => {
                     ))}
                 </div>
             </div>
-            <Receipts receipts={receipts}></Receipts>
         </div>
     );
 };

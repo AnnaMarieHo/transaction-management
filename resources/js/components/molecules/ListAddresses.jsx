@@ -2,8 +2,15 @@ import React, { act, useEffect, useState } from "react";
 import AddressCard from "../organisms/AddressCard";
 
 const ListAddresses = (props) => {
-    const { addresses, editAddress, deleteAddress, updateAddress } = props;
-    const [activeId, setActiveId] = useState(null);
+    const {
+        addresses,
+        editAddress,
+        deleteAddress,
+        updateAddress,
+        setActiveId,
+        activeId,
+    } = props;
+    // const [activeId, setActiveId] = useState(null);
     const [editingId, setEditingId] = useState(null);
 
     const handleSetActive = (id) => {

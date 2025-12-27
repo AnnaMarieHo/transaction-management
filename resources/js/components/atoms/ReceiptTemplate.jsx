@@ -2,7 +2,7 @@ import { isPending } from "@reduxjs/toolkit";
 import React from "react";
 const ReceiptTemplate = (props) => {
     const isSeller = props.variant === "seller";
-    const isNeutral = props.variant !== "seller" && props.variant !== "buyer";
+    // const isNeutral = props.variant !== "seller" && props.variant !== "buyer";
 
     return (
         <div
@@ -10,23 +10,21 @@ const ReceiptTemplate = (props) => {
                 isSeller ? "border-emerald-500" : "border-blue-500"
             } bg-white shadow-sm`}
         >
-            {!isNeutral && (
-                <div className="flex justify-between items-start mb-2">
-                    <span
-                        className={`text-[10px] font-bold uppercase tracking-tighter px-2 py-0.5 rounded ${
-                            isSeller
-                                ? "bg-emerald-100 text-emerald-700"
-                                : "bg-blue-100 text-blue-700"
-                        }`}
-                    >
-                        {isSeller && "Outgoing Sale"}
-                        {!isSeller && "Incoming Sale"}
-                    </span>
-                    <span className="text-slate-400 text-xs">
-                        #{props.reciept_id}
-                    </span>
-                </div>
-            )}
+            <div className="flex justify-between items-start mb-2">
+                <span
+                    className={`text-[10px] font-bold uppercase tracking-tighter px-2 py-0.5 rounded ${
+                        isSeller
+                            ? "bg-emerald-100 text-emerald-700"
+                            : "bg-blue-100 text-blue-700"
+                    }`}
+                >
+                    {isSeller ? "Outgoing Sale" : "Incoming Sale"}
+                </span>
+                <span className="text-slate-400 text-xs">
+                    #{props.reciept_id}
+                </span>
+            </div>
+
             <div className="absolute top-2 right-2 text-[10px] font-mono text-slate-300">
                 REF: {props.reciept_id}
             </div>

@@ -11,6 +11,8 @@ const App = () => {
         useAddress();
     const { receipts } = useReceipt();
 
+    const [activeId, setActiveId] = useState(null);
+
     return (
         <div className="flex h-screen bg-slate-50 overflow-hidden">
             <div className="w-5/12 overflow-y-auto border-r border-slate-200 p-6">
@@ -19,6 +21,8 @@ const App = () => {
                     editAddress={editAddress}
                     deleteAddress={deleteAddress}
                     updateAddress={updateAddress}
+                    setActiveId={setActiveId}
+                    activeId={activeId}
                 />
             </div>
 
@@ -33,7 +37,11 @@ const App = () => {
                 </div>
 
                 <div className="flex-1 overflow-y-auto p-8 bg-slate-50/20">
-                    <DashboardStats receipts={receipts} addresses={addresses} />
+                    <DashboardStats
+                        activeId={activeId}
+                        receipts={receipts}
+                        addresses={addresses}
+                    />
                 </div>
             </div>
         </div>
