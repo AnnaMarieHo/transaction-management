@@ -1,118 +1,110 @@
 import React from "react";
 import Receipts from "./Receipts";
+import GlobalStats from "./GlobalStats";
+import { motion, AnimatePresence } from "framer-motion";
 
 const DashboardStats = ({ receipts, addresses, activeId }) => {
-    const topSpenders = addresses
-        .map((addr) => ({
-            name: addr.first_name,
-            total: receipts
-                .filter((r) => r.b_id === addr.id)
-                .reduce((sum, r) => sum + r.sale_total, 0),
-        }))
-        .sort((a, b) => b.total - a.total)
-        .slice(0, 3);
+    const filteredReceipts = receipts.filter(
+        (receipt) => receipt.b_id === activeId || receipt.s_id === activeId
+    );
 
-    const topSellers = addresses
-        .map((addr) => ({
-            name: addr.first_name,
-            total: receipts
-                .filter((r) => r.s_id === addr.id)
-                .reduce((sum, r) => sum + r.sale_total, 0),
-        }))
-        .sort((a, b) => b.total - a.total)
-        .slice(0, 3);
+    const activePerson = addresses?.find((a) => a.id === activeId);
+    const activeName = activePerson
+        ? `${activePerson.first_name ?? ""} ${activePerson.last_name}`
+        : "";
 
     return (
-        <div className="space-y-8">
-            <div className="grid grid-cols-2 gap-4">
-                <div className="p-4 bg-blue-50 rounded-2xl border border-blue-100">
-                    <p className="text-xs font-bold text-blue-600 uppercase">
-                        Total Volume
-                    </p>
-                    <p className="text-2xl font-black text-slate-800">
-                        $
-                        {receipts
-                            .reduce((sum, r) => sum + r.sale_total, 0)
-                            .toLocaleString()}
-                    </p>
-                </div>
-                <div className="p-4 bg-green-50 rounded-2xl border border-green-100">
-                    <p className="text-xs font-bold text-green-600 uppercase">
-                        Avg. Transaction
-                    </p>
-                    <p className="text-2xl font-black text-slate-800">
-                        $
-                        {(
-                            receipts.reduce((sum, r) => sum + r.sale_total, 0) /
-                                receipts.length || 0
-                        ).toFixed(2)}
-                    </p>
-                </div>
-            </div>
-            <div className="grid grid-cols-2 gap-4">
-                <div className="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm">
-                    <h3 className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-4">
-                        Top Spenders
-                    </h3>
-                    <div className="space-y-4">
-                        {topSpenders.map((user, i) => (
-                            <div
-                                key={i}
-                                className="flex justify-between items-center"
-                            >
-                                <span className="text-sm font-semibold text-slate-700">
-                                    {user.name}
-                                </span>
-                                <span className="text-sm font-bold text-slate-900">
-                                    ${user.total}
-                                </span>
-                            </div>
-                        ))}
+        <div className="space-y-8 mx-auto p-6">
+            <header>
+                <h3 className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-4 ml-2">
+                    {activeName ? activeName : ""}
+                </h3>
+
+                <div className="grid grid-cols-2 gap-4">
+                    <div className="p-4 bg-blue-50 rounded-2xl border border-blue-100">
+                        <p className="text-xs font-bold text-blue-600 uppercase">
+                            Total Volume
+                        </p>
+                        <p className="text-2xl font-black text-slate-800">
+                            $
+                            {(activeId ? filteredReceipts : receipts)
+                                .reduce((sum, r) => sum + r.sale_total, 0)
+                                .toLocaleString()}
+                        </p>
+                    </div>
+                    <div className="p-4 bg-green-50 rounded-2xl border border-green-100">
+                        <p className="text-xs font-bold text-green-600 uppercase">
+                            Avg. Transaction
+                        </p>
+                        <p className="text-2xl font-black text-slate-800">
+                            $
+                            {(activeId
+                                ? filteredReceipts.reduce(
+                                      (sum, r) => sum + r.sale_total,
+                                      0
+                                  ) / filteredReceipts.length || 0
+                                : receipts.reduce(
+                                      (sum, r) => sum + r.sale_total,
+                                      0
+                                  ) / receipts.length || 0
+                            ).toFixed(2)}
+                        </p>
                     </div>
                 </div>
+            </header>
 
-                <div className="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm">
-                    <h3 className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-4">
-                        Top Sellers
-                    </h3>
-                    <div className="space-y-4">
-                        {topSellers.map((user, i) => (
-                            <div
-                                key={i}
-                                className="flex justify-between items-center"
+            <div className="flex flex-col space-y-8">
+                <AnimatePresence mode="popLayout">
+                    {activeId ? (
+                        <React.Fragment key="user-view">
+                            <motion.div
+                                layout
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -20 }}
                             >
-                                <span className="text-sm font-semibold text-slate-700">
-                                    {user.name}
-                                </span>
-                                <span className="text-sm font-bold text-slate-900">
-                                    ${user.total}
-                                </span>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </div>
+                                <Receipts
+                                    receipts={receipts}
+                                    filteredReceipts={filteredReceipts}
+                                    activeId={activeId}
+                                    addresses={addresses}
+                                    activeName={activeName}
+                                />
+                            </motion.div>
 
-            <Receipts receipts={receipts} activeId={activeId}></Receipts>
-
-            <div className="">
-                <div className="space-y-2">
-                    {receipts.slice(0, 5).map((r) => (
-                        <div
-                            key={r.reciept_id}
-                            className="p-3 bg-slate-50 rounded-xl flex justify-between text-xs"
+                            <motion.div layout>
+                                <GlobalStats
+                                    addresses={addresses}
+                                    receipts={receipts}
+                                    activeName={activeName}
+                                />
+                            </motion.div>
+                        </React.Fragment>
+                    ) : (
+                        <motion.div
+                            key="global-view"
+                            layout
+                            initial={{ opacity: 0, scale: 0.95 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{
+                                type: "spring",
+                                damping: 20,
+                                stiffness: 100,
+                            }}
                         >
-                            <span className="font-mono text-slate-400">
-                                #{r.reciept_id}
-                            </span>
-                            <span className="font-bold text-slate-700">
-                                ${r.sale_total}
-                            </span>
-                        </div>
-                    ))}
-                </div>
+                            <GlobalStats
+                                addresses={addresses}
+                                receipts={receipts}
+                                activeName={activeName}
+                                activeId={activeId}
+                                filteredReceipts={filteredReceipts}
+                            />
+                        </motion.div>
+                    )}
+                </AnimatePresence>
             </div>
         </div>
     );
 };
+
 export default DashboardStats;
