@@ -57,7 +57,9 @@ const AddressForm = ({ addAddress }) => {
             <div className="p-6 flex justify-between items-center bg-white">
                 <div>
                     <h2 className="text-lg font-bold text-slate-800">
-                        {showAddressForm ? "New Address" : "Add Addresses"}
+                        {showAddressForm
+                            ? "New Client Address"
+                            : "Add Client Addresses"}
                     </h2>
                     <p className="text-slate-500 text-xs">
                         {showAddressForm
@@ -132,14 +134,6 @@ const AddressForm = ({ addAddress }) => {
                         />
                     </div>
 
-                    {/* <div className="space-y-3">
-                        <input
-                            className={inputClasses}
-                            name="addressLine1"
-                            placeholder="Street Address"
-                            value={formData.addressLine1}
-                            onChange={handleChange}
-                        /> */}
                     <div className="grid grid-cols-2 gap-4">
                         <input
                             className={inputClasses}

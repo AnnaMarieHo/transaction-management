@@ -1,12 +1,8 @@
 import React, { act, useEffect, useState } from "react";
-import AddressCard from "./AddressCard";
-import ReceiptTemplate from "../atoms/ReceiptTemplate";
-import { useReceipt } from "../../hooks/useReceipt";
-import ReceiptDrawer from "../molecules/ReceiptDrawer";
+import AddressCard from "../organisms/AddressCard";
 
 const ListAddresses = (props) => {
     const { addresses, editAddress, deleteAddress, updateAddress } = props;
-
     const [activeId, setActiveId] = useState(null);
     const [editingId, setEditingId] = useState(null);
 
@@ -30,10 +26,10 @@ const ListAddresses = (props) => {
                 <div className="flex-col flex w-full max-w-lg mx-auto space-y-8">
                     <div className="px-2">
                         <h2 className="text-2xl font-bold text-slate-800">
-                            Saved Addresses
+                            All Clients
                         </h2>
                         <p className="text-slate-500 text-sm">
-                            Select an address to edit or manage details.
+                            Select a client to edit or manage details.
                         </p>
                     </div>
 
