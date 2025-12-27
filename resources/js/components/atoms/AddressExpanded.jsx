@@ -6,7 +6,7 @@ import Button from "./Button";
 
 const AddressExpanded = ({ isEditing, addresses, updateAddress, onSave }) => {
     return (
-        <div className="space-y-4 animate-in fade-in slide-in-from-top-1 duration-300">
+        <div className="space-y-2 sm:space-y-3 lg:space-y-4 animate-in fade-in slide-in-from-top-1 duration-300">
             <PersonalInformation
                 {...addresses}
                 onFieldChange={(n, v) => updateAddress(addresses.id, n, v)}

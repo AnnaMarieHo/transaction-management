@@ -25,13 +25,15 @@ const DashboardStats = ({ receipts, addresses, activeId }) => {
     const avgTransaction = calculateReceiptAverage(displayReceipts);
 
     return (
-        <div className="space-y-8 mx-auto p-6">
+        <div className="space-y-6 sm:space-y-8 mx-auto p-3 sm:p-4 lg:p-6">
             <header>
                 {activeName && (
-                    <Label className="mb-4 ml-2">{activeName}</Label>
+                    <Label className="mb-3 sm:mb-4 ml-1 sm:ml-2">
+                        {activeName}
+                    </Label>
                 )}
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                     <StatCard
                         title="Total Volume"
                         value={`$${totalVolume.toLocaleString()}`}
@@ -45,7 +47,7 @@ const DashboardStats = ({ receipts, addresses, activeId }) => {
                 </div>
             </header>
 
-            <div className="flex flex-col space-y-8">
+            <div className="flex flex-col space-y-6 sm:space-y-8">
                 <AnimatePresence mode="wait">
                     {activeId ? (
                         <React.Fragment key="user-view">

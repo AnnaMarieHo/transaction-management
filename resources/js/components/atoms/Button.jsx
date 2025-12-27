@@ -13,9 +13,9 @@ const Button = ({
     fullWidth = false,
 }) => {
     const sizeClasses = {
-        sm: "px-3 py-1.5 text-[10px]",
-        md: "px-4 py-2 text-xs",
-        lg: "px-6 py-3 text-sm",
+        sm: "px-2 sm:px-3 py-1 sm:py-1.5 text-[9px] sm:text-[10px]",
+        md: "px-3 sm:px-4 py-1.5 sm:py-2 text-[10px] sm:text-xs",
+        lg: "px-4 sm:px-6 py-2 sm:py-3 text-xs sm:text-sm",
     };
 
     const variantClasses = {
@@ -46,7 +46,7 @@ const Button = ({
                 className
             )}
         >
-            {Icon && <Icon className="w-4 h-4" />}
+            {Icon && <Icon className="w-3 h-3 sm:w-4 sm:h-4" />}
             {children}
         </button>
     );

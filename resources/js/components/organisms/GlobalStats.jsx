@@ -28,10 +28,10 @@ const GlobalStats = ({ addresses, receipts, activeId }) => {
     const topMarkets = getTopMarkets(cityVolume, totalVolume, 3);
 
     return (
-        <div className="space-y-6">
-            <div className="flex items-center justify-between px-1">
+        <div className="space-y-4 sm:space-y-6">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between px-1 gap-3 sm:gap-0">
                 <div>
-                    <h2 className="text-xl font-black text-slate-800">
+                    <h2 className="text-lg sm:text-xl font-black text-slate-800">
                         {isClientView
                             ? `Insights for ${activeClient?.first_name}`
                             : "Global Dashboard"}
@@ -50,27 +50,27 @@ const GlobalStats = ({ addresses, receipts, activeId }) => {
             </div>
 
             <Card variant="elevated" padding="lg">
-                <div className="mb-6">
+                <div className="mb-4 sm:mb-6">
                     <Label className="mb-1">
                         {isClientView ? "Activity Trend" : "Revenue Momentum"}
                     </Label>
-                    <p className="text-3xl font-black text-slate-900">
+                    <p className="text-2xl sm:text-3xl font-black text-slate-900">
                         ${totalVolume.toLocaleString()}
                     </p>
                 </div>
             </Card>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
                 <TopListCard
                     title="Top Spenders"
                     items={topSpenders}
                     renderItem={(user, i) => (
                         <div key={i}>
-                            <div className="flex justify-between items-center">
-                                <span className="text-sm font-semibold text-slate-700">
+                            <div className="flex justify-between items-center gap-2">
+                                <span className="text-xs sm:text-sm font-semibold text-slate-700 truncate flex-1">
                                     {user.name}
                                 </span>
-                                <span className="text-sm font-bold text-slate-900">
+                                <span className="text-xs sm:text-sm font-bold text-slate-900 flex-shrink-0">
                                     ${user.total.toLocaleString()}
                                 </span>
                             </div>
@@ -87,11 +87,15 @@ const GlobalStats = ({ addresses, receipts, activeId }) => {
                     items={mostActive}
                     renderItem={(user, i) => (
                         <div key={i}>
-                            <div className="flex justify-between items-center">
-                                <span className="text-sm font-semibold text-slate-700">
+                            <div className="flex justify-between items-center gap-2">
+                                <span className="text-xs sm:text-sm font-semibold text-slate-700 truncate flex-1">
                                     {user.name}
                                 </span>
-                                <Badge variant="blue" size="sm">
+                                <Badge
+                                    variant="blue"
+                                    size="sm"
+                                    className="flex-shrink-0"
+                                >
                                     {user.count} Trans.
                                 </Badge>
                             </div>
@@ -105,10 +109,10 @@ const GlobalStats = ({ addresses, receipts, activeId }) => {
                 <Card
                     variant="elevated"
                     padding="md"
-                    className="col-span-1 md:col-span-2"
+                    className="col-span-1 sm:col-span-2 lg:col-span-2"
                 >
-                    <Label className="mb-4">Market Reach</Label>
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                    <Label className="mb-3 sm:mb-4">Market Reach</Label>
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
                         {topMarkets.map((market, i) => (
                             <MarketReachCard key={i} market={market} />
                         ))}

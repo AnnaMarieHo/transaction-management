@@ -31,8 +31,8 @@ const Receipts = ({ activeId, activeName, addresses, filteredReceipts }) => {
     const topPartners = getTopPartners(interactionData, 3);
 
     return (
-        <div className="max-w-7xl mx-auto py-4 border-b border-slate-300">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-start mb-8">
+        <div className="w-full max-w-7xl mx-auto py-4 border-b border-slate-300">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 items-start mb-6 sm:mb-8">
                 {filteredReceipts.map((receipt) => (
                     <ReceiptCard
                         key={receipt.reciept_id}
@@ -42,18 +42,27 @@ const Receipts = ({ activeId, activeName, addresses, filteredReceipts }) => {
                 ))}
             </div>
 
-            <Card variant="elevated" padding="lg" className="mb-8">
-                <Label className="mb-4">
-                    Top Trading Partners for {activeName}
+            <Card
+                variant="elevated"
+                padding="md"
+                className="mb-4 sm:mb-6 lg:mb-8"
+            >
+                <Label className="mb-2 sm:mb-3 lg:mb-4">
+                    <span className="sm:hidden">
+                        Top Partners - {activeName}
+                    </span>
+                    <span className="hidden sm:inline">
+                        Top Trading Partners for {activeName}
+                    </span>
                 </Label>
-                <div className="space-y-3">
+                <div className="space-y-1.5 sm:space-y-2 lg:space-y-3">
                     {topPartners.map((partner, i) => (
                         <PartnerCard key={i} partner={partner} rank={i + 1} />
                     ))}
                 </div>
             </Card>
 
-            <div className="space-y-2">
+            <div className="space-y-1.5 sm:space-y-2 lg:space-y-2.5">
                 {filteredReceipts.slice(0, 5).map((r) => {
                     const isBuying = r.b_id === activeId;
                     const isAboveAverage = r.sale_total > userAverage;

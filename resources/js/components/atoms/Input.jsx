@@ -28,7 +28,7 @@ const Input = ({
             placeholder={placeholder}
             disabled={disabled}
             className={clsx(
-                "w-full p-3 text-sm rounded-lg outline-none transition-all text-slate-700 placeholder:text-slate-400",
+                "w-full p-2 sm:p-3 text-sm sm:text-base rounded-lg outline-none transition-all text-slate-700 placeholder:text-slate-400",
                 variantClasses[variant],
                 {
                     "opacity-60 cursor-not-allowed": disabled,

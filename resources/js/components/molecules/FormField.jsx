@@ -15,9 +15,12 @@ const FormField = ({
     className = "",
 }) => {
     return (
-        <div className={`space-y-1 ${className}`}>
+        <div className={`space-y-0.5 sm:space-y-1 ${className}`}>
             {label && (
-                <Label htmlFor={name} className="ml-1">
+                <Label
+                    htmlFor={name}
+                    className="ml-1 text-xs sm:text-sm font-semibold"
+                >
                     {label}
                     {required && <span className="text-red-500 ml-1">*</span>}
                 </Label>
@@ -30,6 +33,7 @@ const FormField = ({
                 type={type}
                 disabled={disabled}
                 variant={variant}
+                className="text-sm sm:text-base"
             />
         </div>
     );

@@ -18,20 +18,20 @@ const CompanyInformation = ({
 
     return (
         <div className="w-full">
-            <Label className="mb-2">Location</Label>
+            <Label className="mb-1.5 sm:mb-2">Location</Label>
 
             {!edit ? (
-                <div className="text-slate-600 leading-relaxed bg-slate-100 p-3 rounded-lg border border-slate-100">
-                    <p className="font-medium text-slate-800">
-                        {address_line1} {room_num && `• Unit ${room_num}`}
+                <div className="text-sm sm:text-base text-slate-600 leading-relaxed bg-slate-50 sm:bg-slate-100 p-2.5 sm:p-3 rounded-lg border border-slate-100">
+                    <p className="font-semibold text-slate-800 text-sm sm:text-base">
+                        {address_line1} {room_num && `• ${room_num}`}
                     </p>
-                    <p>
+                    <p className="text-sm sm:text-base">
                         {city}, {state} {zip}
                     </p>
                 </div>
             ) : (
-                <div className="space-y-3 animate-in fade-in duration-300">
-                    <div className="flex gap-2">
+                <div className="space-y-2 sm:space-y-3 animate-in fade-in duration-300">
+                    <div className="flex flex-col sm:flex-row gap-2">
                         <div className="flex-[3]">
                             <Input
                                 name="address_line1"
@@ -52,7 +52,7 @@ const CompanyInformation = ({
                         </div>
                     </div>
 
-                    <div className="grid grid-cols-3 gap-2">
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                         <Input
                             name="city"
                             value={city}
