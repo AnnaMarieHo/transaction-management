@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { FaChevronDown, FaReceipt } from "react-icons/fa";
 import ReceiptTemplate from "../atoms/ReceiptTemplate";
 
-const ReceiptCard = ({ receipt }) => {
+const ReceiptCard = ({ receipt, variant }) => {
     const [isExpanded, setIsExpanded] = useState(false);
 
     return (
@@ -49,7 +49,7 @@ const ReceiptCard = ({ receipt }) => {
                         transition={{ duration: 0.3, ease: "easeInOut" }}
                     >
                         <div className="p-6 bg-slate-50/50 border-t border-slate-100">
-                            <ReceiptTemplate {...receipt} />
+                            <ReceiptTemplate {...receipt} variant={variant} />
                         </div>
                     </motion.div>
                 )}
