@@ -72,13 +72,7 @@ const DashboardStats = ({ receipts, addresses, activeId }) => {
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
                                 transition={{ duration: 0.2, delay: 0.1 }}
-                            >
-                                <GlobalStats
-                                    addresses={addresses}
-                                    receipts={receipts}
-                                    activeName={activeName}
-                                />
-                            </motion.div>
+                            ></motion.div>
                         </React.Fragment>
                     ) : (
                         <motion.div

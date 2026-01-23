@@ -14,7 +14,6 @@ const AddressExpanded = ({ isEditing, addresses, updateAddress, onSave }) => {
             />
 
             <Divider />
-
             <CompanyInformation
                 {...addresses}
                 onFieldChange={(n, v) => updateAddress(addresses.id, n, v)}

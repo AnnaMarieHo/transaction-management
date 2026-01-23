@@ -42,7 +42,7 @@ const AddressCard = ({
     }, []);
 
     useEffect(() => {
-        // Scroll active card into view on mobile, accounting for buttons above
+        // Scroll active card into view on mobile
         if (isActive && cardRef.current) {
             // Small delay to let the card expand first
             setTimeout(() => {
