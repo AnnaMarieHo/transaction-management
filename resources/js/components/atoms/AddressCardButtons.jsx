@@ -12,9 +12,14 @@ const AddressCardButtons = (props) => {
         numberTransactions,
     } = props;
     return (
-        <div className="absolute top-[-1.5rem] right-4 flex gap-2 z-20 animate-in fade-in slide-in-from-bottom-2 duration-200">
-            <Button onClick={handleDelete} variant="red" icon={FaRegTrashAlt}>
-                Delete
+        <div className="absolute top-[-1.5rem] right-2 sm:right-4 flex flex-wrap gap-1.5 sm:gap-2 z-20 animate-in fade-in slide-in-from-bottom-2 duration-200">
+            <Button
+                onClick={handleDelete}
+                variant="red"
+                icon={FaRegTrashAlt}
+                size="sm"
+            >
+                <span className="hidden sm:inline">Delete</span>
             </Button>
             <Button
                 onClick={(e) => {
@@ -23,6 +28,7 @@ const AddressCardButtons = (props) => {
                 }}
                 variant={isEditing ? "dark" : "amber"}
                 icon={FaEdit}
+                size="sm"
             >
                 {isEditing ? "Cancel" : "Edit"}
             </Button>
@@ -30,8 +36,13 @@ const AddressCardButtons = (props) => {
                 onClick={handleViewTransactions}
                 variant="blue-outline"
                 icon={IoReceiptSharp}
+                size="sm"
             >
-                {numberTransactions} Transactions
+                <span className="hidden sm:inline">{numberTransactions} </span>
+                <span className="hidden xs:inline sm:hidden">
+                    {numberTransactions}
+                </span>
+                Transactions
             </Button>
         </div>
     );

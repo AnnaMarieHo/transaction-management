@@ -9,6 +9,7 @@ const ListAddresses = (props) => {
         updateAddress,
         setActiveId,
         activeId,
+        onEditingChange,
     } = props;
     // const [activeId, setActiveId] = useState(null);
     const [editingId, setEditingId] = useState(null);
@@ -19,12 +20,19 @@ const ListAddresses = (props) => {
     };
 
     const handleEditToggle = (id) => {
-        setEditingId((prev) => (prev === id ? null : id));
+        setEditingId((prev) => {
+            const newEditingId = prev === id ? null : id;
+            // Notify parent of editing state change
+            onEditingChange?.(newEditingId !== null);
+            return newEditingId;
+        });
     };
 
     const handleSave = async (addressData) => {
         await editAddress(addressData);
         setEditingId(null);
+        // Notify parent editing has ended
+        onEditingChange?.(false);
     };
 
     return (

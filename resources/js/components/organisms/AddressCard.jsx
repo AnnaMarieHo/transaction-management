@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import AddressCollapsed from "../atoms/AddressCollapsed";
 import AddressCardButtons from "../atoms/AddressCardButtons";
 import { useReceipt } from "../../hooks/useReceipt";
@@ -21,6 +21,7 @@ const AddressCard = ({
     const [isVisible, setIsVisible] = useState(false);
     const [viewTransactions, setViewTransactions] = useState(false);
     const [receiptsFilter, setReceiptsFilter] = useState("All");
+    const cardRef = useRef(null);
 
     const { receipts } = useReceipt();
 
@@ -40,6 +41,19 @@ const AddressCard = ({
         setIsVisible(true);
     }, []);
 
+    useEffect(() => {
+        // Scroll active card into view on mobile
+        if (isActive && cardRef.current) {
+            // Small delay to let the card expand first
+            setTimeout(() => {
+                cardRef.current?.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start",
+                });
+            }, 100);
+        }
+    }, [isActive]);
+
     const handleDelete = (e) => {
         e.stopPropagation();
         setIsDeleting(true);
@@ -57,11 +71,12 @@ const AddressCard = ({
     return (
         <>
             <div
-                className={`w-full relative transition-all duration-500 ease-in-out transform
+                ref={cardRef}
+                className={`w-full relative transition-all duration-500 ease-in-out transform scroll-mt-16
             ${
                 !isVisible || isDeleting
                     ? "opacity-0 scale-75 max-h-0 mb-0 overflow-hidden" // Entrance/Exit state
-                    : "opacity-100 scale-100 max-h-[1000px] mb-4" // Visible state
+                    : "opacity-100 scale-100 max-h-[1000px] mb-3 sm:mb-4" // Visible state
             }
         `}
             >
@@ -80,8 +95,8 @@ const AddressCard = ({
                     className={`group flex flex-col w-full rounded-xl transition-all duration-300 overflow-hidden
                 ${
                     isActive
-                        ? "scale-[1.00] ring-2 ring-blue-500 shadow-2xl bg-white"
-                        : "scale-90 border border-slate-200 bg-white shadow-sm hover:border-blue-300"
+                        ? "scale-100 ring-2 ring-blue-500 shadow-2xl bg-white"
+                        : "scale-95 sm:scale-90 border border-slate-200 bg-white shadow-sm hover:border-blue-300"
                 } cursor-pointer`}
                 >
                     <div
@@ -92,7 +107,7 @@ const AddressCard = ({
                         }`}
                     />
 
-                    <div className="p-4">
+                    <div className="p-2.5 sm:p-3 lg:p-4">
                         {!isActive ? (
                             <AddressCollapsed addresses={addresses} />
                         ) : (

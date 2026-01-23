@@ -30,24 +30,26 @@ const StatCard = ({
             className={`${variantClasses[variant]} ${className}`}
         >
             <div className="flex items-start justify-between">
-                <div className="flex-1">
+                <div className="flex-1 min-w-0">
                     <p
-                        className={`text-xs font-bold uppercase tracking-wider ${textVariants[variant]}`}
+                        className={`text-[10px] sm:text-xs font-bold uppercase tracking-wider ${textVariants[variant]}`}
                     >
                         {title}
                     </p>
-                    <p className="text-2xl font-black text-slate-800 mt-1">
+                    <p className="text-xl sm:text-2xl font-black text-slate-800 mt-1 truncate">
                         {value}
                     </p>
                     {subtitle && (
-                        <p className="text-xs text-slate-500 mt-1">
+                        <p className="text-[10px] sm:text-xs text-slate-500 mt-1 truncate">
                             {subtitle}
                         </p>
                     )}
                 </div>
                 {Icon && (
-                    <div className={`p-2 rounded-lg ${textVariants[variant]}`}>
-                        <Icon className="w-5 h-5" />
+                    <div
+                        className={`p-1.5 sm:p-2 rounded-lg ${textVariants[variant]} flex-shrink-0`}
+                    >
+                        <Icon className="w-4 h-4 sm:w-5 sm:h-5" />
                     </div>
                 )}
             </div>

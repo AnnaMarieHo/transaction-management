@@ -27,10 +27,10 @@ const ReceiptDrawer = ({ isOpen, onClose, children, title }) => {
                             damping: 25,
                             stiffness: 200,
                         }}
-                        className="relative w-full max-w-md bg-white h-full shadow-2xl flex flex-col"
+                        className="relative w-full max-w-full sm:max-w-md bg-white h-full shadow-2xl flex flex-col"
                     >
-                        <div className="p-6 border-b border-slate-100 flex items-center justify-between">
-                            <h2 className="text-xl font-bold text-slate-800">
+                        <div className="p-4 sm:p-6 border-b border-slate-100 flex items-center justify-between">
+                            <h2 className="text-lg sm:text-xl font-bold text-slate-800">
                                 {title}
                             </h2>
                             <IconButton
@@ -40,11 +40,11 @@ const ReceiptDrawer = ({ isOpen, onClose, children, title }) => {
                             />
                         </div>
 
-                        <div className="flex-1 overflow-y-auto p-6 bg-slate-50/50">
+                        <div className="flex-1 overflow-y-auto p-4 sm:p-6 bg-slate-50/50">
                             {children}
                         </div>
 
-                        <div className="p-6 border-t border-slate-100 bg-white">
+                        <div className="p-4 sm:p-6 border-t border-slate-100 bg-white">
                             <Button
                                 onClick={onClose}
                                 variant="dark"
