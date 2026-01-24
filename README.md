@@ -1,7 +1,7 @@
 
 ## Next Tasks
 
-# Next Features to Implement:
+### Next Features to Implement:
 
 - Implement **auth**: A user that is logged in should only have access to their information, not other users. They can add a transaction or delete a transaction. An authenticated manager has the ability to add/delete clients (addresses) and their receipts. They will also have the ability to add/delete new transactions.
 - Account deletion handling...: If an authenticated manager deletes a client, they should lose access to their dashboard. 
