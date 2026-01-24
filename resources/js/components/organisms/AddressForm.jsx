@@ -5,7 +5,7 @@ import Input from "../atoms/Input";
 import { addAddress } from "../../store/slices/addressSlice";
 import { useDispatch } from "react-redux";
 
-const AddressForm = ({ addAddress }) => {
+const AddressForm = () => {
     const dispatch = useDispatch()
     
     const [formData, setFormData] = useState({
