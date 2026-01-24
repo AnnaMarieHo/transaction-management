@@ -63,6 +63,7 @@ export const addressSlice = createSlice({
             editingId: null,
             transactionsForId: null,
             receiptsFilter: "All",
+            deletingById: {},
         },
     },
 
@@ -107,6 +108,10 @@ export const addressSlice = createSlice({
         },
         setReceiptsFilter: (state, action) => {
             state.ui.receiptsFilter = action.payload;
+        },
+        markDeleting: (state, action) => {
+            const id = action.payload;
+            state.ui.deletingById[id] = true;
         }
     },
 
@@ -156,6 +161,7 @@ export const addressSlice = createSlice({
                 state.ui.transactionsForId = null;
                 state.ui.receiptsFilter = "All";
             }
+            delete state.ui.deletingById[deletedId];
         })
     }
 
@@ -169,4 +175,5 @@ export const {
     openTransactions,
     closeTransactions,
     setReceiptsFilter,
+    markDeleting,
 } = addressSlice.actions

@@ -1,14 +1,8 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import AddressCollapsed from "../atoms/AddressCollapsed";
-import AddressCardButtons from "../atoms/AddressCardButtons";
-import { useReceipt } from "../../hooks/useReceipt";
 import AddressExpanded from "../atoms/AddressExpanded";
 import {
-    deleteAddress,
     toggleActiveId,
-    toggleEditingId,
-    openTransactions,
-    closeTransactions,
 } from "../../store/slices/addressSlice";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -19,34 +13,19 @@ import { useSelector, useDispatch } from "react-redux";
 const AddressCard = ({ addressId }) => {
     const dispatch = useDispatch();
     
-    const [isDeleting, setIsDeleting] = useState(false);
     const [isVisible, setIsVisible] = useState(false);
     const cardRef = useRef(null);
 
     const address = useSelector((state) =>
         state.addresses.addresses.find((a) => a.id === addressId)
     );
-    const { activeId, editingId, transactionsForId } =
+    const { activeId, deletingById } =
         useSelector((state) => state.addresses.ui);
 
     const isActive = activeId === addressId;
-    const isEditing = editingId === addressId;
-    const viewTransactions = transactionsForId === addressId;
-
-    const { receipts } = useReceipt();
+    const isDeleting = Boolean(deletingById?.[addressId]);
 
     if (!address) return null;
-
-    const activeBuyerReceipts = receipts.filter(
-        (receipt) => receipt.b_id === address.id
-    );
-
-    const activeSellerReceipts = receipts.filter(
-        (receipt) => receipt.s_id === address.id
-    );
-
-    const numberTransactions =
-        activeBuyerReceipts.length + activeSellerReceipts.length;
 
     useEffect(() => {
         // Trigger entrance animation on mount
@@ -66,25 +45,6 @@ const AddressCard = ({ addressId }) => {
         }
     }, [isActive]);
 
-    const handleDelete = (e) => {
-        e.stopPropagation();
-        setIsDeleting(true);
-
-        // Wait for the animation (300ms) before actually removing address from the data
-        setTimeout(() => {
-            dispatch(deleteAddress(addressId));
-        }, 300);
-    };
-
-    const handleViewTransactions = (e) => {
-        e.stopPropagation();
-        if (viewTransactions) {
-            dispatch(closeTransactions());
-        } else {
-            dispatch(openTransactions(addressId));
-        }
-    };
-
     return (
         <>
             <div
@@ -97,16 +57,6 @@ const AddressCard = ({ addressId }) => {
             }
         `}
             >
-                {isActive && (
-                    <AddressCardButtons
-                        handleDelete={handleDelete}
-                        isEditing={isEditing}
-                        onEditToggle={() => dispatch(toggleEditingId(addressId))}
-                        handleViewTransactions={handleViewTransactions}
-                        numberTransactions={numberTransactions}
-                    />
-                )}
-
                 <div
                     onClick={() => dispatch(toggleActiveId(addressId))}
                     className={`group flex flex-col w-full rounded-xl transition-all duration-300 overflow-hidden
