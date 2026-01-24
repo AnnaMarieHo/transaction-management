@@ -1,12 +1,11 @@
 import React, { act, useEffect, useState } from "react";
 import AddressCard from "../organisms/AddressCard";
+import { useSelector } from "react-redux";
 
 const ListAddresses = (props) => {
+    // const {addresses} = useSelector((state) => state.addresses)
     const {
         addresses,
-        editAddress,
-        deleteAddress,
-        updateAddress,
         setActiveId,
         activeId,
         onEditingChange,
@@ -28,12 +27,12 @@ const ListAddresses = (props) => {
         });
     };
 
-    const handleSave = async (addressData) => {
-        await editAddress(addressData);
-        setEditingId(null);
-        // Notify parent editing has ended
-        onEditingChange?.(false);
-    };
+    // const handleSave = async (addressData) => {
+    //     await editAddress(addressData);
+    //     setEditingId(null);
+    //     // Notify parent editing has ended
+    //     onEditingChange?.(false);
+    // };
 
     return (
         <>
@@ -60,9 +59,9 @@ const ListAddresses = (props) => {
                                 onEditToggle={() =>
                                     handleEditToggle(address.id)
                                 }
-                                onSave={handleSave}
-                                deleteAddress={deleteAddress}
-                                updateAddress={updateAddress}
+                                // onSave={handleSave}
+                                // deleteAddress={deleteAddress}
+                                // updateAddress={updateAddress}
                             />
                         ))}
                     </div>

@@ -6,6 +6,12 @@ import ReceiptDrawer from "../molecules/ReceiptDrawer";
 import ReceiptTemplate from "../atoms/ReceiptTemplate";
 import ReceiptDrawerButtons from "../atoms/ReceiptDrawerButtons";
 import AddressExpanded from "../atoms/AddressExpanded";
+import { fetchAddresses, addAddress, deleteAddress, updateAddress, editAddress } from "../../store/slices/addressSlice";
+import {useSelector, useDispatch } from "react-redux";
+
+
+
+
 
 const AddressCard = ({
     addresses,
@@ -13,10 +19,12 @@ const AddressCard = ({
     isEditing,
     onCardClick,
     onEditToggle,
-    onSave,
-    deleteAddress,
-    updateAddress,
+    // onSave,
+    // deleteAddress,
+    // updateAddress,
 }) => {
+    const dispatch = useDispatch();
+    
     const [isDeleting, setIsDeleting] = useState(false);
     const [isVisible, setIsVisible] = useState(false);
     const [viewTransactions, setViewTransactions] = useState(false);
@@ -60,7 +68,7 @@ const AddressCard = ({
 
         // Wait for the animation (300ms) before actually removing address from the data
         setTimeout(() => {
-            deleteAddress(addresses.id);
+            dispatch(deleteAddress(addresses.id));
         }, 300);
     };
 
@@ -80,7 +88,7 @@ const AddressCard = ({
             }
         `}
             >
-                {isActive && (
+                {/* {isActive && (
                     <AddressCardButtons
                         handleDelete={handleDelete}
                         isEditing={isEditing}
@@ -88,7 +96,7 @@ const AddressCard = ({
                         handleViewTransactions={handleViewTransactions}
                         numberTransactions={numberTransactions}
                     />
-                )}
+                )} */}
 
                 <div
                     onClick={onCardClick}
@@ -114,8 +122,8 @@ const AddressCard = ({
                             <AddressExpanded
                                 addresses={addresses}
                                 isEditing={isEditing}
-                                updateAddress={updateAddress}
-                                onSave={onSave}
+                                // updateAddress={updateAddress}
+                                // onSave={onSave}
                             />
                         )}
                     </div>

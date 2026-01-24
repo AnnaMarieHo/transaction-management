@@ -5,12 +5,17 @@ import AddressForm from "./organisms/AddressForm";
 import ReceiptForm from "./organisms/ReceiptForm";
 import { useReceipt } from "../hooks/useReceipt";
 import DashboardStats from "./organisms/DashboardStats";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchAddresses, addAddress, deleteAddress, updateAddress, editAddress } from "../store/slices/addressSlice";
+
 
 const App = () => {
-    const { addresses, addAddress, editAddress, deleteAddress, updateAddress } =
-        useAddress();
-    const { receipts } = useReceipt();
 
+    const dispatch = useDispatch();
+    const {addresses, isFetching, isError} = useSelector((state) => state.addresses)
+    
+
+    const { receipts } = useReceipt();
     const [activeId, setActiveId] = useState(null);
     const [showForms, setShowForms] = useState(false);
     const [isEditing, setIsEditing] = useState(false);
@@ -22,14 +27,12 @@ const App = () => {
     const sidebarRef = useRef(null);
     const hasDragged = useRef(false);
 
-    // Calculate the default height based on state
     const getDefaultHeight = () => {
         if (clientListMinimized) return "65px";
         if (isEditing) return "80vh";
         return "45vh";
     };
 
-    // Handle drag start
     const handleDragStart = (e) => {
         hasDragged.current = false;
         setIsDragging(true);
@@ -42,7 +45,6 @@ const App = () => {
         e.preventDefault();
     };
 
-    // Handle drag move
     const handleDragMove = (e) => {
         if (!isDragging) return;
 
@@ -70,7 +72,6 @@ const App = () => {
         }
     };
 
-    // Handle drag end
     const handleDragEnd = (e) => {
         if (!hasDragged.current && e) {
             // If it was just a click (no drag), toggle minimized state
@@ -109,6 +110,10 @@ const App = () => {
             setCustomHeight(null);
         }
     }, [clientListMinimized, isEditing]);
+
+    useEffect(() => {
+        dispatch(fetchAddresses());
+    }, [dispatch])
 
     // Calculate the actual height to use
     const sidebarHeight = customHeight || getDefaultHeight();
@@ -151,10 +156,10 @@ const App = () => {
                     }`}
                 >
                     <div className="flex-1 min-w-[300px] max-w-lg">
-                        <AddressForm addAddress={addAddress} />
+                        <AddressForm/>
                     </div>
                     <div className="flex-1 min-w-[300px] max-w-lg">
-                        <ReceiptForm addAddress={() => {}} />
+                        <ReceiptForm addReceipt={() => {}} />
                     </div>
                 </div>
 
@@ -229,9 +234,9 @@ const App = () => {
                 >
                     <ListAddresses
                         addresses={addresses}
-                        editAddress={editAddress}
-                        deleteAddress={deleteAddress}
-                        updateAddress={updateAddress}
+                        // editAddress={editAddress}
+                        // deleteAddress={deleteAddress}
+                        // updateAddress={updateAddress}
                         setActiveId={setActiveId}
                         activeId={activeId}
                         onEditingChange={setIsEditing}

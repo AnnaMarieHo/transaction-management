@@ -1,7 +1,13 @@
 import React from "react";
 import Avatar from "./Avatar";
+import {useSelector } from "react-redux";
 
-const AddressCollapsed = ({ addresses }) => {
+
+
+
+const AddressCollapsed = ({addresses}) => {
+    // const {addresses} = useSelector((state) => state.addresses)
+
     const initials = `${addresses.first_name?.[0] || ""}${
         addresses.last_name?.[0] || ""
     }`;
