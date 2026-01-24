@@ -1,38 +1,9 @@
-import React, { act, useEffect, useState } from "react";
+import React from "react";
 import AddressCard from "../organisms/AddressCard";
 import { useSelector } from "react-redux";
 
-const ListAddresses = (props) => {
-    // const {addresses} = useSelector((state) => state.addresses)
-    const {
-        addresses,
-        setActiveId,
-        activeId,
-        onEditingChange,
-    } = props;
-    // const [activeId, setActiveId] = useState(null);
-    const [editingId, setEditingId] = useState(null);
-
-    const handleSetActive = (id) => {
-        if (editingId !== null) return;
-        setActiveId((prevId) => (prevId === id ? null : id));
-    };
-
-    const handleEditToggle = (id) => {
-        setEditingId((prev) => {
-            const newEditingId = prev === id ? null : id;
-            // Notify parent of editing state change
-            onEditingChange?.(newEditingId !== null);
-            return newEditingId;
-        });
-    };
-
-    // const handleSave = async (addressData) => {
-    //     await editAddress(addressData);
-    //     setEditingId(null);
-    //     // Notify parent editing has ended
-    //     onEditingChange?.(false);
-    // };
+const ListAddresses = () => {
+    const { addresses } = useSelector((state) => state.addresses);
 
     return (
         <>
@@ -51,17 +22,7 @@ const ListAddresses = (props) => {
                         {addresses.map((address) => (
                             <AddressCard
                                 key={address.id}
-                                addresses={address}
-                                isActive={address.id === activeId}
-                                activeId={activeId}
-                                isEditing={address.id === editingId}
-                                onCardClick={() => handleSetActive(address.id)}
-                                onEditToggle={() =>
-                                    handleEditToggle(address.id)
-                                }
-                                // onSave={handleSave}
-                                // deleteAddress={deleteAddress}
-                                // updateAddress={updateAddress}
+                                addressId={address.id}
                             />
                         ))}
                     </div>

@@ -2,43 +2,47 @@ import React, { useState, useEffect, useRef } from "react";
 import AddressCollapsed from "../atoms/AddressCollapsed";
 import AddressCardButtons from "../atoms/AddressCardButtons";
 import { useReceipt } from "../../hooks/useReceipt";
-import ReceiptDrawer from "../molecules/ReceiptDrawer";
-import ReceiptTemplate from "../atoms/ReceiptTemplate";
-import ReceiptDrawerButtons from "../atoms/ReceiptDrawerButtons";
 import AddressExpanded from "../atoms/AddressExpanded";
-import { fetchAddresses, addAddress, deleteAddress, updateAddress, editAddress } from "../../store/slices/addressSlice";
-import {useSelector, useDispatch } from "react-redux";
+import {
+    deleteAddress,
+    toggleActiveId,
+    toggleEditingId,
+    openTransactions,
+    closeTransactions,
+} from "../../store/slices/addressSlice";
+import { useSelector, useDispatch } from "react-redux";
 
 
 
 
 
-const AddressCard = ({
-    addresses,
-    isActive,
-    isEditing,
-    onCardClick,
-    onEditToggle,
-    // onSave,
-    // deleteAddress,
-    // updateAddress,
-}) => {
+const AddressCard = ({ addressId }) => {
     const dispatch = useDispatch();
     
     const [isDeleting, setIsDeleting] = useState(false);
     const [isVisible, setIsVisible] = useState(false);
-    const [viewTransactions, setViewTransactions] = useState(false);
-    const [receiptsFilter, setReceiptsFilter] = useState("All");
     const cardRef = useRef(null);
+
+    const address = useSelector((state) =>
+        state.addresses.addresses.find((a) => a.id === addressId)
+    );
+    const { activeId, editingId, transactionsForId } =
+        useSelector((state) => state.addresses.ui);
+
+    const isActive = activeId === addressId;
+    const isEditing = editingId === addressId;
+    const viewTransactions = transactionsForId === addressId;
 
     const { receipts } = useReceipt();
 
+    if (!address) return null;
+
     const activeBuyerReceipts = receipts.filter(
-        (receipt) => receipt.b_id === addresses.id
+        (receipt) => receipt.b_id === address.id
     );
 
     const activeSellerReceipts = receipts.filter(
-        (receipt) => receipt.s_id === addresses.id
+        (receipt) => receipt.s_id === address.id
     );
 
     const numberTransactions =
@@ -68,12 +72,17 @@ const AddressCard = ({
 
         // Wait for the animation (300ms) before actually removing address from the data
         setTimeout(() => {
-            dispatch(deleteAddress(addresses.id));
+            dispatch(deleteAddress(addressId));
         }, 300);
     };
 
-    const handleViewTransactions = () => {
-        setViewTransactions(!viewTransactions);
+    const handleViewTransactions = (e) => {
+        e.stopPropagation();
+        if (viewTransactions) {
+            dispatch(closeTransactions());
+        } else {
+            dispatch(openTransactions(addressId));
+        }
     };
 
     return (
@@ -88,18 +97,18 @@ const AddressCard = ({
             }
         `}
             >
-                {/* {isActive && (
+                {isActive && (
                     <AddressCardButtons
                         handleDelete={handleDelete}
                         isEditing={isEditing}
-                        onEditToggle={onEditToggle}
+                        onEditToggle={() => dispatch(toggleEditingId(addressId))}
                         handleViewTransactions={handleViewTransactions}
                         numberTransactions={numberTransactions}
                     />
-                )} */}
+                )}
 
                 <div
-                    onClick={onCardClick}
+                    onClick={() => dispatch(toggleActiveId(addressId))}
                     className={`group flex flex-col w-full rounded-xl transition-all duration-300 overflow-hidden
                 ${
                     isActive
@@ -117,58 +126,15 @@ const AddressCard = ({
 
                     <div className="p-2.5 sm:p-3 lg:p-4">
                         {!isActive ? (
-                            <AddressCollapsed addresses={addresses} />
+                            <AddressCollapsed addresses={address} />
                         ) : (
                             <AddressExpanded
-                                addresses={addresses}
-                                isEditing={isEditing}
-                                // updateAddress={updateAddress}
-                                // onSave={onSave}
+                                addressId={addressId}
                             />
                         )}
                     </div>
                 </div>
             </div>
-            <ReceiptDrawer
-                isOpen={viewTransactions}
-                onClose={() => setViewTransactions(false)}
-                title="Transaction Records"
-            >
-                <ReceiptDrawerButtons
-                    onFilterChange={setReceiptsFilter}
-                    currentFilter={receiptsFilter}
-                />
-
-                <div className="mt-6 space-y-6">
-                    {(receiptsFilter === "All" ||
-                        receiptsFilter === "Incoming") &&
-                        activeBuyerReceipts.map((receipt) => (
-                            <ReceiptTemplate
-                                key={receipt.reciept_id}
-                                variant="buyer"
-                                {...receipt}
-                            />
-                        ))}
-
-                    {(receiptsFilter === "All" ||
-                        receiptsFilter === "Outgoing") &&
-                        activeSellerReceipts.map((receipt) => (
-                            <ReceiptTemplate
-                                key={receipt.reciept_id}
-                                variant="seller"
-                                {...receipt}
-                            />
-                        ))}
-
-                    {numberTransactions === 0 && (
-                        <div className="text-center py-20 text-slate-400">
-                            <p>
-                                No transaction history found for this address.
-                            </p>
-                        </div>
-                    )}
-                </div>
-            </ReceiptDrawer>
         </>
     );
 };

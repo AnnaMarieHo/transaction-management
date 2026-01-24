@@ -1,24 +1,24 @@
 import React, { useEffect, useState, useRef } from "react";
 import ListAddresses from "./molecules/ListAddresses";
-import { useAddress } from "../hooks/useAddress";
 import AddressForm from "./organisms/AddressForm";
 import ReceiptForm from "./organisms/ReceiptForm";
 import { useReceipt } from "../hooks/useReceipt";
 import DashboardStats from "./organisms/DashboardStats";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchAddresses, addAddress, deleteAddress, updateAddress, editAddress } from "../store/slices/addressSlice";
+import { fetchAddresses } from "../store/slices/addressSlice";
+import AddressTransactionsDrawer from "./molecules/AddressTransactionsDrawer";
 
 
 const App = () => {
 
     const dispatch = useDispatch();
-    const {addresses, isFetching, isError} = useSelector((state) => state.addresses)
+    const { addresses } = useSelector((state) => state.addresses);
+    const { activeId, editingId } = useSelector((state) => state.addresses.ui);
+    const isEditing = editingId !== null;
     
 
     const { receipts } = useReceipt();
-    const [activeId, setActiveId] = useState(null);
     const [showForms, setShowForms] = useState(false);
-    const [isEditing, setIsEditing] = useState(false);
     const [clientListMinimized, setClientListMinimized] = useState(false);
     const [customHeight, setCustomHeight] = useState(null);
     const [isDragging, setIsDragging] = useState(false);
@@ -233,16 +233,10 @@ const App = () => {
                     }`}
                 >
                     <ListAddresses
-                        addresses={addresses}
-                        // editAddress={editAddress}
-                        // deleteAddress={deleteAddress}
-                        // updateAddress={updateAddress}
-                        setActiveId={setActiveId}
-                        activeId={activeId}
-                        onEditingChange={setIsEditing}
                     />
                 </div>
             </div>
+            <AddressTransactionsDrawer />
         </div>
     );
 };

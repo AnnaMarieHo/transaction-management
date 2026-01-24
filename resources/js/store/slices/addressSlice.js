@@ -51,13 +51,19 @@ export const deleteAddress = createAsyncThunk(
 )
 
 export const addressSlice = createSlice({
-    name: "addreses",
+    name: "addresses",
     initialState: {
         addresses: [],
         loading: false,
         isFetching: false,
         isError: false,
         errorMessage: "",
+        ui: {
+            activeId: null,
+            editingId: null,
+            transactionsForId: null,
+            receiptsFilter: "All",
+        },
     },
 
     reducers: {
@@ -67,6 +73,40 @@ export const addressSlice = createSlice({
             if (existingAddress){
                 existingAddress[name] = value;
             }
+        },
+        toggleActiveId: (state, action) => {
+            const id = action.payload;
+            // Don't allow switching active cards while editing
+            if (state.ui.editingId !== null) return;
+            const nextActiveId = state.ui.activeId === id ? null : id;
+            state.ui.activeId = nextActiveId;
+            // If we collapse/switch cards, close any open transactions drawer
+            if (state.ui.transactionsForId !== null && state.ui.transactionsForId !== nextActiveId) {
+                state.ui.transactionsForId = null;
+                state.ui.receiptsFilter = "All";
+            }
+        },
+        toggleEditingId: (state, action) => {
+            const id = action.payload;
+            // Enter/exit edit mode; ensure the editing card is active
+            state.ui.editingId = state.ui.editingId === id ? null : id;
+            if (state.ui.editingId !== null) {
+                state.ui.activeId = id;
+            }
+        },
+        stopEditing: (state) => {
+            state.ui.editingId = null;
+        },
+        openTransactions: (state, action) => {
+            const id = action.payload;
+            state.ui.transactionsForId = id;
+        },
+        closeTransactions: (state) => {
+            state.ui.transactionsForId = null;
+            state.ui.receiptsFilter = "All";
+        },
+        setReceiptsFilter: (state, action) => {
+            state.ui.receiptsFilter = action.payload;
         }
     },
 
@@ -97,6 +137,8 @@ export const addressSlice = createSlice({
             if(idx !== -1){
                 state.addresses[idx] = action.payload
             }
+            // After a successful save, exit edit mode
+            state.ui.editingId = null;
         })
         .addCase(editAddress.pending, (state) => {
             state.isFetching = true
@@ -106,10 +148,25 @@ export const addressSlice = createSlice({
         })
         .addCase(deleteAddress.fulfilled, (state, action) => {
             state.isFetching = false;
-            state.addresses = state.addresses.filter(item => item.id !== action.meta.arg);
+            const deletedId = action.meta.arg;
+            state.addresses = state.addresses.filter(item => item.id !== deletedId);
+            if (state.ui.activeId === deletedId) state.ui.activeId = null;
+            if (state.ui.editingId === deletedId) state.ui.editingId = null;
+            if (state.ui.transactionsForId === deletedId) {
+                state.ui.transactionsForId = null;
+                state.ui.receiptsFilter = "All";
+            }
         })
     }
 
 })
 
-export const {updateAddress} = addressSlice.actions
+export const {
+    updateAddress,
+    toggleActiveId,
+    toggleEditingId,
+    stopEditing,
+    openTransactions,
+    closeTransactions,
+    setReceiptsFilter,
+} = addressSlice.actions
