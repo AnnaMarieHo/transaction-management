@@ -2,8 +2,12 @@ import React, { useState } from "react";
 import { FaPlus, FaTimes } from "react-icons/fa";
 import Button from "../atoms/Button";
 import Input from "../atoms/Input";
+import { addAddress } from "../../store/slices/addressSlice";
+import { useDispatch } from "react-redux";
 
-const AddressForm = ({ addAddress }) => {
+const AddressForm = () => {
+    const dispatch = useDispatch()
+    
     const [formData, setFormData] = useState({
         firstName: "",
         lastName: "",
@@ -28,12 +32,14 @@ const AddressForm = ({ addAddress }) => {
         setFormData((prev) => ({ ...prev, [name]: value }));
     };
 
+   
+
     const handleSubmit = (e) => {
         e.preventDefault();
         // Pre-submit check
         if (!formData.firstName || !formData.addressLine1) return;
 
-        addAddress(formData);
+        dispatch(addAddress(formData))
 
         // Reset and close
         setFormData({

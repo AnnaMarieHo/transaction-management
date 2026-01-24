@@ -1,7 +1,7 @@
 import React from "react";
 import Avatar from "./Avatar";
 
-const AddressCollapsed = ({ addresses }) => {
+const AddressCollapsed = ({addresses}) => {
     const initials = `${addresses.first_name?.[0] || ""}${
         addresses.last_name?.[0] || ""
     }`;

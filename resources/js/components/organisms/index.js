@@ -1,5 +1,3 @@
-// Atomic Design - Organisms
-// Complex UI components composed of molecules and atoms
 
 export { default as AddressCard } from "./AddressCard";
 export { default as AddressForm } from "./AddressForm";
