@@ -14,7 +14,7 @@ const App = () => {
 
     const dispatch = useDispatch();
     const { addresses } = useSelector((state) => state.addresses);
-    const { activeId, editingId } = useSelector((state) => state.addresses.ui);
+    const { activeId} = useSelector((state) => state.addresses.ui);
     
 
     const { receipts } = useReceipt();

@@ -6,24 +6,20 @@ import {
 } from "../../store/slices/addressSlice";
 import { useSelector, useDispatch } from "react-redux";
 
-
-
-
-
 const AddressCard = ({ addressId }) => {
-    const dispatch = useDispatch();
-    
     const [isVisible, setIsVisible] = useState(false);
-    const cardRef = useRef(null);
-
+    const { activeId, deletingById } = useSelector((state) => state.addresses.ui);
     const address = useSelector((state) =>
         state.addresses.addresses.find((a) => a.id === addressId)
     );
-    const { activeId, deletingById } =
-        useSelector((state) => state.addresses.ui);
+    
+    const cardRef = useRef(null);
+    const dispatch = useDispatch();
 
     const isActive = activeId === addressId;
     const isDeleting = Boolean(deletingById?.[addressId]);
+    
+
 
     if (!address) return null;
 
@@ -59,7 +55,9 @@ const AddressCard = ({ addressId }) => {
             >
                 <div
                     onClick={() => dispatch(toggleActiveId(addressId))}
-                    className={`group flex flex-col w-full rounded-xl transition-all duration-300 overflow-hidden
+                    className={`group flex flex-col w-full rounded-xl transition-all duration-300 ${
+                        isActive ? "overflow-visible" : "overflow-hidden"
+                    }
                 ${
                     isActive
                         ? "scale-100 ring-2 ring-blue-500 shadow-2xl bg-white"
