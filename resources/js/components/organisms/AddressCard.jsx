@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import AddressCollapsed from "../atoms/AddressCollapsed";
-import AddressExpanded from "../atoms/AddressExpanded";
+import AddressExpanded from "./AddressExpanded";
 import {
     toggleActiveId,
 } from "../../store/slices/addressSlice";

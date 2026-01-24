@@ -1,9 +1,9 @@
 import React from "react";
 import CompanyInformation from "../molecules/CompanyInformation";
 import PersonalInformation from "../molecules/PersonalInformation";
-import Divider from "./Divider";
-import Button from "./Button";
-import AddressCardButtons from "./AddressCardButtons";
+import Divider from "../atoms/Divider";
+import Button from "../atoms/Button";
+import AddressCardButtons from "../atoms/AddressCardButtons";
 import { useReceipt } from "../../hooks/useReceipt";
 import {
     updateAddress,

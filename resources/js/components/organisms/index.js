@@ -6,3 +6,4 @@ export { default as GlobalStats } from "./GlobalStats";
 export { default as ReceiptCard } from "./ReceiptCard";
 export { default as ReceiptForm } from "./ReceiptForm";
 export { default as Receipts } from "./Receipts";
+export { default as AddressExpanded } from "./AddressExpanded";
