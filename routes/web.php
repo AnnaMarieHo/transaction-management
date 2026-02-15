@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AddressController;
-use App\Http\Controllers\ReceiptController;
+use App\Http\Controllers\TransactionController;
 
 Route::get('/', function () {
     return view('app');
@@ -15,5 +15,6 @@ Route::post('/add-address', [AddressController::class, 'store']);
 Route::post('/edit-address/{id}', [AddressController::class, 'update']);
 Route::delete('/delete-address/{id}', [AddressController::class, 'destroy']);
 
-// Reciept routes
-Route::get('/test-receipts', [ReceiptController::class, 'index']);
+// Receipt / Transaction routes
+Route::get('/receipts', [TransactionController::class, 'index']);
+Route::post('/receipts', [TransactionController::class, 'store']);
