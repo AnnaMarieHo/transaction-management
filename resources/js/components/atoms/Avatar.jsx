@@ -4,9 +4,9 @@ import clsx from "clsx";
 const Avatar = ({ initials, variant = "default", className = "" }) => {
     const variantClasses = {
         default:
-            "bg-slate-100 text-slate-500 group-hover:bg-blue-100 group-hover:text-blue-600",
-        blue: "bg-blue-100 text-blue-600",
-        white: "bg-white border border-slate-200 text-slate-600",
+            "bg-slate-100 dark:bg-slate-600 text-slate-500 dark:text-slate-300 group-hover:bg-blue-100 dark:group-hover:bg-blue-900/40 group-hover:text-blue-600 dark:group-hover:text-blue-400",
+        blue: "bg-blue-100 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400",
+        white: "bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 text-slate-600 dark:text-slate-300",
     };
 
     return (

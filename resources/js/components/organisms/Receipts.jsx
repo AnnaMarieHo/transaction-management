@@ -17,7 +17,9 @@ const Receipts = ({ activeId, activeName, addresses, filteredReceipts }) => {
 
     if (loading)
         return (
-            <div className="p-8 text-slate-400 animate-pulse">Loading...</div>
+            <div className="p-8 text-slate-400 dark:text-slate-500 animate-pulse">
+                Loading...
+            </div>
         );
 
     const userAverage = calculateReceiptAverage(filteredReceipts);
@@ -31,7 +33,7 @@ const Receipts = ({ activeId, activeName, addresses, filteredReceipts }) => {
     const topPartners = getTopPartners(interactionData, 3);
 
     return (
-        <div className="w-full max-w-7xl mx-auto py-4 border-b border-slate-300">
+        <div className="w-full max-w-7xl mx-auto py-4 border-b border-slate-300 dark:border-slate-600">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 items-start mb-6 sm:mb-8">
                 {filteredReceipts.map((receipt) => (
                     <ReceiptCard

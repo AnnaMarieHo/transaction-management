@@ -1,25 +1,23 @@
 import React, { useEffect, useRef, useState } from "react";
 import AddressCollapsed from "../atoms/AddressCollapsed";
 import AddressExpanded from "./AddressExpanded";
-import {
-    toggleActiveId,
-} from "../../store/slices/addressSlice";
+import { toggleActiveId } from "../../store/slices/addressSlice";
 import { useSelector, useDispatch } from "react-redux";
 
 const AddressCard = ({ addressId }) => {
     const [isVisible, setIsVisible] = useState(false);
-    const { activeId, deletingById } = useSelector((state) => state.addresses.ui);
+    const { activeId, deletingById } = useSelector(
+        (state) => state.addresses.ui
+    );
     const address = useSelector((state) =>
         state.addresses.addresses.find((a) => a.id === addressId)
     );
-    
+
     const cardRef = useRef(null);
     const dispatch = useDispatch();
 
     const isActive = activeId === addressId;
     const isDeleting = Boolean(deletingById?.[addressId]);
-    
-
 
     if (!address) return null;
 
@@ -60,15 +58,15 @@ const AddressCard = ({ addressId }) => {
                     }
                 ${
                     isActive
-                        ? "scale-100 ring-2 ring-blue-500 shadow-2xl bg-white"
-                        : "scale-95 sm:scale-90 border border-slate-200 bg-white shadow-sm hover:border-blue-300"
+                        ? "scale-100 ring-2 ring-blue-500 dark:ring-blue-400 shadow-2xl bg-white dark:bg-slate-800"
+                        : "scale-95 sm:scale-90 border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-800 shadow-sm hover:border-blue-300 dark:hover:border-blue-600"
                 } cursor-pointer`}
                 >
                     <div
                         className={`h-1.5 w-full transition-colors ${
                             isActive
-                                ? "bg-blue-500"
-                                : "bg-slate-200 group-hover:bg-blue-200"
+                                ? "bg-blue-500 dark:bg-blue-500"
+                                : "bg-slate-200 dark:bg-slate-600 group-hover:bg-blue-200 dark:group-hover:bg-blue-700"
                         }`}
                     />
 
@@ -76,9 +74,7 @@ const AddressCard = ({ addressId }) => {
                         {!isActive ? (
                             <AddressCollapsed addresses={address} />
                         ) : (
-                            <AddressExpanded
-                                addressId={addressId}
-                            />
+                            <AddressExpanded addressId={addressId} />
                         )}
                     </div>
                 </div>

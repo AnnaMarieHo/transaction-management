@@ -14,11 +14,12 @@ const Badge = ({
     };
 
     const variantClasses = {
-        default: "bg-slate-100 text-slate-600",
-        blue: "bg-blue-50 text-blue-600 border border-blue-100",
-        green: "bg-green-50 text-green-600",
-        amber: "bg-amber-50 text-amber-600",
-        red: "bg-red-50 text-red-600",
+        default:
+            "bg-slate-100 dark:bg-slate-600 text-slate-600 dark:text-slate-300",
+        blue: "bg-blue-50 dark:bg-blue-900/40 text-blue-600 dark:text-blue-300 border border-blue-100 dark:border-blue-800",
+        green: "bg-green-50 dark:bg-green-900/40 text-green-600 dark:text-green-300",
+        amber: "bg-amber-50 dark:bg-amber-900/40 text-amber-600 dark:text-amber-300",
+        red: "bg-red-50 dark:bg-red-900/40 text-red-600 dark:text-red-300",
     };
 
     return (

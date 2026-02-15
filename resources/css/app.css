@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* Class-based dark mode (toggle via .dark on html) */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
 @source '../**/*.blade.php';
@@ -28,5 +31,13 @@
 
     .custom-scrollbar::-webkit-scrollbar-thumb:hover {
         background: rgb(148 163 184); /* slate-400 */
+    }
+
+    .dark .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: rgb(71 85 105); /* slate-600 */
+    }
+
+    .dark .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+        background: rgb(100 116 139); /* slate-500 */
     }
 }

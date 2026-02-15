@@ -80,13 +80,13 @@ const ReceiptForm = ({ addReceipt }) => {
             <div
                 className={`transition-all duration-500 ease-in-out overflow-hidden ${
                     showReceiptForm
-                        ? "max-h-[1000px] opacity-100 border-t border-slate-100"
+                        ? "max-h-[1000px] opacity-100 border-t border-slate-100 dark:border-slate-700"
                         : "max-h-0 opacity-0"
                 }`}
             >
                 <form
                     onSubmit={handleSubmit}
-                    className="p-4 sm:p-6 space-y-3 sm:space-y-4 bg-white"
+                    className="p-4 sm:p-6 space-y-3 sm:space-y-4 bg-white dark:bg-slate-800"
                 >
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                         <Input

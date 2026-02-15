@@ -16,10 +16,13 @@ const Card = ({
     };
 
     const variantClasses = {
-        default: "bg-white border border-slate-200 rounded-2xl shadow-sm",
-        elevated: "bg-white border border-slate-100 rounded-3xl shadow-sm",
-        flat: "bg-slate-50 border border-slate-100 rounded-2xl",
-        bordered: "bg-white border border-slate-200 rounded-xl",
+        default:
+            "bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 rounded-2xl shadow-sm dark:shadow-none",
+        elevated:
+            "bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-3xl shadow-sm dark:shadow-none",
+        flat: "bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-700 rounded-2xl",
+        bordered:
+            "bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 rounded-xl",
     };
 
     return (

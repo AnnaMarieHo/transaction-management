@@ -1,6 +1,9 @@
 import React, { useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { closeTransactions, setReceiptsFilter } from "../../store/slices/addressSlice";
+import {
+    closeTransactions,
+    setReceiptsFilter,
+} from "../../store/slices/addressSlice";
 import { useReceipt } from "../../hooks/useReceipt";
 import ReceiptDrawer from "./ReceiptDrawer";
 import ReceiptDrawerButtons from "../atoms/ReceiptDrawerButtons";
@@ -19,21 +22,33 @@ const AddressTransactionsDrawer = () => {
         return addresses.find((a) => a.id === transactionsForId) ?? null;
     }, [addresses, transactionsForId]);
 
-    const { buyerReceipts, sellerReceipts, numberTransactions } = useMemo(() => {
-        if (!transactionsForId) {
-            return { buyerReceipts: [], sellerReceipts: [], numberTransactions: 0 };
-        }
-        const buyerReceipts = receipts.filter((r) => r.b_id === transactionsForId);
-        const sellerReceipts = receipts.filter((r) => r.s_id === transactionsForId);
-        return {
-            buyerReceipts,
-            sellerReceipts,
-            numberTransactions: buyerReceipts.length + sellerReceipts.length,
-        };
-    }, [receipts, transactionsForId]);
+    const { buyerReceipts, sellerReceipts, numberTransactions } =
+        useMemo(() => {
+            if (!transactionsForId) {
+                return {
+                    buyerReceipts: [],
+                    sellerReceipts: [],
+                    numberTransactions: 0,
+                };
+            }
+            const buyerReceipts = receipts.filter(
+                (r) => r.b_id === transactionsForId
+            );
+            const sellerReceipts = receipts.filter(
+                (r) => r.s_id === transactionsForId
+            );
+            return {
+                buyerReceipts,
+                sellerReceipts,
+                numberTransactions:
+                    buyerReceipts.length + sellerReceipts.length,
+            };
+        }, [receipts, transactionsForId]);
 
     const title = address
-        ? `Transaction Records — ${address.first_name ?? ""} ${address.last_name ?? ""}`.trim()
+        ? `Transaction Records — ${address.first_name ?? ""} ${
+              address.last_name ?? ""
+          }`.trim()
         : "Transaction Records";
 
     return (
@@ -67,7 +82,7 @@ const AddressTransactionsDrawer = () => {
                     ))}
 
                 {transactionsForId !== null && numberTransactions === 0 && (
-                    <div className="text-center py-20 text-slate-400">
+                    <div className="text-center py-20 text-slate-400 dark:text-slate-500">
                         <p>No transaction history found for this address.</p>
                     </div>
                 )}
@@ -77,4 +92,3 @@ const AddressTransactionsDrawer = () => {
 };
 
 export default AddressTransactionsDrawer;
-

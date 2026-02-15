@@ -10,17 +10,18 @@ const StatCard = ({
     className = "",
 }) => {
     const variantClasses = {
-        default: "bg-white border-slate-100",
-        blue: "bg-blue-50 border-blue-100",
-        green: "bg-green-50 border-green-100",
-        amber: "bg-amber-50 border-amber-100",
+        default:
+            "bg-white dark:bg-slate-800 border-slate-100 dark:border-slate-700",
+        blue: "bg-blue-50 dark:bg-blue-900/30 border-blue-100 dark:border-blue-800",
+        green: "bg-green-50 dark:bg-green-900/30 border-green-100 dark:border-green-800",
+        amber: "bg-amber-50 dark:bg-amber-900/30 border-amber-100 dark:border-amber-800",
     };
 
     const textVariants = {
-        default: "text-slate-600",
-        blue: "text-blue-600",
-        green: "text-green-600",
-        amber: "text-amber-600",
+        default: "text-slate-600 dark:text-slate-400",
+        blue: "text-blue-600 dark:text-blue-400",
+        green: "text-green-600 dark:text-green-400",
+        amber: "text-amber-600 dark:text-amber-400",
     };
 
     return (
@@ -36,11 +37,11 @@ const StatCard = ({
                     >
                         {title}
                     </p>
-                    <p className="text-xl sm:text-2xl font-black text-slate-800 mt-1 truncate">
+                    <p className="text-xl sm:text-2xl font-black text-slate-800 dark:text-slate-100 mt-1 truncate">
                         {value}
                     </p>
                     {subtitle && (
-                        <p className="text-[10px] sm:text-xs text-slate-500 mt-1 truncate">
+                        <p className="text-[10px] sm:text-xs text-slate-500 dark:text-slate-400 mt-1 truncate">
                             {subtitle}
                         </p>
                     )}

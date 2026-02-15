@@ -13,9 +13,9 @@ const Input = ({
 }) => {
     const variantClasses = {
         default:
-            "bg-slate-50 border border-slate-200 focus:ring-2 focus:ring-blue-100 focus:border-blue-400",
+            "bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 focus:ring-2 focus:ring-blue-100 dark:focus:ring-blue-900/50 focus:border-blue-400 dark:focus:border-blue-500",
         minimal:
-            "bg-white border border-slate-200 focus:border-blue-500 focus:ring-1 focus:ring-blue-500",
+            "bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 focus:border-blue-500 dark:focus:border-blue-400 focus:ring-1 focus:ring-blue-500 dark:focus:ring-blue-400",
         transparent: "bg-transparent border border-transparent cursor-default",
     };
 
@@ -28,7 +28,7 @@ const Input = ({
             placeholder={placeholder}
             disabled={disabled}
             className={clsx(
-                "w-full p-2 sm:p-3 text-sm sm:text-base rounded-lg outline-none transition-all text-slate-700 placeholder:text-slate-400",
+                "w-full p-2 sm:p-3 text-sm sm:text-base rounded-lg outline-none transition-all text-slate-700 dark:text-slate-200 placeholder:text-slate-400 dark:placeholder:text-slate-500",
                 variantClasses[variant],
                 {
                     "opacity-60 cursor-not-allowed": disabled,

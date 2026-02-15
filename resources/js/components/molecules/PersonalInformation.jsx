@@ -18,12 +18,12 @@ const PersonalInformation = ({
 
     return (
         <div className="w-full space-y-1 sm:space-y-2 lg:space-y-3">
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-1.5 sm:gap-2 border-b border-slate-200 pb-1.5 sm:pb-2">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-1.5 sm:gap-2 border-b border-slate-200 dark:border-slate-600 pb-1.5 sm:pb-2">
                 <div className="min-w-0 flex-1">
-                    <h2 className="text-[10px] sm:text-xs uppercase tracking-wider text-slate-400 font-bold">
+                    <h2 className="text-[10px] sm:text-xs uppercase tracking-wider text-slate-400 dark:text-slate-500 font-bold">
                         Contact
                     </h2>
-                    <div className="flex gap-1 text-base sm:text-lg lg:text-xl font-semibold text-slate-800 truncate">
+                    <div className="flex gap-1 text-base sm:text-lg lg:text-xl font-semibold text-slate-800 dark:text-slate-100 truncate">
                         <span>{first_name}</span>
                         <span>{last_name}</span>
                     </div>
