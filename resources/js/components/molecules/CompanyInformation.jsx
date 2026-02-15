@@ -21,11 +21,11 @@ const CompanyInformation = ({
             <Label className="mb-1.5 sm:mb-2">Location</Label>
 
             {!edit ? (
-                <div className="text-sm sm:text-base text-slate-600 leading-relaxed bg-slate-50 sm:bg-slate-100 p-2.5 sm:p-3 rounded-lg border border-slate-100">
-                    <p className="font-semibold text-slate-800 text-sm sm:text-base">
+                <div className="text-sm sm:text-base text-slate-600 dark:text-slate-400 leading-relaxed bg-slate-50 sm:bg-slate-100 dark:bg-slate-700/50 dark:sm:bg-slate-700/50 p-2.5 sm:p-3 rounded-lg border border-slate-100 dark:border-slate-600">
+                    <p className="font-semibold text-slate-800 dark:text-slate-200 text-sm sm:text-base">
                         {address_line1} {room_num && `• ${room_num}`}
                     </p>
-                    <p className="text-sm sm:text-base">
+                    <p className="text-sm sm:text-base dark:text-slate-400">
                         {city}, {state} {zip}
                     </p>
                 </div>

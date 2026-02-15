@@ -7,7 +7,7 @@ const PartnerCard = ({ partner, rank, className = "" }) => {
 
     return (
         <div
-            className={`flex items-center justify-between gap-2 sm:gap-4 p-2 sm:p-3 lg:p-4 bg-slate-50 rounded-xl sm:rounded-2xl ${className}`}
+            className={`flex items-center justify-between gap-2 sm:gap-4 p-2 sm:p-3 lg:p-4 bg-slate-50 dark:bg-slate-800/50 rounded-xl sm:rounded-2xl ${className}`}
         >
             <div className="flex items-center gap-2 sm:gap-3 lg:gap-4 min-w-0 flex-1">
                 <Avatar
@@ -17,11 +17,11 @@ const PartnerCard = ({ partner, rank, className = "" }) => {
                 />
                 <div className="min-w-0 flex-1">
                     {company && (
-                        <p className="text-[8px] sm:text-[9px] lg:text-[10px] font-bold text-blue-500 uppercase truncate">
+                        <p className="text-[8px] sm:text-[9px] lg:text-[10px] font-bold text-blue-500 dark:text-blue-400 uppercase truncate">
                             {company}
                         </p>
                     )}
-                    <p className="text-xs sm:text-sm lg:text-base font-black text-slate-800 truncate">
+                    <p className="text-xs sm:text-sm lg:text-base font-black text-slate-800 dark:text-slate-100 truncate">
                         {name}
                     </p>
                     {(buys > 0 || sells > 0) && (
@@ -47,7 +47,7 @@ const PartnerCard = ({ partner, rank, className = "" }) => {
                 </div>
             </div>
             <div className="text-right flex-shrink-0 flex flex-col items-end gap-0.5 sm:gap-1">
-                <p className="text-sm sm:text-base lg:text-lg font-black text-slate-900">
+                <p className="text-sm sm:text-base lg:text-lg font-black text-slate-900 dark:text-slate-100">
                     ${totalValue.toLocaleString()}
                 </p>
                 {rank && (

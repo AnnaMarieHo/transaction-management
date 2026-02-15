@@ -6,8 +6,8 @@ import { addAddress } from "../../store/slices/addressSlice";
 import { useDispatch } from "react-redux";
 
 const AddressForm = () => {
-    const dispatch = useDispatch()
-    
+    const dispatch = useDispatch();
+
     const [formData, setFormData] = useState({
         firstName: "",
         lastName: "",
@@ -32,14 +32,12 @@ const AddressForm = () => {
         setFormData((prev) => ({ ...prev, [name]: value }));
     };
 
-   
-
     const handleSubmit = (e) => {
         e.preventDefault();
         // Pre-submit check
         if (!formData.firstName || !formData.addressLine1) return;
 
-        dispatch(addAddress(formData))
+        dispatch(addAddress(formData));
 
         // Reset and close
         setFormData({
@@ -58,15 +56,15 @@ const AddressForm = () => {
     };
 
     return (
-        <div className="w-full bg-white border border-slate-200 rounded-xl shadow-xl overflow-hidden transition-all duration-500">
-            <div className="p-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-0 bg-white">
+        <div className="w-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 rounded-xl shadow-xl dark:shadow-none overflow-hidden transition-all duration-500">
+            <div className="p-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-0 bg-white dark:bg-slate-800">
                 <div className="flex-1 min-w-0">
-                    <h2 className="text-base sm:text-lg font-bold text-slate-800 truncate">
+                    <h2 className="text-base sm:text-lg font-bold text-slate-800 dark:text-slate-100 truncate">
                         {showAddressForm
                             ? "New Client Address"
                             : "Add Client Addresses"}
                     </h2>
-                    <p className="text-slate-500 text-xs truncate">
+                    <p className="text-slate-500 dark:text-slate-400 text-xs truncate">
                         {showAddressForm
                             ? "Fill in the delivery details"
                             : "Add a new location to your list"}
@@ -88,13 +86,13 @@ const AddressForm = () => {
             <div
                 className={`transition-all duration-500 ease-in-out overflow-hidden ${
                     showAddressForm
-                        ? "max-h-[1000px] opacity-100 border-t border-slate-100"
+                        ? "max-h-[1000px] opacity-100 border-t border-slate-100 dark:border-slate-700"
                         : "max-h-0 opacity-0"
                 }`}
             >
                 <form
                     onSubmit={handleSubmit}
-                    className="p-4 sm:p-6 space-y-3 sm:space-y-4 bg-white"
+                    className="p-4 sm:p-6 space-y-3 sm:space-y-4 bg-white dark:bg-slate-800"
                 >
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                         <Input

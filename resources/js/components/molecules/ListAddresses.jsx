@@ -1,5 +1,6 @@
 import React from "react";
 import AddressCard from "../organisms/AddressCard";
+import NightModeToggle from "../atoms/NightModeToggle";
 import { useSelector } from "react-redux";
 
 const ListAddresses = () => {
@@ -7,15 +8,18 @@ const ListAddresses = () => {
 
     return (
         <>
-            <div className="bg-slate-50 min-h-screen py-12 px-4">
+            <div className="bg-slate-50 dark:bg-slate-800/50 min-h-screen py-12 px-4 transition-colors">
                 <div className="flex-col flex w-full max-w-lg mx-auto space-y-8">
-                    <div className="px-2">
-                        <h2 className="text-2xl font-bold text-slate-800">
-                            All Clients
-                        </h2>
-                        <p className="text-slate-500 text-sm">
-                            Select a client to edit or manage details.
-                        </p>
+                    <div className="px-2 flex items-start justify-between gap-3">
+                        <div>
+                            <h2 className="text-2xl font-bold text-slate-800 dark:text-slate-100">
+                                All Clients
+                            </h2>
+                            <p className="text-slate-500 dark:text-slate-400 text-sm">
+                                Select a client to edit or manage details.
+                            </p>
+                        </div>
+                        <NightModeToggle className="hidden lg:flex flex-shrink-0" />
                     </div>
 
                     <div className="space-y-4">

@@ -39,16 +39,14 @@ const ResizableClientSidebar = ({ children }) => {
         const clientY = e.touches ? e.touches[0].clientY : e.clientY;
         const deltaYAbs = Math.abs(dragStartY.current - clientY);
 
-        // Only start dragging if moved more than 5px (to distinguish from click)
         if (deltaYAbs > 5) {
             hasDragged.current = true;
         }
 
         if (hasDragged.current) {
-            const deltaY = dragStartY.current - clientY; // inverted (dragging from bottom)
+            const deltaY = dragStartY.current - clientY;
             const newHeight = dragStartHeight.current + deltaY;
 
-            // Constrain height between 65px (minimized) and 90vh (max)
             const minHeight = 65;
             const maxHeight = window.innerHeight * 0.9;
             const constrainedHeight = Math.max(
@@ -62,7 +60,6 @@ const ResizableClientSidebar = ({ children }) => {
 
     const handleDragEnd = (e) => {
         if (!hasDragged.current && e) {
-            // If it was just a click (no drag), toggle minimized state
             setClientListMinimized(!clientListMinimized);
             setCustomHeight(null);
         }
@@ -70,7 +67,6 @@ const ResizableClientSidebar = ({ children }) => {
         hasDragged.current = false;
     };
 
-    // Set up global mouse/touch listeners for dragging
     useEffect(() => {
         if (!isDragging) return;
 
@@ -92,7 +88,6 @@ const ResizableClientSidebar = ({ children }) => {
         };
     }, [isDragging]);
 
-    // Reset custom height when minimized or editing state changes
     useEffect(() => {
         if (!isDragging) {
             setCustomHeight(null);
@@ -109,7 +104,7 @@ const ResizableClientSidebar = ({ children }) => {
     return (
         <div
             ref={sidebarRef}
-            className={`fixed lg:relative bottom-0 lg:bottom-auto left-0 lg:left-auto w-full lg:w-5/12 bg-white border-t lg:border-t-0 lg:border-l border-slate-200 shadow-[0_-4px_16px_rgba(0,0,0,0.1)] lg:shadow-none rounded-t-3xl lg:rounded-none z-10 flex flex-col ${
+            className={`fixed lg:relative bottom-0 lg:bottom-auto left-0 lg:left-auto w-full lg:w-5/12 bg-white dark:bg-slate-800 border-t lg:border-t-0 lg:border-l border-slate-200 dark:border-slate-700 shadow-[0_-4px_16px_rgba(0,0,0,0.1)] dark:shadow-[0_-4px_16px_rgba(0,0,0,0.3)] lg:shadow-none rounded-t-3xl lg:rounded-none z-10 flex flex-col transition-colors ${
                 isDragging ? "" : "transition-all duration-300"
             } ${
                 hasCustomHeight
@@ -127,24 +122,26 @@ const ResizableClientSidebar = ({ children }) => {
                 onTouchStart={handleDragStart}
                 onMouseUp={handleDragEnd}
                 onTouchEnd={handleDragEnd}
-                className={`lg:hidden w-full flex items-center justify-center py-3 bg-white border-b border-slate-200 cursor-ns-resize select-none flex-shrink-0 ${
+                className={`lg:hidden w-full flex items-center justify-center py-3 bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 cursor-ns-resize select-none flex-shrink-0 ${
                     isDragging
-                        ? "bg-blue-50 border-blue-200"
-                        : "hover:bg-slate-50 active:bg-slate-100"
+                        ? "bg-blue-50 dark:bg-blue-900/30 border-blue-200 dark:border-blue-700"
+                        : "hover:bg-slate-50 dark:hover:bg-slate-700/50 active:bg-slate-100 dark:active:bg-slate-700"
                 } transition-colors`}
             >
                 <div className="flex flex-col items-center gap-1.5">
                     <div
                         className={`w-10 h-1 rounded-full transition-colors ${
-                            isDragging ? "bg-blue-400" : "bg-slate-300"
+                            isDragging
+                                ? "bg-blue-400 dark:bg-blue-400"
+                                : "bg-slate-300 dark:bg-slate-600"
                         }`}
                     />
                     {activePerson && clientListMinimized && (
-                        <span className="text-xs font-semibold text-blue-600">
+                        <span className="text-xs font-semibold text-blue-600 dark:text-blue-400">
                             {activePerson.first_name} {activePerson.last_name}
                         </span>
                     )}
-                    <span className="text-xs font-medium text-slate-500">
+                    <span className="text-xs font-medium text-slate-500 dark:text-slate-400">
                         {clientListMinimized
                             ? "Show Clients"
                             : isDragging
@@ -167,4 +164,3 @@ const ResizableClientSidebar = ({ children }) => {
 };
 
 export default ResizableClientSidebar;
-

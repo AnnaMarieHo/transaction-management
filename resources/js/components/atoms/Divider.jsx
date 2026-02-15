@@ -8,7 +8,7 @@ const Divider = ({ orientation = "horizontal", className = "" }) => {
 
     return (
         <div
-            className={`bg-slate-100 ${orientationClasses[orientation]} ${className}`}
+            className={`bg-slate-100 dark:bg-slate-700 ${orientationClasses[orientation]} ${className}`}
         />
     );
 };

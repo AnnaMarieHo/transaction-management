@@ -25,7 +25,7 @@ const DashboardStats = ({ receipts, addresses, activeId }) => {
     const avgTransaction = calculateReceiptAverage(displayReceipts);
 
     return (
-        <div className="space-y-6 sm:space-y-8 mx-auto p-3 sm:p-4 lg:p-6">
+        <div className="space-y-6 sm:space-y-8 mx-auto p-3 sm:p-4 lg:p-6 text-slate-900 dark:text-slate-100">
             <header>
                 {activeName && (
                     <Label className="mb-3 sm:mb-4 ml-1 sm:ml-2">

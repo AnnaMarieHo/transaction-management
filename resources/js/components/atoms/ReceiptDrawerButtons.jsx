@@ -3,7 +3,7 @@ import Button from "./Button";
 
 const ReceiptDrawerButtons = ({ onFilterChange, currentFilter }) => {
     return (
-        <div className="p-3 sm:p-4 border-b border-slate-100 flex gap-1.5 sm:gap-2">
+        <div className="p-3 sm:p-4 border-b border-slate-100 dark:border-slate-700 flex gap-1.5 sm:gap-2">
             <Button
                 onClick={() => onFilterChange("All")}
                 variant={currentFilter === "All" ? "dark" : "ghost"}

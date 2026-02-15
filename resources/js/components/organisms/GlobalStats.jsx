@@ -31,12 +31,12 @@ const GlobalStats = ({ addresses, receipts, activeId }) => {
         <div className="space-y-4 sm:space-y-6">
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between px-1 gap-3 sm:gap-0">
                 <div>
-                    <h2 className="text-lg sm:text-xl font-black text-slate-800">
+                    <h2 className="text-lg sm:text-xl font-black text-slate-800 dark:text-slate-100">
                         {isClientView
                             ? `Insights for ${activeClient?.first_name}`
                             : "Global Dashboard"}
                     </h2>
-                    <p className="text-xs text-slate-400 font-medium">
+                    <p className="text-xs text-slate-400 dark:text-slate-500 font-medium">
                         {isClientView
                             ? "Viewing filtered partner activity"
                             : "Viewing total network performance"}
@@ -54,7 +54,7 @@ const GlobalStats = ({ addresses, receipts, activeId }) => {
                     <Label className="mb-1">
                         {isClientView ? "Activity Trend" : "Revenue Momentum"}
                     </Label>
-                    <p className="text-2xl sm:text-3xl font-black text-slate-900">
+                    <p className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-slate-100">
                         ${totalVolume.toLocaleString()}
                     </p>
                 </div>
@@ -88,7 +88,7 @@ const GlobalStats = ({ addresses, receipts, activeId }) => {
                     renderItem={(user, i) => (
                         <div key={i}>
                             <div className="flex justify-between items-center gap-2">
-                                <span className="text-xs sm:text-sm font-semibold text-slate-700 truncate flex-1">
+                                <span className="text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-300 truncate flex-1">
                                     {user.name}
                                 </span>
                                 <Badge
@@ -99,7 +99,7 @@ const GlobalStats = ({ addresses, receipts, activeId }) => {
                                     {user.count} Trans.
                                 </Badge>
                             </div>
-                            <p className="text-[10px] text-slate-400 mt-1">
+                            <p className="text-[10px] text-slate-400 dark:text-slate-500 mt-1">
                                 Value: ${user.value.toLocaleString()}
                             </p>
                         </div>

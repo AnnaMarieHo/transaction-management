@@ -2,7 +2,7 @@ import api from "./apiService";
 
 export const fetchReceipts = async () => {
     try {
-        const response = await api.get("/test-receipts");
+        const response = await api.get("/receipts");
         console.log("RECIEPTS SERVICE", response.data);
         return response.data;
     } catch (e) {
