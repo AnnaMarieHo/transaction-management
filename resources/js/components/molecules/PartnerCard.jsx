@@ -60,4 +60,4 @@ const PartnerCard = ({ partner, rank, className = "" }) => {
     );
 };
 
-export default PartnerCard;
+export default React.memo(PartnerCard);
