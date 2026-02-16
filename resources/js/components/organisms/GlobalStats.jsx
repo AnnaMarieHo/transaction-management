@@ -12,7 +12,7 @@ const GlobalStats = () => {
 
     if (loading) {
         return (
-            <div className="p-8 text-slate-400 dark:text-slate-500 animate-pulse">
+            <div className="p-8 text-slate-400 dark:text-slate-500">
                 Loading global stats...
             </div>
         );

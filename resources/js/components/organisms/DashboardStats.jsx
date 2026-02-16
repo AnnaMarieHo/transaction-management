@@ -49,7 +49,7 @@ const DashboardStats = () => {
                 )}
 
                 {isLoading ? (
-                    <div className="text-slate-400 dark:text-slate-500 animate-pulse">
+                    <div className="text-slate-400 dark:text-slate-500">
                         Loading stats...
                     </div>
                 ) : (
@@ -84,11 +84,11 @@ const DashboardStats = () => {
 
             <div className="flex flex-col space-y-6 sm:space-y-8">
                 {activeId ? (
-                    <div className="transition-opacity duration-200">
+                    <div className="">
                         <Receipts activeId={activeId} activeName={activeName} />
                     </div>
                 ) : (
-                    <div className="transition-opacity duration-200">
+                    <div className="">
                         <GlobalStats />
                     </div>
                 )}

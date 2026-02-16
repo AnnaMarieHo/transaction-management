@@ -35,7 +35,6 @@ const AddressCard = ({ addressId }) => {
             // Small delay to let the card expand first
             setTimeout(() => {
                 cardRef.current?.scrollIntoView({
-                    behavior: "smooth",
                     block: "start",
                 });
             }, 100);
@@ -46,7 +45,7 @@ const AddressCard = ({ addressId }) => {
         <>
             <div
                 ref={cardRef}
-                className={`w-full relative transition-all duration-500 ease-in-out transform scroll-mt-16
+                className={`w-full relative scroll-mt-16
             ${
                 !isVisible || isDeleting
                     ? "opacity-0 scale-75 max-h-0 mb-0 overflow-hidden"
@@ -56,20 +55,20 @@ const AddressCard = ({ addressId }) => {
             >
                 <div
                     onClick={() => dispatch(toggleActiveId(addressId))}
-                    className={`group flex flex-col w-full rounded-xl transition-all duration-300 cursor-pointer will-change-[transform,box-shadow] ${
+                    className={`group flex flex-col w-full rounded-xl will-change-[transform,box-shadow] ${
                         isActive ? "overflow-visible" : "overflow-hidden"
                     }
                 ${
                     isActive
                         ? "scale-100 ring-2 ring-blue-500 dark:ring-blue-400 shadow-2xl bg-white dark:bg-slate-800"
-                        : "scale-95 sm:scale-90 border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-800 shadow-sm hover:shadow-md"
+                        : "scale-95 sm:scale-90 border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-800 shadow-sm"
                 }`}
                 >
                     <div
-                        className={`h-1.5 w-full transition-colors ${
+                        className={`h-1.5 w-full ${
                             isActive
                                 ? "bg-blue-500 dark:bg-blue-500"
-                                : "bg-slate-200 dark:bg-slate-600 group-hover:bg-blue-400"
+                                : "bg-slate-200 dark:bg-slate-600 "
                         }`}
                     />
 

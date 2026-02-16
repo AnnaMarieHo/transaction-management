@@ -20,7 +20,7 @@ const Receipts = ({ activeId, activeName }) => {
 
     if (loading) {
         return (
-            <div className="p-8 text-slate-400 dark:text-slate-500 animate-pulse">
+            <div className="p-8 text-slate-400 dark:text-slate-500">
                 Loading...
             </div>
         );
@@ -52,7 +52,7 @@ const Receipts = ({ activeId, activeName }) => {
                     </span>
                 </Label>
                 {partnersLoading ? (
-                    <div className="text-slate-400 dark:text-slate-500 text-sm animate-pulse">
+                    <div className="text-slate-400 dark:text-slate-500 text-sm ">
                         Loading partners...
                     </div>
                 ) : (

@@ -15,7 +15,7 @@ const MarketReachCard = ({ market, className = "" }) => {
             </div>
             <div className="w-full bg-slate-100 dark:bg-slate-700 h-1 sm:h-1.5 rounded-full overflow-hidden">
                 <div
-                    className="bg-blue-500 dark:bg-blue-500 h-full transition-all duration-500"
+                    className="bg-blue-500 dark:bg-blue-500 h-full"
                     style={{ width: `${share}%` }}
                 />
             </div>
