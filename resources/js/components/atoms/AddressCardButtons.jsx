@@ -12,7 +12,7 @@ const AddressCardButtons = (props) => {
         numberTransactions,
     } = props;
     return (
-        <div className="absolute top-[-1.5rem] right-2 sm:right-4 flex flex-wrap gap-1.5 sm:gap-2 z-20 animate-in fade-in slide-in-from-bottom-2 duration-200">
+        <div className="absolute top-[-1.5rem] right-2 sm:right-4 flex flex-wrap gap-1.5 sm:gap-2 z-20">
             <Button
                 onClick={handleDelete}
                 variant="red"

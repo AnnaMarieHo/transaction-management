@@ -19,15 +19,15 @@ const Button = ({
     };
 
     const variantClasses = {
-        blue: "bg-blue-600 text-white hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 shadow-md active:scale-[0.98]",
-        gray: "bg-slate-100 text-slate-600 hover:bg-slate-200 dark:bg-slate-600 dark:text-slate-200 dark:hover:bg-slate-500 active:scale-[0.98]",
-        red: "bg-white dark:bg-slate-800 border border-red-100 dark:border-red-900 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 shadow-lg",
-        amber: "bg-white dark:bg-slate-800 border border-yellow-100 dark:border-amber-800 text-yellow-600 dark:text-amber-400 hover:bg-yellow-50 dark:hover:bg-amber-900/20 shadow-lg",
+        blue: "bg-blue-600 text-white dark:bg-blue-500 dark:hover:bg-blue-600 shadow-md active:scale-[0.98]",
+        gray: "bg-slate-100 text-slate-600 dark:bg-slate-600 dark:text-slate-200 dark:hover:bg-slate-500 active:scale-[0.98]",
+        red: "bg-white dark:bg-slate-800 border border-red-100 dark:border-red-900 text-red-600 dark:text-red-400 dark:hover:bg-red-900/20 shadow-lg",
+        amber: "bg-white dark:bg-slate-800 border border-yellow-100 dark:border-amber-800 text-yellow-600 dark:text-amber-400 dark:hover:bg-amber-900/20 shadow-lg",
         "blue-outline":
-            "bg-white dark:bg-slate-800 border border-blue-100 dark:border-blue-800 text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 shadow-lg",
-        green: "bg-emerald-600 text-white hover:bg-emerald-700 dark:bg-emerald-500 dark:hover:bg-emerald-600 shadow-md active:scale-[0.98]",
-        ghost: "bg-transparent text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700",
-        dark: "bg-slate-800 text-white hover:bg-slate-900 dark:bg-slate-700 dark:hover:bg-slate-600 active:scale-[0.98]",
+            "bg-white dark:bg-slate-800 border border-blue-100 dark:border-blue-800 text-blue-600 dark:text-blue-400 dark:hover:bg-blue-900/20 shadow-lg",
+        green: "bg-emerald-600 text-white dark:bg-emerald-500 dark:hover:bg-emerald-600 shadow-md active:scale-[0.98]",
+        ghost: "bg-transparent text-slate-600 dark:text-slate-300 dark:hover:bg-slate-700",
+        dark: "bg-slate-800 text-white dark:bg-slate-700 dark:hover:bg-slate-600 active:scale-[0.98]",
     };
 
     return (
@@ -36,7 +36,7 @@ const Button = ({
             onClick={onClick}
             disabled={disabled}
             className={clsx(
-                "flex items-center justify-center gap-2 font-bold uppercase tracking-wider transition-all duration-300 rounded-full",
+                "flex items-center justify-center gap-2 font-bold uppercase tracking-wider rounded-full",
                 sizeClasses[size],
                 variantClasses[variant],
                 {

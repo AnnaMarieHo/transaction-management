@@ -1,14 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import AddressCard from "../organisms/AddressCard";
 import NightModeToggle from "../atoms/NightModeToggle";
 import { useSelector } from "react-redux";
+import { selectAddresses } from "../../store/selectors";
 
-const ListAddresses = () => {
-    const { addresses } = useSelector((state) => state.addresses);
+const ListAddresses = ({ activeId, onSetActiveId }) => {
+    const addresses = useSelector(selectAddresses);
 
     return (
         <>
-            <div className="bg-slate-50 dark:bg-slate-800/50 min-h-screen py-12 px-4 transition-colors">
+            <div className="bg-slate-50 dark:bg-slate-800/50 min-h-screen py-12 px-4">
                 <div className="flex-col flex w-full max-w-lg mx-auto space-y-8">
                     <div className="px-2 flex items-start justify-between gap-3">
                         <div>
@@ -27,6 +28,8 @@ const ListAddresses = () => {
                             <AddressCard
                                 key={address.id}
                                 addressId={address.id}
+                                activeId={activeId}
+                                onToggleActive={onSetActiveId}
                             />
                         ))}
                     </div>
@@ -35,4 +38,4 @@ const ListAddresses = () => {
         </>
     );
 };
-export default ListAddresses;
+export default React.memo(ListAddresses);

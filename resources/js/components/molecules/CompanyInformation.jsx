@@ -30,7 +30,7 @@ const CompanyInformation = ({
                     </p>
                 </div>
             ) : (
-                <div className="space-y-2 sm:space-y-3 animate-in fade-in duration-300">
+                <div className="space-y-2 sm:space-y-3">
                     <div className="flex flex-col sm:flex-row gap-2">
                         <div className="flex-[3]">
                             <Input

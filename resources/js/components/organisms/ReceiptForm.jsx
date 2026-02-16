@@ -78,7 +78,7 @@ const ReceiptForm = ({ addReceipt }) => {
             </div>
 
             <div
-                className={`transition-all duration-500 ease-in-out overflow-hidden ${
+                className={`overflow-hidden ${
                     showReceiptForm
                         ? "max-h-[1000px] opacity-100 border-t border-slate-100 dark:border-slate-700"
                         : "max-h-0 opacity-0"

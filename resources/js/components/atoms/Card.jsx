@@ -32,7 +32,7 @@ const Card = ({
                 variantClasses[variant],
                 paddingClasses[padding],
                 {
-                    "cursor-pointer hover:shadow-md transition-shadow": onClick,
+                    " ": onClick,
                 },
                 className
             )}

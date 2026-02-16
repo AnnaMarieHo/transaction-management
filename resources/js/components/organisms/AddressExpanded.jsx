@@ -59,7 +59,7 @@ const AddressExpanded = ({ addressId }) => {
         dispatch(editAddress(address));
     };
     return (
-        <div className="space-y-2 sm:space-y-3 lg:space-y-4 animate-in fade-in slide-in-from-top-1 duration-300">
+        <div className="space-y-2 sm:space-y-3 lg:space-y-4 ">
             <AddressCardButtons
                 handleDelete={handleDelete}
                 isEditing={isEditing}
@@ -85,7 +85,7 @@ const AddressExpanded = ({ addressId }) => {
             />
 
             {isEditing && (
-                <div className="pt-2 animate-in zoom-in-95 duration-200">
+                <div className="pt-2">
                     <Button
                         onClick={handleSave}
                         variant="blue"
@@ -100,4 +100,4 @@ const AddressExpanded = ({ addressId }) => {
     );
 };
 
-export default AddressExpanded;
+export default React.memo(AddressExpanded);

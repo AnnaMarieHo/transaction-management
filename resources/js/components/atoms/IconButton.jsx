@@ -15,10 +15,9 @@ const IconButton = ({
     };
 
     const variantClasses = {
-        default:
-            "text-slate-400 dark:text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-700 hover:text-slate-600 dark:hover:text-slate-300 rounded-full transition-colors",
-        blue: "text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/30 hover:text-blue-700 dark:hover:text-blue-300 rounded-full transition-colors",
-        red: "text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/30 hover:text-red-700 dark:hover:text-red-300 rounded-full transition-colors",
+        default: "text-slate-400 dark:text-slate-500 rounded-full",
+        blue: "text-blue-600 dark:text-blue-400 rounded-full",
+        red: "text-red-600 dark:text-red-400 rounded-full",
     };
 
     return (

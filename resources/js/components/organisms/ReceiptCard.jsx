@@ -6,14 +6,14 @@ const ReceiptCard = ({ receipt, variant }) => {
     const [isExpanded, setIsExpanded] = useState(false);
 
     return (
-        <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 rounded-2xl shadow-sm dark:shadow-none overflow-hidden hover:shadow-md dark:hover:shadow-none transition-shadow h-fit">
+        <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 rounded-2xl shadow-sm dark:shadow-none overflow-hidden  h-fit">
             <button
                 onClick={() => setIsExpanded(!isExpanded)}
-                className="w-full flex items-center justify-between p-3 sm:p-4 hover:bg-slate-50/80 dark:hover:bg-slate-700/50 transition-all"
+                className="w-full flex items-center justify-between p-3 sm:p-4 "
             >
                 <div className="flex items-center gap-2 sm:gap-4">
                     <div
-                        className={`p-2 sm:p-2.5 rounded-xl transition-colors ${
+                        className={`p-2 sm:p-2.5 rounded-xl ${
                             isExpanded
                                 ? "bg-blue-600 dark:bg-blue-500 text-white"
                                 : "bg-slate-100 dark:bg-slate-600 text-slate-500 dark:text-slate-400"
@@ -43,7 +43,7 @@ const ReceiptCard = ({ receipt, variant }) => {
                 </div>
 
                 <div
-                    className={`text-slate-300 dark:text-slate-500 flex-shrink-0 transition-transform duration-200 ${
+                    className={`text-slate-300 dark:text-slate-500 flex-shrink-0 ${
                         isExpanded ? "rotate-180" : ""
                     }`}
                 >
@@ -52,7 +52,7 @@ const ReceiptCard = ({ receipt, variant }) => {
             </button>
 
             <div
-                className={`transition-all duration-300 ease-in-out overflow-hidden ${
+                className={` overflow-hidden ${
                     isExpanded
                         ? "max-h-[1000px] opacity-100"
                         : "max-h-0 opacity-0"

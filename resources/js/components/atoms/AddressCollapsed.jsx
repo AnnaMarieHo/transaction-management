@@ -6,7 +6,7 @@ const AddressCollapsed = ({ addresses }) => {
         addresses.last_name?.[0] || ""
     }`;
     return (
-        <div className="flex items-center gap-2 sm:gap-3 lg:gap-4 animate-in fade-in duration-300">
+        <div className="flex items-center gap-2 sm:gap-3 lg:gap-4">
             <Avatar initials={initials} className="hidden xs:flex sm:flex" />
             <div className="flex-1 min-w-0">
                 <h3 className="text-sm sm:text-base lg:text-lg font-semibold text-slate-800 dark:text-slate-100 truncate">
@@ -19,7 +19,7 @@ const AddressCollapsed = ({ addresses }) => {
                     {addresses.address_line1}, {addresses.city}
                 </p>
             </div>
-            <div className="text-slate-300 dark:text-slate-500 group-hover:text-blue-400 dark:group-hover:text-blue-400 transition-colors flex-shrink-0">
+            <div className="text-slate-300 dark:text-slate-500 flex-shrink-0">
                 <svg
                     className="w-4 h-4"
                     fill="none"
@@ -37,4 +37,4 @@ const AddressCollapsed = ({ addresses }) => {
         </div>
     );
 };
-export default AddressCollapsed;
+export default React.memo(AddressCollapsed);

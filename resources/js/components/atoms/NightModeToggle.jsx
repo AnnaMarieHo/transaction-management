@@ -15,9 +15,8 @@ const NightModeToggle = ({ className = "" }) => {
             }
             className={`
                 flex items-center justify-center rounded-full p-2
-                text-slate-500 hover:text-amber-500 hover:bg-amber-50
-                dark:text-slate-400 dark:hover:text-amber-400 dark:hover:bg-amber-500/10
-                transition-colors duration-200
+                text-slate-500 
+                dark:text-slate-400 
                 ${className}
             `}
         >

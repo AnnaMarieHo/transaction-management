@@ -56,7 +56,7 @@ const AddressForm = () => {
     };
 
     return (
-        <div className="w-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 rounded-xl shadow-xl dark:shadow-none overflow-hidden transition-all duration-500">
+        <div className="w-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 rounded-xl shadow-xl dark:shadow-none overflow-hidden">
             <div className="p-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-0 bg-white dark:bg-slate-800">
                 <div className="flex-1 min-w-0">
                     <h2 className="text-base sm:text-lg font-bold text-slate-800 dark:text-slate-100 truncate">
@@ -84,7 +84,7 @@ const AddressForm = () => {
             </div>
 
             <div
-                className={`transition-all duration-500 ease-in-out overflow-hidden ${
+                className={`overflow-hidden ${
                     showAddressForm
                         ? "max-h-[1000px] opacity-100 border-t border-slate-100 dark:border-slate-700"
                         : "max-h-0 opacity-0"
