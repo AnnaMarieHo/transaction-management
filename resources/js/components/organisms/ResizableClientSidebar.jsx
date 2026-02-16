@@ -1,11 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useSelector } from "react-redux";
 
-const ResizableClientSidebar = ({ children, activeId }) => {
-    const addresses = useSelector((state) => state.addresses.addresses);
-    const editingId = useSelector((state) => state.addresses.ui.editingId);
-    const isEditing = editingId !== null;
-
+const ResizableClientSidebar = ({ children }) => {
     const [clientListMinimized, setClientListMinimized] = useState(false);
     const [customHeight, setCustomHeight] = useState(null);
     const [isDragging, setIsDragging] = useState(false);
@@ -17,7 +12,6 @@ const ResizableClientSidebar = ({ children, activeId }) => {
 
     const getDefaultHeight = () => {
         if (clientListMinimized) return "65px";
-        if (isEditing) return "80vh";
         return "45vh";
     };
 
@@ -88,18 +82,8 @@ const ResizableClientSidebar = ({ children, activeId }) => {
         };
     }, [isDragging]);
 
-    useEffect(() => {
-        if (!isDragging) {
-            setCustomHeight(null);
-        }
-    }, [clientListMinimized, isEditing]);
-
     const sidebarHeight = customHeight || getDefaultHeight();
     const hasCustomHeight = customHeight !== null;
-
-    const activePerson = activeId
-        ? addresses.find((a) => a.id === activeId)
-        : null;
 
     return (
         <div
@@ -111,8 +95,6 @@ const ResizableClientSidebar = ({ children, activeId }) => {
                     ? ""
                     : clientListMinimized
                     ? "h-[65px]"
-                    : isEditing
-                    ? "h-[80vh]"
                     : "h-[45vh]"
             } lg:h-full`}
             style={hasCustomHeight ? { height: sidebarHeight } : undefined}
@@ -136,11 +118,6 @@ const ResizableClientSidebar = ({ children, activeId }) => {
                                 : "bg-slate-300 dark:bg-slate-600"
                         }`}
                     />
-                    {activePerson && clientListMinimized && (
-                        <span className="text-xs font-semibold text-blue-600 dark:text-blue-400">
-                            {activePerson.first_name} {activePerson.last_name}
-                        </span>
-                    )}
                     <span className="text-xs font-medium text-slate-500 dark:text-slate-400">
                         {clientListMinimized
                             ? "Show Clients"
