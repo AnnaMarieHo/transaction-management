@@ -22,7 +22,7 @@ class Address extends Model
 
     public function buyerReceipts()
     {
-        return $this->hasMany(Receipt::class, 'b_id');
+        return $this->hasMany(Transaction::class, 'b_id');
     }
 
     public function sellerReceipts()

@@ -20,7 +20,7 @@ Route::delete('/delete-address/{id}', [AddressController::class, 'destroy']);
 Route::get('/receipts', [TransactionController::class, 'index']);
 Route::post('/receipts', [TransactionController::class, 'store']);
 
-// Client / Reciept routes
-Route::get('/stats', [StatsController::class, 'index']);
-Route::post('/user-partners/{addressId}', [StatsController::class, 'getPartners']);
-Route::get('/stats/user/{addressId}', [StatsController::class, 'getUserStats']);
+// Stats routes
+Route::get('/stats', [StatsController::class, 'index']);  // Global stats
+Route::get('/stats/user/{addressId}', [StatsController::class, 'getUserStats']);  // User summary stats
+Route::get('/stats/partners/{addressId}', [StatsController::class, 'getPartners']);  // Top partners

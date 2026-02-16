@@ -4,46 +4,27 @@ import {
     closeTransactions,
     setReceiptsFilter,
 } from "../../store/slices/addressSlice";
-// import { useReceipt } from "../../hooks/useReceipt";
 import ReceiptDrawer from "./ReceiptDrawer";
 import ReceiptDrawerButtons from "../atoms/ReceiptDrawerButtons";
 import ReceiptTemplate from "../atoms/ReceiptTemplate";
+import {
+    selectAddressById,
+    selectTransactionsForId,
+    selectReceiptsFilter,
+    selectReceiptsForAddress,
+} from "../../store/selectors";
 
 const AddressTransactionsDrawer = () => {
     const dispatch = useDispatch();
-    const receipts = useSelector((state) => state.receipts.receipts);
-    const { transactionsForId, receiptsFilter } = useSelector(
-        (state) => state.addresses.ui
+
+    const transactionsForId = useSelector(selectTransactionsForId);
+    const receiptsFilter = useSelector(selectReceiptsFilter);
+    const address = useSelector((state) =>
+        selectAddressById(state, transactionsForId)
     );
-    const addresses = useSelector((state) => state.addresses.addresses);
-
-    const address = useMemo(() => {
-        if (!transactionsForId) return null;
-        return addresses.find((a) => a.id === transactionsForId) ?? null;
-    }, [addresses, transactionsForId]);
-
-    const { buyerReceipts, sellerReceipts, numberTransactions } =
-        useMemo(() => {
-            if (!transactionsForId) {
-                return {
-                    buyerReceipts: [],
-                    sellerReceipts: [],
-                    numberTransactions: 0,
-                };
-            }
-            const buyerReceipts = receipts.filter(
-                (r) => r.b_id === transactionsForId
-            );
-            const sellerReceipts = receipts.filter(
-                (r) => r.s_id === transactionsForId
-            );
-            return {
-                buyerReceipts,
-                sellerReceipts,
-                numberTransactions:
-                    buyerReceipts.length + sellerReceipts.length,
-            };
-        }, [receipts, transactionsForId]);
+    const { buyerReceipts, sellerReceipts, numberTransactions } = useSelector(
+        (state) => selectReceiptsForAddress(state, transactionsForId)
+    );
 
     const title = address
         ? `Transaction Records — ${address.first_name ?? ""} ${

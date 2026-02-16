@@ -1,4 +1,3 @@
-// resources/js/services/statsService.js
 import api from "./apiService";
 
 export const fetchGlobalStats = async () => {
@@ -14,7 +13,6 @@ export const fetchGlobalStats = async () => {
 export const fetchUserStats = async (addressId) => {
     try {
         const response = await api.get(`/stats/user/${addressId}`);
-        console.log(response);
         return response.data;
     } catch (e) {
         console.error("Error fetching user stats:", e);
@@ -22,12 +20,12 @@ export const fetchUserStats = async (addressId) => {
     }
 };
 
-// export const fetchUserPartners = async (addressId) => {
-//     try {
-//         const response = await api.post(`/individual-stats/${addressId}`);
-//         return response.data;
-//     } catch (e) {
-//         console.error("Error fetching partners:", e);
-//         throw e;
-//     }
-// };
+export const fetchTopPartners = async (addressId) => {
+    try {
+        const response = await api.get(`/stats/partners/${addressId}`);
+        return response.data;
+    } catch (e) {
+        console.error("Error fetching partners:", e);
+        throw e;
+    }
+};

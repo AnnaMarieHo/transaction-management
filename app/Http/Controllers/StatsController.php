@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Services\ReceiptStatsService; // Add this import!
+use App\Services\ReceiptStatsService; 
 use Illuminate\Support\Facades\Log;
 
 
@@ -16,23 +16,35 @@ class StatsController extends Controller
         $this->statsService = $statsService;
     }
 
-    public function index() {
+    /**
+     * Get global stats (all users)
+     */
+    public function index()
+    {
         return response()->json([
-            'topSpenders' => $this->statsService->getTopSpenders(),
-            'markets'     => $this->statsService->getCityVolume(),
+            'topSpenders' => $this->statsService->getTopSpenders(3),
+            'mostActive' => $this->statsService->getMostActive(3),
+            'topMarkets' => $this->statsService->getTopMarkets(3),
         ]);
     }
 
-    public function getUserStats($addressId) {
-        Log::denug("current address Id: ", ['addresId', $addressId]);
+    /**
+     * Get stats for a specific user
+     */
+    public function getUserStats($addressId)
+    {
         return response()->json(
             $this->statsService->getSummaryStats($addressId)
         );
     }
 
-    public function getPartners($addressId) {
-        return response()->json([
-            'partnerships' => $this->statsService->getPartnerStats($addressId),
-        ]);
+    /**
+     * Get top partners for a specific user
+     */
+    public function getPartners($addressId)
+    {
+        return response()->json(
+            $this->statsService->getTopPartners($addressId, 3)
+        );
     }
 }

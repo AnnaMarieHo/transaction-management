@@ -1,9 +1,8 @@
-// resources/js/store/slices/statsSlice.js
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import {
     fetchGlobalStats,
     fetchUserStats,
-    // fetchUserPartners,
+    fetchTopPartners,
 } from "../../services/statsService";
 
 // Fetch global stats (all users)
@@ -23,12 +22,21 @@ export const fetchUserStatsAsync = createAsyncThunk(
     "stats/fetchUser",
     async (addressId, thunkAPI) => {
         try {
-            // const [stats, partners] = await Promise.all([
-            //     fetchUserStats(addressId),
-            //     fetchUserPartners(addressId),
-            // ]);
-            const stats = await Promise.all([fetchUserStats(addressId)]);
-            return { ...stats, partnerships: partners, addressId };
+            const stats = await fetchUserStats(addressId);
+            return { ...stats, addressId };
+        } catch (e) {
+            return thunkAPI.rejectWithValue(e.message);
+        }
+    }
+);
+
+// Fetch top partners for a specific user
+export const fetchTopPartnersAsync = createAsyncThunk(
+    "stats/fetchPartners",
+    async (addressId, thunkAPI) => {
+        try {
+            const partners = await fetchTopPartners(addressId);
+            return partners;
         } catch (e) {
             return thunkAPI.rejectWithValue(e.message);
         }
@@ -40,7 +48,8 @@ const statsSlice = createSlice({
     initialState: {
         global: {
             topSpenders: [],
-            markets: [],
+            mostActive: [],
+            topMarkets: [],
             loading: false,
             error: null,
         },
@@ -48,8 +57,12 @@ const statsSlice = createSlice({
             totalVolume: 0,
             average: 0,
             count: 0,
-            partnerships: [],
             addressId: null,
+            loading: false,
+            error: null,
+        },
+        partners: {
+            list: [],
             loading: false,
             error: null,
         },
@@ -60,8 +73,12 @@ const statsSlice = createSlice({
                 totalVolume: 0,
                 average: 0,
                 count: 0,
-                partnerships: [],
                 addressId: null,
+                loading: false,
+                error: null,
+            };
+            state.partners = {
+                list: [],
                 loading: false,
                 error: null,
             };
@@ -76,7 +93,8 @@ const statsSlice = createSlice({
             .addCase(fetchGlobalStatsAsync.fulfilled, (state, action) => {
                 state.global.loading = false;
                 state.global.topSpenders = action.payload.topSpenders || [];
-                state.global.markets = action.payload.markets || [];
+                state.global.mostActive = action.payload.mostActive || [];
+                state.global.topMarkets = action.payload.topMarkets || [];
             })
             .addCase(fetchGlobalStatsAsync.rejected, (state, action) => {
                 state.global.loading = false;
@@ -91,12 +109,23 @@ const statsSlice = createSlice({
                 state.user.totalVolume = action.payload.totalVolume || 0;
                 state.user.average = action.payload.average || 0;
                 state.user.count = action.payload.count || 0;
-                state.user.partnerships = action.payload.partnerships || [];
                 state.user.addressId = action.payload.addressId;
             })
             .addCase(fetchUserStatsAsync.rejected, (state, action) => {
                 state.user.loading = false;
                 state.user.error = action.payload;
+            })
+            // Top partners
+            .addCase(fetchTopPartnersAsync.pending, (state) => {
+                state.partners.loading = true;
+            })
+            .addCase(fetchTopPartnersAsync.fulfilled, (state, action) => {
+                state.partners.loading = false;
+                state.partners.list = action.payload || [];
+            })
+            .addCase(fetchTopPartnersAsync.rejected, (state, action) => {
+                state.partners.loading = false;
+                state.partners.error = action.payload;
             });
     },
 });
