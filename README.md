@@ -24,8 +24,8 @@ Ideally the features above should be implemented and finished, but these general
 
 - [ ] OPTIMIZE OPTIMIZE OPTIMIZE. I've now learned what not to use Redux for... Removed UI state handling from addressSlice and receiptSlices to stop unecessary re-renderings. Also had to massively refactor the architecture and component tree. This reduced ~25% latency during performance evaluation when running the application with a 6x CPU slowdown (NPI i roughly 417.. still not ideal but MASSIVELY better than what it was). NOTE TO SELF: Dont go adding bells and whistles when the application is not ready - to that end... let the backend do the heavy lifting. THINK FULL STACK 
     - Before when you clicking a card, Redux activeId changed and notified ALL 20+ AddressCard subscribers. ALL cards re-ran hooks and re-rendered
-    - THe current latency reduction came from re-introducing activeId state management in App.jsx component to track selected addresses. Now only an active card re-renders and the previouly active card re-renders. Cards now handle THEIR OWN state. 
-    - Additionally I had a lot of poor architectural decisions to accommodate UI state. This was just... rough to say the least. Dashboard is currently disabled and I will plan to hit appropriate endpoints that fetch a selected user's data.
+    - THe current latency reduction came from reorganizing the component architecture and flattening some of the tree. Especially the AddressCard. AddressCard handles its own instance of activeId to "track" selected addresses. Now only an active card re-renders and the previouly active card re-renders. Cards handle THEIR OWN state.
+    - I had a lot of poor architectural decisions to accommodate UI state. This was just... rough to say the least. Dashboard is currently disabled and I will plan to hit appropriate endpoints that fetch a selected user's data.
     - The AddressCard has been flattened as best as it can currently... in fact this whole application needs decoupling and flattening.
       
 - [x] (Pretty much done) - API should take care of transaction stats:
