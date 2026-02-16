@@ -22,7 +22,9 @@
 
 Ideally the features above should be implemented and finished, but these general task often turn into smaller tasks. Below is a record of problems, bugs, and optimizations, as well as the subtasks that result from these isues.
 
-- [ ] OPTIMIZE OPTIMIZE OPTIMIZE. The transitions are crazy on this... just discovered employed the performance tab. I have so many styling regrets
+- [ ] OPTIMIZE OPTIMIZE OPTIMIZE. I've now learned what and what not to use Redux for... Removed UI state handling from addressSlice to stop unecessary re-renderings
+    - Before when you clicking a card, Redux activeId changed and notified ALL 20+ AddressCard subscribers. ALL cards re-ran hooks and re-rendered
+    - THe current latency reduction came from re-introducing activeId state management in App.jsx component to track selected addresses. Now only an active card re-renders and the previouly active card re-renders. Other ccards are skipped by React.memo
       
 - [x] (Pretty much done) - API should take care of transaction stats:
     - [x]  Moved receiptUtils logic over to a designated service
