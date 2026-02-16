@@ -6,19 +6,19 @@
 /**
  * Calculate average of receipt sale totals
  */
-export const calculateReceiptAverage = (receipts) => {
-    if (!receipts || receipts.length === 0) return 0;
-    const total = receipts.reduce((sum, r) => sum + r.sale_total, 0);
-    return total / receipts.length;
-};
+// export const calculateReceiptAverage = (receipts) => {
+//     if (!receipts || receipts.length === 0) return 0;
+//     const total = receipts.reduce((sum, r) => sum + r.sale_total, 0);
+//     return total / receipts.length;
+// };
 
-/**
- * Calculate total volume from receipts
- */
-export const calculateTotalVolume = (receipts) => {
-    if (!receipts || receipts.length === 0) return 0;
-    return receipts.reduce((sum, r) => sum + r.sale_total, 0);
-};
+// /**
+//  * Calculate total volume from receipts
+//  */
+// export const calculateTotalVolume = (receipts) => {
+//     if (!receipts || receipts.length === 0) return 0;
+//     return receipts.reduce((sum, r) => sum + r.sale_total, 0);
+// };
 
 /**
  * Calculate percentage difference from average
@@ -118,15 +118,15 @@ export const calculateMostActive = (addresses, receipts, limit = 3) => {
 };
 
 /**
- * Calculate city volume distribution
- */
-export const calculateCityVolume = (receipts) => {
-    return receipts.reduce((acc, r) => {
-        const city = r.b_city?.replace("_", " ") || "Other";
-        acc[city] = (acc[city] || 0) + r.sale_total;
-        return acc;
-    }, {});
-};
+//  * Calculate city volume distribution
+//  */
+// export const calculateCityVolume = (receipts) => {
+//     return receipts.reduce((acc, r) => {
+//         const city = r.b_city?.replace("_", " ") || "Other";
+//         acc[city] = (acc[city] || 0) + r.sale_total;
+//         return acc;
+//     }, {});
+// };
 
 /**
  * Get top markets by volume with market share percentage

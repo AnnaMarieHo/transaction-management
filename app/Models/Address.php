@@ -19,4 +19,14 @@ class Address extends Model
         'state',
         'zip'
     ];
+
+    public function buyerReceipts()
+    {
+        return $this->hasMany(Receipt::class, 'b_id');
+    }
+
+    public function sellerReceipts()
+    {
+        return $this->hasMany(Transaction::class, 's_id');
+    }
 }

@@ -4,7 +4,7 @@ import PersonalInformation from "../molecules/PersonalInformation";
 import Divider from "../atoms/Divider";
 import Button from "../atoms/Button";
 import AddressCardButtons from "../atoms/AddressCardButtons";
-import { useReceipt } from "../../hooks/useReceipt";
+// import { useReceipt } from "../../hooks/useReceipt";
 import {
     updateAddress,
     editAddress,
@@ -17,9 +17,9 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 
 const AddressExpanded = ({ addressId }) => {
-
     const dispatch = useDispatch();
-    const { receipts } = useReceipt();
+    const receipts = useSelector((state) => state.receipts.receipts);
+
     const address = useSelector((state) =>
         state.addresses.addresses.find((a) => a.id === addressId)
     );
@@ -28,7 +28,7 @@ const AddressExpanded = ({ addressId }) => {
     );
     const isEditing = editingId === addressId;
     const viewTransactions = transactionsForId === addressId;
-    
+
     if (!address) return null;
 
     const activeBuyerReceipts = receipts.filter(

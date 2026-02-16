@@ -1,19 +1,18 @@
 import React from "react";
-import { useReceipt } from "../../hooks/useReceipt";
 import ReceiptCard from "./ReceiptCard";
 import Card from "../atoms/Card";
 import Label from "../atoms/Label";
 import PartnerCard from "../molecules/PartnerCard";
 import TransactionItem from "../molecules/TransactionItem";
 import {
-    calculateReceiptAverage,
     calculatePercentDiff,
     buildPartnerInteractionData,
     getTopPartners,
 } from "../../utils/receiptUtils";
+import { useSelector } from "react-redux";
 
 const Receipts = ({ activeId, activeName, addresses, filteredReceipts }) => {
-    const { loading } = useReceipt();
+    const loading = useSelector((state) => state.receipts.loading);
 
     if (loading)
         return (
@@ -21,8 +20,6 @@ const Receipts = ({ activeId, activeName, addresses, filteredReceipts }) => {
                 Loading...
             </div>
         );
-
-    const userAverage = calculateReceiptAverage(filteredReceipts);
 
     const interactionData = buildPartnerInteractionData(
         filteredReceipts,
@@ -64,7 +61,7 @@ const Receipts = ({ activeId, activeName, addresses, filteredReceipts }) => {
                 </div>
             </Card>
 
-            <div className="space-y-1.5 sm:space-y-2 lg:space-y-2.5">
+            {/* <div className="space-y-1.5 sm:space-y-2 lg:space-y-2.5">
                 {filteredReceipts.slice(0, 5).map((r) => {
                     const isBuying = r.b_id === activeId;
                     const isAboveAverage = r.sale_total > userAverage;
@@ -84,7 +81,7 @@ const Receipts = ({ activeId, activeName, addresses, filteredReceipts }) => {
                         />
                     );
                 })}
-            </div>
+            </div> */}
         </div>
     );
 };

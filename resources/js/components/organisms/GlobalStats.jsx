@@ -5,11 +5,11 @@ import Badge from "../atoms/Badge";
 import TopListCard from "../molecules/TopListCard";
 import MarketReachCard from "../molecules/MarketReachCard";
 import {
-    calculateTotalVolume,
-    calculateTopSpenders,
+    // calculateTotalVolume,
+    // calculateTopSpenders,
     calculateMostActive,
-    calculateCityVolume,
-    getTopMarkets,
+    // calculateCityVolume,
+    // getTopMarkets,
     filterReceiptsByUser,
 } from "../../utils/receiptUtils";
 
@@ -21,11 +21,11 @@ const GlobalStats = ({ addresses, receipts, activeId }) => {
         ? filterReceiptsByUser(receipts, activeId)
         : receipts;
 
-    const totalVolume = calculateTotalVolume(relevantReceipts);
-    const topSpenders = calculateTopSpenders(addresses, relevantReceipts, 3);
+    // const totalVolume = calculateTotalVolume(relevantReceipts);
+    // const topSpenders = calculateTopSpenders(addresses, relevantReceipts, 3);
     const mostActive = calculateMostActive(addresses, relevantReceipts, 3);
-    const cityVolume = calculateCityVolume(relevantReceipts);
-    const topMarkets = getTopMarkets(cityVolume, totalVolume, 3);
+    // const cityVolume = calculateCityVolume(relevantReceipts);
+    // const topMarkets = getTopMarkets(cityVolume, totalVolume, 3);
 
     return (
         <div className="space-y-4 sm:space-y-6">

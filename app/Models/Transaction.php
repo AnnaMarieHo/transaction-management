@@ -29,4 +29,14 @@ class Transaction extends Model
         'image', 
         'highest_prices', 
     ];
+
+    public function buyer()
+    {
+        return $this->belongsTo(Address::class, 'b_id');
+    }
+
+    public function seller()
+    {
+        return $this->belongsTo(Address::class, 's_id');
+    }
 }

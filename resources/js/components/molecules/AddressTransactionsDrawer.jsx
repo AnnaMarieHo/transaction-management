@@ -4,14 +4,14 @@ import {
     closeTransactions,
     setReceiptsFilter,
 } from "../../store/slices/addressSlice";
-import { useReceipt } from "../../hooks/useReceipt";
+// import { useReceipt } from "../../hooks/useReceipt";
 import ReceiptDrawer from "./ReceiptDrawer";
 import ReceiptDrawerButtons from "../atoms/ReceiptDrawerButtons";
 import ReceiptTemplate from "../atoms/ReceiptTemplate";
 
 const AddressTransactionsDrawer = () => {
     const dispatch = useDispatch();
-    const { receipts } = useReceipt();
+    const receipts = useSelector((state) => state.receipts.receipts);
     const { transactionsForId, receiptsFilter } = useSelector(
         (state) => state.addresses.ui
     );

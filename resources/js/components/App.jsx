@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import ListAddresses from "./molecules/ListAddresses";
 import AddressForm from "./organisms/AddressForm";
 import ReceiptForm from "./organisms/ReceiptForm";
-import { useReceipt } from "../hooks/useReceipt";
 import DashboardStats from "./organisms/DashboardStats";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchAddresses } from "../store/slices/addressSlice";
+import { fetchReceiptsAsync } from "../store/slices/recieptSlice";
 import AddressTransactionsDrawer from "./molecules/AddressTransactionsDrawer";
 import ResizableClientSidebar from "./organisms/ResizableClientSidebar";
 import NightModeToggle from "./atoms/NightModeToggle";
@@ -15,11 +15,12 @@ const App = () => {
     const { addresses } = useSelector((state) => state.addresses);
     const { activeId } = useSelector((state) => state.addresses.ui);
 
-    const { receipts } = useReceipt();
+    const receipts = useSelector((state) => state.receipts.receipts);
     const [showForms, setShowForms] = useState(false);
 
     useEffect(() => {
         dispatch(fetchAddresses());
+        dispatch(fetchReceiptsAsync());
     }, [dispatch]);
 
     return (
