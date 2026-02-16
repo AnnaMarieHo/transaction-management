@@ -23,5 +23,5 @@
 Ideally the features above should be implemented and finished, but these general task often turn into smaller tasks. Below is a record of problems, bugs, and optimizations, as well as the subtasks that result from these isues.
 
 - OPTIMIZE OPTIMIZE OPTIMIZE. The transitions are crazy on this... just discovered employed the performance tab. I have so many styling regrets
-[x] (Mostly done) - API should take care of transaction stats: Move receiptUtils logic over to its own controller for global and individual client stats calculations. Add designiated endpoint
+- [x] (Mostly done) - API should take care of transaction stats: Move receiptUtils logic over to its own controller for global and individual client stats calculations. Add designiated endpoint
 
