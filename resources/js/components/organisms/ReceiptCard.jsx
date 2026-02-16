@@ -1,10 +1,8 @@
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { FaChevronDown, FaReceipt } from "react-icons/fa";
 import ReceiptTemplate from "../atoms/ReceiptTemplate";
 
 const ReceiptCard = ({ receipt, variant }) => {
-    console.log(variant);
     const [isExpanded, setIsExpanded] = useState(false);
 
     return (
@@ -44,30 +42,28 @@ const ReceiptCard = ({ receipt, variant }) => {
                     </div>
                 </div>
 
-                <motion.div
-                    animate={{ rotate: isExpanded ? 180 : 0 }}
-                    className="text-slate-300 dark:text-slate-500 flex-shrink-0"
+                <div
+                    className={`text-slate-300 dark:text-slate-500 flex-shrink-0 transition-transform duration-200 ${
+                        isExpanded ? "rotate-180" : ""
+                    }`}
                 >
                     <FaChevronDown className="w-3 h-3 sm:w-4 sm:h-4" />
-                </motion.div>
+                </div>
             </button>
 
-            <AnimatePresence>
-                {isExpanded && (
-                    <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.3, ease: "easeInOut" }}
-                    >
-                        <div className="p-4 sm:p-6 bg-slate-50/50 dark:bg-slate-900/50 border-t border-slate-100 dark:border-slate-700">
-                            <ReceiptTemplate {...receipt} variant={variant} />
-                        </div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
+            <div
+                className={`transition-all duration-300 ease-in-out overflow-hidden ${
+                    isExpanded
+                        ? "max-h-[1000px] opacity-100"
+                        : "max-h-0 opacity-0"
+                }`}
+            >
+                <div className="p-4 sm:p-6 bg-slate-50/50 dark:bg-slate-900/50 border-t border-slate-100 dark:border-slate-700">
+                    <ReceiptTemplate {...receipt} variant={variant} />
+                </div>
+            </div>
         </div>
     );
 };
 
-export default ReceiptCard;
+export default React.memo(ReceiptCard);

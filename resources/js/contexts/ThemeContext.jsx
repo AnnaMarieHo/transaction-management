@@ -40,8 +40,14 @@ export const ThemeProvider = ({ children }) => {
         });
     }, []);
 
+    // Memoize the context value to prevent unnecessary re-renders
+    const value = React.useMemo(
+        () => ({ isNightMode, toggleNightMode }),
+        [isNightMode, toggleNightMode]
+    );
+
     return (
-        <ThemeContext.Provider value={{ isNightMode, toggleNightMode }}>
+        <ThemeContext.Provider value={value}>
             {children}
         </ThemeContext.Provider>
     );

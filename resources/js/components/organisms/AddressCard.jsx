@@ -49,27 +49,27 @@ const AddressCard = ({ addressId }) => {
                 className={`w-full relative transition-all duration-500 ease-in-out transform scroll-mt-16
             ${
                 !isVisible || isDeleting
-                    ? "opacity-0 scale-75 max-h-0 mb-0 overflow-hidden" // Entrance/Exit state
-                    : "opacity-100 scale-100 max-h-[1000px] mb-3 sm:mb-4" // Visible state
+                    ? "opacity-0 scale-75 max-h-0 mb-0 overflow-hidden"
+                    : "opacity-100 scale-100 max-h-[1000px] mb-3 sm:mb-4"
             }
         `}
             >
                 <div
                     onClick={() => dispatch(toggleActiveId(addressId))}
-                    className={`group flex flex-col w-full rounded-xl transition-all duration-300 ${
+                    className={`group flex flex-col w-full rounded-xl transition-all duration-300 cursor-pointer will-change-[transform,box-shadow] ${
                         isActive ? "overflow-visible" : "overflow-hidden"
                     }
                 ${
                     isActive
                         ? "scale-100 ring-2 ring-blue-500 dark:ring-blue-400 shadow-2xl bg-white dark:bg-slate-800"
-                        : "scale-95 sm:scale-90 border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-800 shadow-sm hover:border-blue-300 dark:hover:border-blue-600"
-                } cursor-pointer`}
+                        : "scale-95 sm:scale-90 border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-800 shadow-sm hover:shadow-md"
+                }`}
                 >
                     <div
                         className={`h-1.5 w-full transition-colors ${
                             isActive
                                 ? "bg-blue-500 dark:bg-blue-500"
-                                : "bg-slate-200 dark:bg-slate-600 group-hover:bg-blue-200 dark:group-hover:bg-blue-700"
+                                : "bg-slate-200 dark:bg-slate-600 group-hover:bg-blue-400"
                         }`}
                     />
 
@@ -86,4 +86,4 @@ const AddressCard = ({ addressId }) => {
     );
 };
 
-export default AddressCard;
+export default React.memo(AddressCard);
