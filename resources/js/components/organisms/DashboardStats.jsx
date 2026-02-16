@@ -16,10 +16,9 @@ import {
     clearUserStats,
 } from "../../store/slices/statsSlice";
 
-const DashboardStats = () => {
+const DashboardStats = ({ activeId }) => {
     const dispatch = useDispatch();
 
-    const activeId = useSelector(selectActiveId);
     const activeName = useSelector(selectActiveAddressName);
     const receipts = useSelector(selectReceipts);
 

@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 
-const ResizableClientSidebar = ({ children }) => {
-    const { addresses } = useSelector((state) => state.addresses);
-    const { activeId, editingId } = useSelector((state) => state.addresses.ui);
+const ResizableClientSidebar = ({ children, activeId }) => {
+    const addresses = useSelector((state) => state.addresses.addresses);
+    const editingId = useSelector((state) => state.addresses.ui.editingId);
     const isEditing = editingId !== null;
 
     const [clientListMinimized, setClientListMinimized] = useState(false);

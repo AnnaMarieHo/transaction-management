@@ -12,9 +12,8 @@ import NightModeToggle from "./atoms/NightModeToggle";
 
 const App = () => {
     const dispatch = useDispatch();
-
-    const receipts = useSelector((state) => state.receipts.receipts);
     const [showForms, setShowForms] = useState(false);
+    const [activeId, setActiveId] = useState(null);
 
     useEffect(() => {
         dispatch(fetchAddresses());
@@ -69,12 +68,12 @@ const App = () => {
                 </div>
 
                 <div className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 bg-slate-50/20 dark:bg-slate-900/30 custom-scrollbar transition-colors">
-                    <DashboardStats />
+                    <DashboardStats activeId={activeId} />
                 </div>
             </div>
 
-            <ResizableClientSidebar>
-                <ListAddresses />
+            <ResizableClientSidebar activeId={activeId}>
+                <ListAddresses activeId={activeId} onSetActiveId={setActiveId} />
             </ResizableClientSidebar>
             <AddressTransactionsDrawer />
         </div>

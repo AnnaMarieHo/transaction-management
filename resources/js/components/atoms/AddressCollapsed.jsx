@@ -37,4 +37,4 @@ const AddressCollapsed = ({ addresses }) => {
         </div>
     );
 };
-export default AddressCollapsed;
+export default React.memo(AddressCollapsed);

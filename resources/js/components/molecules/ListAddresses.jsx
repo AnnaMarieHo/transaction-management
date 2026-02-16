@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import AddressCard from "../organisms/AddressCard";
 import NightModeToggle from "../atoms/NightModeToggle";
 import { useSelector } from "react-redux";
+import { selectAddresses } from "../../store/selectors";
 
-const ListAddresses = () => {
-    const { addresses } = useSelector((state) => state.addresses);
+const ListAddresses = ({ activeId, onSetActiveId }) => {
+    const addresses = useSelector(selectAddresses);
 
     return (
         <>
@@ -27,6 +28,8 @@ const ListAddresses = () => {
                             <AddressCard
                                 key={address.id}
                                 addressId={address.id}
+                                activeId={activeId}
+                                onToggleActive={onSetActiveId}
                             />
                         ))}
                     </div>
@@ -35,4 +38,4 @@ const ListAddresses = () => {
         </>
     );
 };
-export default ListAddresses;
+export default React.memo(ListAddresses);

@@ -93,4 +93,4 @@ const Receipts = ({ activeId, activeName }) => {
     );
 };
 
-export default Receipts;
+export default React.memo(Receipts);

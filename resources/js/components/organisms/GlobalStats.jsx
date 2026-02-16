@@ -96,4 +96,4 @@ const GlobalStats = () => {
     );
 };
 
-export default GlobalStats;
+export default React.memo(GlobalStats);

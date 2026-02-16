@@ -100,4 +100,4 @@ const AddressExpanded = ({ addressId }) => {
     );
 };
 
-export default AddressExpanded;
+export default React.memo(AddressExpanded);
