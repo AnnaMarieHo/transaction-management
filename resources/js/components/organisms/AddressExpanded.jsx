@@ -4,7 +4,6 @@ import PersonalInformation from "../molecules/PersonalInformation";
 import Divider from "../atoms/Divider";
 import Button from "../atoms/Button";
 import AddressCardButtons from "../atoms/AddressCardButtons";
-import { useReceipt } from "../../hooks/useReceipt";
 import {
     updateAddress,
     editAddress,
@@ -15,30 +14,27 @@ import {
     markDeleting,
 } from "../../store/slices/addressSlice";
 import { useSelector, useDispatch } from "react-redux";
+import {
+    selectAddressById,
+    selectEditingId,
+    selectTransactionsForId,
+    selectReceiptsForAddress,
+} from "../../store/selectors";
 
 const AddressExpanded = ({ addressId }) => {
-
     const dispatch = useDispatch();
-    const { receipts } = useReceipt();
-    const address = useSelector((state) =>
-        state.addresses.addresses.find((a) => a.id === addressId)
+
+    const address = useSelector((state) => selectAddressById(state, addressId));
+    const editingId = useSelector(selectEditingId);
+    const transactionsForId = useSelector(selectTransactionsForId);
+    const { numberTransactions } = useSelector((state) =>
+        selectReceiptsForAddress(state, addressId)
     );
-    const { editingId, transactionsForId } = useSelector(
-        (state) => state.addresses.ui
-    );
+
     const isEditing = editingId === addressId;
     const viewTransactions = transactionsForId === addressId;
-    
-    if (!address) return null;
 
-    const activeBuyerReceipts = receipts.filter(
-        (receipt) => receipt.b_id === address.id
-    );
-    const activeSellerReceipts = receipts.filter(
-        (receipt) => receipt.s_id === address.id
-    );
-    const numberTransactions =
-        activeBuyerReceipts.length + activeSellerReceipts.length;
+    if (!address) return null;
 
     const handleDelete = (e) => {
         e.stopPropagation();

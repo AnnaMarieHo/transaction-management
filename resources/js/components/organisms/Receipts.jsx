@@ -1,36 +1,30 @@
 import React from "react";
-import { useReceipt } from "../../hooks/useReceipt";
 import ReceiptCard from "./ReceiptCard";
 import Card from "../atoms/Card";
 import Label from "../atoms/Label";
 import PartnerCard from "../molecules/PartnerCard";
-import TransactionItem from "../molecules/TransactionItem";
+import { useSelector } from "react-redux";
 import {
-    calculateReceiptAverage,
-    calculatePercentDiff,
-    buildPartnerInteractionData,
-    getTopPartners,
-} from "../../utils/receiptUtils";
+    selectReceiptsLoading,
+    selectFilteredReceipts,
+} from "../../store/selectors";
 
-const Receipts = ({ activeId, activeName, addresses, filteredReceipts }) => {
-    const { loading } = useReceipt();
+const Receipts = ({ activeId, activeName }) => {
+    // Using memoized selectors and backend data
+    const loading = useSelector(selectReceiptsLoading);
+    const filteredReceipts = useSelector(selectFilteredReceipts);
+    const topPartners = useSelector((state) => state.stats.partners.list);
+    const partnersLoading = useSelector(
+        (state) => state.stats.partners.loading
+    );
 
-    if (loading)
+    if (loading) {
         return (
             <div className="p-8 text-slate-400 dark:text-slate-500 animate-pulse">
                 Loading...
             </div>
         );
-
-    const userAverage = calculateReceiptAverage(filteredReceipts);
-
-    const interactionData = buildPartnerInteractionData(
-        filteredReceipts,
-        activeId,
-        addresses
-    );
-
-    const topPartners = getTopPartners(interactionData, 3);
+    }
 
     return (
         <div className="w-full max-w-7xl mx-auto py-4 border-b border-slate-300 dark:border-slate-600">
@@ -57,14 +51,24 @@ const Receipts = ({ activeId, activeName, addresses, filteredReceipts }) => {
                         Top Trading Partners for {activeName}
                     </span>
                 </Label>
-                <div className="space-y-1.5 sm:space-y-2 lg:space-y-3">
-                    {topPartners.map((partner, i) => (
-                        <PartnerCard key={i} partner={partner} rank={i + 1} />
-                    ))}
-                </div>
+                {partnersLoading ? (
+                    <div className="text-slate-400 dark:text-slate-500 text-sm animate-pulse">
+                        Loading partners...
+                    </div>
+                ) : (
+                    <div className="space-y-1.5 sm:space-y-2 lg:space-y-3">
+                        {topPartners.map((partner, index) => (
+                            <PartnerCard
+                                key={partner.id}
+                                partner={partner}
+                                rank={index + 1}
+                            />
+                        ))}
+                    </div>
+                )}
             </Card>
 
-            <div className="space-y-1.5 sm:space-y-2 lg:space-y-2.5">
+            {/* <div className="space-y-1.5 sm:space-y-2 lg:space-y-2.5">
                 {filteredReceipts.slice(0, 5).map((r) => {
                     const isBuying = r.b_id === activeId;
                     const isAboveAverage = r.sale_total > userAverage;
@@ -84,7 +88,7 @@ const Receipts = ({ activeId, activeName, addresses, filteredReceipts }) => {
                         />
                     );
                 })}
-            </div>
+            </div> */}
         </div>
     );
 };

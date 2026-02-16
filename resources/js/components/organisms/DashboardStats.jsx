@@ -1,28 +1,43 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import Receipts from "./Receipts";
 import GlobalStats from "./GlobalStats";
-import { motion, AnimatePresence } from "framer-motion";
 import StatCard from "../molecules/StatCard";
 import Label from "../atoms/Label";
 import {
-    calculateTotalVolume,
-    calculateReceiptAverage,
-    filterReceiptsByUser,
-} from "../../utils/receiptUtils";
+    selectActiveId,
+    selectActiveAddressName,
+    selectReceipts,
+} from "../../store/selectors";
+import {
+    fetchUserStatsAsync,
+    fetchGlobalStatsAsync,
+    fetchTopPartnersAsync,
+    clearUserStats,
+} from "../../store/slices/statsSlice";
 
-const DashboardStats = ({ receipts, addresses, activeId }) => {
-    const filteredReceipts = activeId
-        ? filterReceiptsByUser(receipts, activeId)
-        : [];
+const DashboardStats = () => {
+    const dispatch = useDispatch();
 
-    const activePerson = addresses?.find((a) => a.id === activeId);
-    const activeName = activePerson
-        ? `${activePerson.first_name ?? ""} ${activePerson.last_name}`
-        : "";
+    const activeId = useSelector(selectActiveId);
+    const activeName = useSelector(selectActiveAddressName);
+    const receipts = useSelector(selectReceipts);
 
-    const displayReceipts = activeId ? filteredReceipts : receipts;
-    const totalVolume = calculateTotalVolume(displayReceipts);
-    const avgTransaction = calculateReceiptAverage(displayReceipts);
+    const userStats = useSelector((state) => state.stats.user);
+    const globalStats = useSelector((state) => state.stats.global);
+
+    // Fetch stats when activeId changes
+    useEffect(() => {
+        if (activeId) {
+            dispatch(fetchUserStatsAsync(activeId));
+            dispatch(fetchTopPartnersAsync(activeId));
+        } else {
+            dispatch(clearUserStats());
+            dispatch(fetchGlobalStatsAsync());
+        }
+    }, [activeId, dispatch]);
+
+    const isLoading = activeId ? userStats.loading : globalStats.loading;
 
     return (
         <div className="space-y-6 sm:space-y-8 mx-auto p-3 sm:p-4 lg:p-6 text-slate-900 dark:text-slate-100">
@@ -33,69 +48,50 @@ const DashboardStats = ({ receipts, addresses, activeId }) => {
                     </Label>
                 )}
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-                    <StatCard
-                        title="Total Volume"
-                        value={`$${totalVolume.toLocaleString()}`}
-                        variant="blue"
-                    />
-                    <StatCard
-                        title="Avg. Transaction"
-                        value={`$${avgTransaction.toFixed(2)}`}
-                        variant="green"
-                    />
-                </div>
+                {isLoading ? (
+                    <div className="text-slate-400 dark:text-slate-500 animate-pulse">
+                        Loading stats...
+                    </div>
+                ) : (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                        {activeId ? (
+                            <>
+                                <StatCard
+                                    title="Total Volume"
+                                    value={`$${Number(
+                                        userStats.totalVolume || 0
+                                    ).toLocaleString()}`}
+                                    variant="blue"
+                                />
+                                <StatCard
+                                    title="Avg. Transaction"
+                                    value={`$${Number(
+                                        userStats.average || 0
+                                    ).toFixed(2)}`}
+                                    variant="green"
+                                />
+                            </>
+                        ) : (
+                            <StatCard
+                                title="Total Transactions"
+                                value={receipts.length}
+                                variant="blue"
+                            />
+                        )}
+                    </div>
+                )}
             </header>
 
             <div className="flex flex-col space-y-6 sm:space-y-8">
-                <AnimatePresence mode="wait">
-                    {activeId ? (
-                        <React.Fragment key="user-view">
-                            <motion.div
-                                layout
-                                initial={{ opacity: 0, y: 10 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -10 }}
-                                transition={{ duration: 0.2, ease: "easeOut" }}
-                            >
-                                <Receipts
-                                    receipts={receipts}
-                                    filteredReceipts={filteredReceipts}
-                                    activeId={activeId}
-                                    addresses={addresses}
-                                    activeName={activeName}
-                                />
-                            </motion.div>
-
-                            <motion.div
-                                layout
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                transition={{ duration: 0.2, delay: 0.1 }}
-                            ></motion.div>
-                        </React.Fragment>
-                    ) : (
-                        <motion.div
-                            key="global-view"
-                            layout
-                            initial={{ opacity: 0, scale: 0.98 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            exit={{ opacity: 0, scale: 0.98 }}
-                            transition={{
-                                duration: 0.2,
-                                ease: "easeOut",
-                            }}
-                        >
-                            <GlobalStats
-                                addresses={addresses}
-                                receipts={receipts}
-                                activeName={activeName}
-                                activeId={activeId}
-                                filteredReceipts={filteredReceipts}
-                            />
-                        </motion.div>
-                    )}
-                </AnimatePresence>
+                {activeId ? (
+                    <div className="transition-opacity duration-200">
+                        <Receipts activeId={activeId} activeName={activeName} />
+                    </div>
+                ) : (
+                    <div className="transition-opacity duration-200">
+                        <GlobalStats />
+                    </div>
+                )}
             </div>
         </div>
     );

@@ -3,21 +3,24 @@ import AddressCollapsed from "../atoms/AddressCollapsed";
 import AddressExpanded from "./AddressExpanded";
 import { toggleActiveId } from "../../store/slices/addressSlice";
 import { useSelector, useDispatch } from "react-redux";
+import {
+    selectActiveId,
+    selectAddressById,
+    selectIsAddressDeleting,
+} from "../../store/selectors";
 
 const AddressCard = ({ addressId }) => {
     const [isVisible, setIsVisible] = useState(false);
-    const { activeId, deletingById } = useSelector(
-        (state) => state.addresses.ui
-    );
-    const address = useSelector((state) =>
-        state.addresses.addresses.find((a) => a.id === addressId)
-    );
-
     const cardRef = useRef(null);
     const dispatch = useDispatch();
 
+    const activeId = useSelector(selectActiveId);
+    const address = useSelector((state) => selectAddressById(state, addressId));
+    const isDeleting = useSelector((state) =>
+        selectIsAddressDeleting(state, addressId)
+    );
+
     const isActive = activeId === addressId;
-    const isDeleting = Boolean(deletingById?.[addressId]);
 
     if (!address) return null;
 

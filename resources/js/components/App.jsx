@@ -2,24 +2,23 @@ import React, { useEffect, useState } from "react";
 import ListAddresses from "./molecules/ListAddresses";
 import AddressForm from "./organisms/AddressForm";
 import ReceiptForm from "./organisms/ReceiptForm";
-import { useReceipt } from "../hooks/useReceipt";
 import DashboardStats from "./organisms/DashboardStats";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchAddresses } from "../store/slices/addressSlice";
+import { fetchReceiptsAsync } from "../store/slices/recieptSlice";
 import AddressTransactionsDrawer from "./molecules/AddressTransactionsDrawer";
 import ResizableClientSidebar from "./organisms/ResizableClientSidebar";
 import NightModeToggle from "./atoms/NightModeToggle";
 
 const App = () => {
     const dispatch = useDispatch();
-    const { addresses } = useSelector((state) => state.addresses);
-    const { activeId } = useSelector((state) => state.addresses.ui);
 
-    const { receipts } = useReceipt();
+    const receipts = useSelector((state) => state.receipts.receipts);
     const [showForms, setShowForms] = useState(false);
 
     useEffect(() => {
         dispatch(fetchAddresses());
+        dispatch(fetchReceiptsAsync());
     }, [dispatch]);
 
     return (
@@ -70,11 +69,7 @@ const App = () => {
                 </div>
 
                 <div className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 bg-slate-50/20 dark:bg-slate-900/30 custom-scrollbar transition-colors">
-                    <DashboardStats
-                        activeId={activeId}
-                        receipts={receipts}
-                        addresses={addresses}
-                    />
+                    <DashboardStats />
                 </div>
             </div>
 
