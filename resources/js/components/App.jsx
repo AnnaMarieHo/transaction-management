@@ -2,18 +2,16 @@ import React, { useEffect, useState } from "react";
 import ListAddresses from "./molecules/ListAddresses";
 import AddressForm from "./organisms/AddressForm";
 import ReceiptForm from "./organisms/ReceiptForm";
-import DashboardStats from "./organisms/DashboardStats";
-import { useSelector, useDispatch } from "react-redux";
+import GlobalStats from "./organisms/GlobalStats";
+import { useDispatch } from "react-redux";
 import { fetchAddresses } from "../store/slices/addressSlice";
 import { fetchReceiptsAsync } from "../store/slices/recieptSlice";
-import AddressTransactionsDrawer from "./molecules/AddressTransactionsDrawer";
 import ResizableClientSidebar from "./organisms/ResizableClientSidebar";
 import NightModeToggle from "./atoms/NightModeToggle";
 
 const App = () => {
     const dispatch = useDispatch();
     const [showForms, setShowForms] = useState(false);
-    const [activeId, setActiveId] = useState(null);
 
     useEffect(() => {
         dispatch(fetchAddresses());
@@ -63,19 +61,18 @@ const App = () => {
                         <AddressForm />
                     </div>
                     <div className="flex-1 min-w-[300px] max-w-lg">
-                        <ReceiptForm addReceipt={() => {}} />
+                        <ReceiptForm />
                     </div>
                 </div>
 
                 <div className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 bg-slate-50/20 dark:bg-slate-900/30 custom-scrollbar transition-colors">
-                    <DashboardStats activeId={activeId} />
+                    <GlobalStats />
                 </div>
             </div>
 
-            <ResizableClientSidebar activeId={activeId}>
-                <ListAddresses activeId={activeId} onSetActiveId={setActiveId} />
+            <ResizableClientSidebar>
+                <ListAddresses />
             </ResizableClientSidebar>
-            <AddressTransactionsDrawer />
         </div>
     );
 };

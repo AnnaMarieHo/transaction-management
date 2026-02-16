@@ -4,11 +4,7 @@ import Receipts from "./Receipts";
 import GlobalStats from "./GlobalStats";
 import StatCard from "../molecules/StatCard";
 import Label from "../atoms/Label";
-import {
-    selectActiveId,
-    selectActiveAddressName,
-    selectReceipts,
-} from "../../store/selectors";
+import { selectReceipts, selectAddressById } from "../../store/selectors";
 import {
     fetchUserStatsAsync,
     fetchGlobalStatsAsync,
@@ -19,11 +15,20 @@ import {
 const DashboardStats = ({ activeId }) => {
     const dispatch = useDispatch();
 
-    const activeName = useSelector(selectActiveAddressName);
+    const activeAddress = useSelector((state) =>
+        selectAddressById(state, activeId)
+    );
     const receipts = useSelector(selectReceipts);
 
     const userStats = useSelector((state) => state.stats.user);
     const globalStats = useSelector((state) => state.stats.global);
+
+    // Generate active name from address
+    const activeName = activeAddress
+        ? `${activeAddress.first_name ?? ""} ${
+              activeAddress.last_name ?? ""
+          }`.trim()
+        : "";
 
     // Fetch stats when activeId changes
     useEffect(() => {

@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import AddressCard from "../organisms/AddressCard";
 import NightModeToggle from "../atoms/NightModeToggle";
+import ErrorBoundary from "../atoms/ErrorBoundary";
 import { useSelector } from "react-redux";
 import { selectAddresses } from "../../store/selectors";
 
-const ListAddresses = ({ activeId, onSetActiveId }) => {
+const ListAddresses = () => {
     const addresses = useSelector(selectAddresses);
 
     return (
@@ -25,12 +26,12 @@ const ListAddresses = ({ activeId, onSetActiveId }) => {
 
                     <div className="space-y-4">
                         {addresses.map((address) => (
-                            <AddressCard
+                            <ErrorBoundary
                                 key={address.id}
-                                addressId={address.id}
-                                activeId={activeId}
-                                onToggleActive={onSetActiveId}
-                            />
+                                errorMessage="This client card encountered an error."
+                            >
+                                <AddressCard addressId={address.id} />
+                            </ErrorBoundary>
                         ))}
                     </div>
                 </div>
