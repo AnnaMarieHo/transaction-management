@@ -8,6 +8,7 @@ import { fetchAddresses } from "../store/slices/addressSlice";
 import { fetchReceiptsAsync } from "../store/slices/recieptSlice";
 import ResizableClientSidebar from "./organisms/ResizableClientSidebar";
 import NightModeToggle from "./atoms/NightModeToggle";
+import { fetchGlobalStatsAsync } from "../store/slices/statsSlice";
 
 const App = () => {
     const dispatch = useDispatch();
@@ -16,6 +17,7 @@ const App = () => {
     useEffect(() => {
         dispatch(fetchAddresses());
         dispatch(fetchReceiptsAsync());
+        dispatch(fetchGlobalStatsAsync());
     }, [dispatch]);
 
     return (

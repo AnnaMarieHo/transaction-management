@@ -10,11 +10,12 @@ export const fetchGlobalStatsAsync = createAsyncThunk(
     "stats/fetchGlobal",
     async (_, thunkAPI) => {
         try {
+            console.log("triggered in statsSlice");
             return await fetchGlobalStats();
         } catch (e) {
             return thunkAPI.rejectWithValue(e.message);
         }
-    }
+    },
 );
 
 // Fetch stats for a specific user
@@ -27,7 +28,7 @@ export const fetchUserStatsAsync = createAsyncThunk(
         } catch (e) {
             return thunkAPI.rejectWithValue(e.message);
         }
-    }
+    },
 );
 
 // Fetch top partners for a specific user
@@ -40,7 +41,7 @@ export const fetchTopPartnersAsync = createAsyncThunk(
         } catch (e) {
             return thunkAPI.rejectWithValue(e.message);
         }
-    }
+    },
 );
 
 const statsSlice = createSlice({

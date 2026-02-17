@@ -2,7 +2,9 @@ import api from "./apiService";
 
 export const fetchGlobalStats = async () => {
     try {
+        console.log("triggered in statsService");
         const response = await api.get("/stats");
+        console.log("global stats: ", response);
         return response.data;
     } catch (e) {
         console.error("Error fetching global stats:", e);

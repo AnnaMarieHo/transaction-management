@@ -22,9 +22,9 @@ class StatsController extends Controller
     public function index()
     {
         return response()->json([
-            'topSpenders' => $this->statsService->getTopSpenders(3),
-            'mostActive' => $this->statsService->getMostActive(3),
-            'topMarkets' => $this->statsService->getTopMarkets(3),
+            'topSpenders' => $this->statsService->getTopSpenders(7),
+            'mostActive' => $this->statsService->getMostActive(7),
+            'topMarkets' => $this->statsService->getTopMarkets(7),
         ]);
     }
 
@@ -44,7 +44,7 @@ class StatsController extends Controller
     public function getPartners($addressId)
     {
         return response()->json(
-            $this->statsService->getTopPartners($addressId, 3)
+            $this->statsService->getTopPartners($addressId, 7)
         );
     }
 }

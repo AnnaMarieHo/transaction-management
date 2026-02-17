@@ -33,7 +33,7 @@ class ReceiptStatsService
         ];
     }
     
-    public function getTopSpenders($limit = 3)
+    public function getTopSpenders($limit = 7)
     {
         return Address::whereHas('buyerReceipts') 
             ->withSum('buyerReceipts as total_spent', 'sale_total')
@@ -62,7 +62,7 @@ class ReceiptStatsService
     /**
      * Get most active users (by transaction count)
      */
-    public function getMostActive($limit = 3)
+    public function getMostActive($limit = 7)
     {
         $addresses = Address::all();
 
@@ -93,7 +93,7 @@ class ReceiptStatsService
     /**
      * Get top markets with market share percentage
      */
-    public function getTopMarkets($limit = 3)
+    public function getTopMarkets($limit = 7)
     {
         $totalVolume = Transaction::sum('sale_total');
         
@@ -119,7 +119,7 @@ class ReceiptStatsService
      * Get top trading partners for a specific address
      * Uses application-level logic to avoid complex SQL joins
      */
-    public function getTopPartners($addressId, $limit = 3)
+    public function getTopPartners($addressId, $limit = 7)
     {
         // Get all transactions involving this address
         $transactions = Transaction::query()

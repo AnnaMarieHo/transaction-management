@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import Card from "../atoms/Card";
 import Label from "../atoms/Label";
@@ -85,7 +85,7 @@ const GlobalStats = () => {
                     className="col-span-1 sm:col-span-2 lg:col-span-2"
                 >
                     <Label className="mb-3 sm:mb-4">Market Reach</Label>
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                         {(topMarkets || []).map((market, i) => (
                             <MarketReachCard key={i} market={market} />
                         ))}
