@@ -6,17 +6,23 @@
 - Implement **auth**: A user that is logged in should only have access to their information, not other users. They can add a transaction or delete a transaction. An authenticated manager has the ability to add/delete clients (addresses) and their receipts. They will also have the ability to add/delete new transactions.
 - Account deletion handling...: If an authenticated manager deletes a client, they should lose access to their dashboard. 
 
-**Current Front-End**
+**FRONT-END**
 - Update the *add receipt form*: Right now the add reciept form is a placeholder copy of add address form. Modify for reciept specific entries (price, qty, ingoing, outgoing, etc). 
 - In *add receipt form* add a "connected to" dropdown that lists existing clients: Receipts must belong to a current client in some capacity.
 
 - Provide **selected** client "add receipt" button and form (this is just barely different from *add reciept form* task - it's on a selected client basis): When the transaction drawer is open with a selected user's receipts, they should be able to add a receipt under the "outgoing" or "incoming" categories. This will require an "add button" and a form. Should suppoort adding under the "outgoing" or "incoming" filters to directly create receipts of either type
 
-**API**
+**BACKEND - HIGH PRIORITY**
 - Create the *add receipt* logic in the receipt controller
 - Create the *edit receipt* logic in the receipt conttroller
 - Create the *delete receipt* logic in the receipt controller
-- Begin on auth - should support email verification and session token 
+- Begin on auth
+  - [ ] Front end should authenticate with an ID + PWD
+  - [ ] Backend recieves auth credentials and performs authorization -> decides user role, provides cookie + session AS a JWT token
+  - [ ] JWT is sent back to front end's security context
+  - [ ] When a user goes to interact with backend, the authcontext wraps the request with implicit jwt token (if set up properly)
+  - [ ] The request will be passed into security interceptor (MUST look into Laravel's security interceptor/middleware)
+  - [ ] If the request + JWT pass the security interceptor, a users role, name, etc. are obtained, they interact with the controller and return a response.
 
 ## Bugs, Delays, Optimizations, & Unexpected Sub-tasks
 
